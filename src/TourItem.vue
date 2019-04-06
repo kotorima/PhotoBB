@@ -8,7 +8,7 @@
             </div>
             <div>
                 <h3></h3>
-                <p>c по</p>
+                <p>c {{ touritem }} по {{ touritem }}</p>
             </div>
         </div>
         <div>
@@ -20,7 +20,6 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
 
 export default {
    data() {
@@ -28,9 +27,10 @@ export default {
     };
   },
   props: ['touritem']
+
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

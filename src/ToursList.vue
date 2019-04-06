@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TourItem from './TourItem.vue';
 
 export default {
