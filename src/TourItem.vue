@@ -3,7 +3,7 @@
         <div>
             <div>
                 <img src='' alt=''>
-                <h3></h3>
+                <h3>{{ touritem }}</h3>
                 <p></p>
             </div>
             <div>

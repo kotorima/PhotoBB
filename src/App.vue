@@ -15,7 +15,7 @@
       </div>
       </div>
       <app-form></app-form>
-      <app-tours-list v-bind:tourslist="tours"></app-tours-list>
+      <app-tours-list></app-tours-list>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
     "app-steps": Steps,
     "app-search": Search,
     "app-form": FormLogin,
-    "app-tours-list": Tour,
+    "app-tours-list": ToursList,
   }
 };
 </script>
