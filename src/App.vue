@@ -66,6 +66,7 @@ export default {
 #app {
     background: url('assets/images/background.png');
     background-repeat: no-repeat;
+    background-size: contain;
 }
   
   a,
@@ -123,6 +124,6 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 48rem;
+    height: 42rem;
   }
 </style>

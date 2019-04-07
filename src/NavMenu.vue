@@ -1,6 +1,6 @@
 <template>
       <el-menu
-        :default-active="1">
+        default-active="1">
         <el-menu-item index="1">
           <a href="#" id="search"><img src="./assets/images/search.png" alt="search"></a>
         </el-menu-item>

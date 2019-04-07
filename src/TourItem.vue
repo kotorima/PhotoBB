@@ -3,12 +3,12 @@
         <div>
             <div>
                 <img src='' alt=''>
-                <h3>{{ touritem }}</h3>
+                <h3>{{ }}</h3>
                 <p></p>
             </div>
             <div>
                 <h3></h3>
-                <p>c {{ touritem }} по {{ touritem }}</p>
+                <p>c {{ touritem.start_date }} по {{ touritem.finish_date}}</p>
             </div>
         </div>
         <div>
