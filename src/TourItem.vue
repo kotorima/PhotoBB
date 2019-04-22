@@ -3,7 +3,7 @@
         <div class='header-item'>
             <div class='left'>
                 <div>
-                    <img src='' v-bind:alt='touritem.user.username'>
+                    <img src='./assets/images/user.jpg' v-bind:alt='touritem.user.username' >
                     <div class='discription'>
                         <h3>{{ touritem.user.name }} {{ touritem.user.surname }} ({{ touritem.user.username }})</h3>
                         <p>{{ touritem.user.email }}</p>
@@ -18,13 +18,18 @@
                 <span v-else> {{ touritem.cost }} руб./час </span>
             </div>
         </div>
-        <div>
-          <img v-for='photo of touritem.file' v-bind:src='photo.name' v-bind:alt='photo.name'>
-          <button class='next'>
-            <svg width="40" height="72" viewBox="0 0 40 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.41215 1.47899C5.0476 0.109869 2.83523 0.109869 1.47068 1.47899C0.106129 2.8481 0.106129 5.06788 1.47068 6.43699L30.8932 35.958L1.47068 65.479C0.106129 66.8481 0.106128 69.0679 1.47068 70.437C2.83523 71.8061 5.0476 71.8061 6.41215 70.437L37.8502 38.8937C38.0252 38.7733 38.1917 38.635 38.3473 38.479C39.0402 37.7837 39.3812 36.8692 39.3704 35.958C39.3812 35.0468 39.0402 34.1322 38.3473 33.437C38.1917 33.281 38.0252 33.1427 37.8502 33.0222L6.41215 1.47899Z" fill="white"/>
-            </svg>
-          </button>
+        <div class='photos'>
+            <div  v-if='touritem.file!=0'>
+                <img v-for='photo in touritem.file' v-bind:key='photo.id' v-bind:src="'http://photobb.dev.webant.ru/uploads/'+photo.path" v-bind:alt='photo.name'>
+                <button class='next' v-on:click="nextPhotos">
+                    <svg width="20" height="52" viewBox="0 0 40 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.41215 1.47899C5.0476 0.109869 2.83523 0.109869 1.47068 1.47899C0.106129 2.8481 0.106129 5.06788 1.47068 6.43699L30.8932 35.958L1.47068 65.479C0.106129 66.8481 0.106128 69.0679 1.47068 70.437C2.83523 71.8061 5.0476 71.8061 6.41215 70.437L37.8502 38.8937C38.0252 38.7733 38.1917 38.635 38.3473 38.479C39.0402 37.7837 39.3812 36.8692 39.3704 35.958C39.3812 35.0468 39.0402 34.1322 38.3473 33.437C38.1917 33.281 38.0252 33.1427 37.8502 33.0222L6.41215 1.47899Z" fill="black"/>
+                    </svg>
+                </button>
+            </div>
+            <div v-else>
+                <h4>Нет фото</h4>
+            </div>
         </div>
         <button class='contact'>Связаться</button>
     </div>
@@ -35,6 +40,7 @@ export default {
     return {
         date: '',
         result: '',
+        photos: touritem.file,
     };
   },
   methods: {
@@ -42,6 +48,9 @@ export default {
           this.date = new Date(date);
           this.result = this.date.getDate() + ".0" + (this.date.getMonth() + 1)+ "." + this.date.getFullYear();
           return this.result;
+      },
+      nextPhotos: function () {
+
       }
   },
   props: ['touritem']
@@ -55,45 +64,82 @@ export default {
     margin: 0;
     box-sizing: border-box;
 }
+
  h3{
      font-family:'Exo2';
+     font-weight: normal;
  }
- p, span, img, button {
+
+ p, span, img, button, h4 {
      font-family: 'Roboto';
  }
+
+ p {
+     font-size: 0.7rem;
+     margin-top: 0.5rem;
+ }
+
+ h4 {
+     font-weight: normal;
+     color: #7E7E7E;
+     margin: auto;
+     padding: 5vw;
+ }
+
  .main-item {
      display: flex;
      flex-direction: column;
-     width: 80vw;
+     width: 70vw;
      margin: auto;
-     padding: 2rem;
+     padding: 2vw 3vw;
      background: #FFFFFF;
      box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
      border-radius: 8px;
      margin-bottom: 10vh;
  }
+
  .header-item {
      display: flex;
      flex-direction: row;
      justify-content: space-between;
+     margin-bottom: 2vw;
  }
+
  .right {
+     display: flex;
+     flex-direction: column;
      text-align: right;
  }
+
  .left {
      display: flex;
      flex-direction: column;
  }
+
  .left > div {
      display: flex;
      flex-direction: row;
-     margin-left: 1rem;
+     margin-left: 1vw;
  }
+
+ .left > div > img {
+     width: 5vw;
+     height: 5vw;
+     border-radius: 50%;
+     object-fit: cover;
+     margin-right: 1vw;
+     margin-left: -1vw;
+ }
+
  .discription {
      display: flex;
      flex-direction: column;
  }
+
  .contact {
+     display: flex;
+     justify-content: center;
+     align-self: flex-end;
      background: #EC7948;
      border-radius: 0.2rem;
      border: none;
@@ -101,17 +147,41 @@ export default {
      height: 2rem;
      color: #FFFFFF;
      font-weight: normal;
+     margin-top: 2vw;
  }
+
  .type {
      background: #E8E8E8;
      border-radius: 4px;
      color: #7E7E7E;
-     font-size: 0.7rem;
      padding: 0.4rem;
      width: 5rem;
      text-align: center;
+     margin-top: 2vw;
  }
+
  span {
-     color: #EC7948
+     color: #EC7948;
+     padding-top: 2vw;
  }
+
+ .photos,
+ .photos > div {
+     display: flex;
+     flex-direction: row;
+     width: 100%;
+ }
+
+.photos img {
+    width: 23vw;
+    height: 23vw;
+    margin-right: 3vw;
+    object-fit: cover;
+}
+
+.next {
+    border: none;
+    background: none;
+    position: relative;
+}
 </style>

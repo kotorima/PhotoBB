@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-tour-item v-for="tour in tours" v-bind:touritem="tour"></app-tour-item>
+    <app-tour-item v-for="tour in tours" v-bind:key="tour.id" v-bind:touritem="tour"></app-tour-item>
   </div>
 </template>
 
