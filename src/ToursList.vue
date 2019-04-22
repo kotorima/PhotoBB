@@ -20,7 +20,9 @@ export default {
   mounted() {
     axios
       .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json')
-      .then(response => (this.tours = response));
+      .then(response => { 
+        this.tours = response.data.items;
+        });
   },
 };
 </script>
