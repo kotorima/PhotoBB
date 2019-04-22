@@ -20,12 +20,12 @@
         </div>
         <div class='photos'>
             <div  v-if='touritem.file!=0'>
-                <img v-for='photo in touritem.file' v-bind:key='photo.id' v-bind:src="'http://photobb.dev.webant.ru/uploads/'+photo.path" v-bind:alt='photo.name'>
                 <button class='next' v-on:click="nextPhotos">
-                    <svg width="20" height="52" viewBox="0 0 40 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.41215 1.47899C5.0476 0.109869 2.83523 0.109869 1.47068 1.47899C0.106129 2.8481 0.106129 5.06788 1.47068 6.43699L30.8932 35.958L1.47068 65.479C0.106129 66.8481 0.106128 69.0679 1.47068 70.437C2.83523 71.8061 5.0476 71.8061 6.41215 70.437L37.8502 38.8937C38.0252 38.7733 38.1917 38.635 38.3473 38.479C39.0402 37.7837 39.3812 36.8692 39.3704 35.958C39.3812 35.0468 39.0402 34.1322 38.3473 33.437C38.1917 33.281 38.0252 33.1427 37.8502 33.0222L6.41215 1.47899Z" fill="black"/>
+                    <svg width="40" height="72" viewBox="0 0 40 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.41215 1.47899C5.0476 0.109869 2.83523 0.109869 1.47068 1.47899C0.106129 2.8481 0.106129 5.06788 1.47068 6.43699L30.8932 35.958L1.47068 65.479C0.106129 66.8481 0.106128 69.0679 1.47068 70.437C2.83523 71.8061 5.0476 71.8061 6.41215 70.437L37.8502 38.8937C38.0252 38.7733 38.1917 38.635 38.3473 38.479C39.0402 37.7837 39.3812 36.8692 39.3704 35.958C39.3812 35.0468 39.0402 34.1322 38.3473 33.437C38.1917 33.281 38.0252 33.1427 37.8502 33.0222L6.41215 1.47899Z" fill="red"/>
                     </svg>
                 </button>
+                <img v-for='photo in touritem.file' v-bind:key='photo.id' v-bind:src="'http://photobb.dev.webant.ru/uploads/'+photo.path" v-bind:alt='photo.name'>
             </div>
             <div v-else>
                 <h4>Нет фото</h4>
@@ -77,6 +77,10 @@ export default {
  p {
      font-size: 0.7rem;
      margin-top: 0.5rem;
+ }
+ 
+ button {
+     cursor: pointer;
  }
 
  h4 {
@@ -165,11 +169,13 @@ export default {
      padding-top: 2vw;
  }
 
- .photos,
  .photos > div {
      display: flex;
      flex-direction: row;
-     width: 100%;
+     width: 70vw;
+     overflow: hidden;
+     margin:0;
+     margin-left: -2.5rem;
  }
 
 .photos img {
@@ -183,5 +189,6 @@ export default {
     border: none;
     background: none;
     position: relative;
+    left: 62vw;
 }
 </style>
