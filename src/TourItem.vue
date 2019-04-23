@@ -3,7 +3,8 @@
         <div class='header-item'>
             <div class='left'>
                 <div>
-                    <img src='./assets/images/user.jpg' v-bind:alt='touritem.user.username' >
+                    <img v-if="touritem.user.ava_social" v-bind:src="touritem.user.ava_social" v-bind:alt='touritem.user.username' >
+                    <img v-else src='./assets/images/ava.png' v-bind:alt='touritem.user.username' >
                     <div class='discription'>
                         <h3>{{ touritem.user.name }} {{ touritem.user.surname }} ({{ touritem.user.username }})</h3>
                         <p>{{ touritem.user.email }}</p>
@@ -14,18 +15,18 @@
             <div class='right'>
                 <h3>{{ touritem.city.location_name }}</h3>
                 <p>c {{ reformatDate(touritem.start_date) }} по {{ reformatDate(touritem.finish_date) }}</p>
-                <span v-if="touritem.cost == 0"> договорная </span>
+                <span v-if="!touritem.cost"> договорная </span>
                 <span v-else> {{ touritem.cost }} руб./час </span>
             </div>
         </div>
         <div class='photos'>
-            <div  v-if='touritem.file!=0'>
-                <button class='next' v-on:click="nextPhotos">
+            <div  v-if='touritem.file.length > 0'>
+                <button class='next' v-on:click="nextPhotos(touritem.file.length)">
                     <svg width="40" height="72" viewBox="0 0 40 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.41215 1.47899C5.0476 0.109869 2.83523 0.109869 1.47068 1.47899C0.106129 2.8481 0.106129 5.06788 1.47068 6.43699L30.8932 35.958L1.47068 65.479C0.106129 66.8481 0.106128 69.0679 1.47068 70.437C2.83523 71.8061 5.0476 71.8061 6.41215 70.437L37.8502 38.8937C38.0252 38.7733 38.1917 38.635 38.3473 38.479C39.0402 37.7837 39.3812 36.8692 39.3704 35.958C39.3812 35.0468 39.0402 34.1322 38.3473 33.437C38.1917 33.281 38.0252 33.1427 37.8502 33.0222L6.41215 1.47899Z" fill="red"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.41215 1.47899C5.0476 0.109869 2.83523 0.109869 1.47068 1.47899C0.106129 2.8481 0.106129 5.06788 1.47068 6.43699L30.8932 35.958L1.47068 65.479C0.106129 66.8481 0.106128 69.0679 1.47068 70.437C2.83523 71.8061 5.0476 71.8061 6.41215 70.437L37.8502 38.8937C38.0252 38.7733 38.1917 38.635 38.3473 38.479C39.0402 37.7837 39.3812 36.8692 39.3704 35.958C39.3812 35.0468 39.0402 34.1322 38.3473 33.437C38.1917 33.281 38.0252 33.1427 37.8502 33.0222L6.41215 1.47899Z" fill="white"/>
                     </svg>
                 </button>
-                <img v-for='photo in touritem.file' v-bind:key='photo.id' v-bind:src="'http://photobb.dev.webant.ru/uploads/'+photo.path" v-bind:alt='photo.name'>
+                <img v-for='photo in touritem.file.slice(from, to)' v-bind:key='photo.id' v-bind:src="'http://photobb.dev.webant.ru/uploads/'+photo.path" v-bind:alt='photo.name'>
             </div>
             <div v-else>
                 <h4>Нет фото</h4>
@@ -40,7 +41,8 @@ export default {
     return {
         date: '',
         result: '',
-        photos: touritem.file,
+        from: 0,
+        to: 3,
     };
   },
   methods: {
@@ -49,9 +51,17 @@ export default {
           this.result = this.date.getDate() + ".0" + (this.date.getMonth() + 1)+ "." + this.date.getFullYear();
           return this.result;
       },
-      nextPhotos: function () {
-
+      nextPhotos: function (countOfPhoto) {
+        this.from+=2;
+        this.to+=2;
+		if (this.to == countOfPhoto) {
+			this.from=0;
+            this.to=3;
+		}
       }
+  },
+  computed:{
+
   },
   props: ['touritem']
 
@@ -87,7 +97,7 @@ export default {
      font-weight: normal;
      color: #7E7E7E;
      margin: auto;
-     padding: 5vw;
+     padding: 5vw 5vw 9vw;
  }
 
  .main-item {
@@ -172,10 +182,10 @@ export default {
  .photos > div {
      display: flex;
      flex-direction: row;
-     width: 70vw;
+     width: 67vw;
      overflow: hidden;
      margin:0;
-     margin-left: -2.5rem;
+     position: relative;
  }
 
 .photos img {
@@ -188,7 +198,8 @@ export default {
 .next {
     border: none;
     background: none;
-    position: relative;
-    left: 62vw;
+    position: absolute;
+    left: 61vw;
+    top: 8vw;
 }
 </style>
