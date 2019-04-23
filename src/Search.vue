@@ -12,21 +12,20 @@
             </el-dropdown>
         </div>
         <div class="item">
-            <p>Прибытие</p>
+            <p>Отбытие</p>
             <el-dropdown>
-                <span>Выберете дату</span>
+                <span v-if='curr'>{{ formattedDate }}</span>
+                <span v-else>Выберете дату</span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>Каленларь</el-dropdown-item>
+                    <el-dropdown-item>
+                        <app-date-picker v-model="curr"></app-date-picker>
+                    </el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
         <div class="item">
-            <p>Отбытие</p>
+            <p>Cтоимость</p>
             <el-dropdown>
-                <span>Выберете дату</span>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>Каленларь</el-dropdown-item>
-                </el-dropdown-menu>
             </el-dropdown>
         </div>
         <button class="item button">Найти</button>
@@ -34,19 +33,22 @@
 </template>
 
 <script>
-import Picker from './Picker.vue';
+import DatePicker from './DatePicker.vue';
 
 export default {
     data() {
     return {
-        value: ''
+        value: '',
+        curr: new Date(),
     };
   },
   components: {
-      "app-picker": Picker
+      "app-date-picker": DatePicker
   },
-  mounted() {
-
+  computed: {
+    formattedDate() {
+      return dateFns.format(this.curr, 'MM/DD/YYYY');
+    }
   },
 }
 </script>
