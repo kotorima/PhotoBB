@@ -4,10 +4,10 @@
         <div>
             <p>{{ question }}</p>
             <a href="#"><img src="./assets/images/vk.png" alt="VK"></a>
-            <input type='text' placeholder="Имя" v-show='auth'>
-            <input type='text' placeholder="Логин / e-mail">
-            <input type='password' placeholder='Пароль'>
-            <input type='password' placeholder='Пароль' v-show='auth'>
+            <input type='text' placeholder="Имя" v-show='auth' required autofocus>
+            <input type='text' placeholder="Логин / e-mail" required>
+            <input type='password' placeholder='Пароль' required>
+            <input type='password' placeholder='Пароль' v-show='auth' required>
             <input type='submit' v-bind:value='text'>
             <input type='button' v-on:click='replacementForm' v-bind:value='sort'> 
             <a href='#' v-show='auth'>Вы фотограф?</a>
@@ -89,9 +89,23 @@ export default {
         margin-bottom: 1rem;
     }
 
+    input[type='submit']:hover {
+        background: #323A6D;
+    }
+
+    input[type='button'] {
+        border: 0.1rem solid #323A6D;
+        color: #323A6D;
+    }
+
     h2 {
         font-weight: bold;
         margin-bottom: 1rem;
     }
 
+    a:last-child {
+        font-family: 'Roboto';
+        font-weight: normal;
+        color: #8A8A8A;
+    }
 </style>

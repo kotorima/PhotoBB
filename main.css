@@ -1,0 +1,34 @@
+body {
+    box-sizing:border-box;
+    margin: 0;
+}
+
+.el-input__icon{
+    display: none !important;
+}
+
+.el-range-editor .el-range-input::placeholder {
+    color: #8a8a8a !important;
+    font-size: 0.84rem !important;
+}
+
+.el-range-editor .el-range-input {
+    width: 35% !important;
+    color: #8a8a8a !important;
+}
+
+.el-date-editor .el-range-separator {
+    padding: 0 !important;
+    padding-bottom: 0.4rem !important;
+    width: 7% !important;
+    color: #8a8a8a !important;
+}
+
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.today.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.today.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range > div > span {
+    color: black !important;
+    font-weight: normal;
+}

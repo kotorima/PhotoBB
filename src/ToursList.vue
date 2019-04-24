@@ -24,7 +24,7 @@ export default {
       .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json')
       .then(response => { 
         this.tours = response.data.items;
-        });
+      });
   },
   methods: {
     loadingNextTours: function(countTours) {
@@ -38,7 +38,7 @@ export default {
   a {
     display: flex;
     justify-content: center;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-weight: normal;
     text-decoration: underline;
     margin-bottom: 5rem;

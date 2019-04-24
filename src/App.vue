@@ -79,6 +79,9 @@ export default {
      text-decoration: none;
      font-size: 1rem;
      font-weight: bold;
+  }
+
+  a, button, input[type='submit'], input[type='button'] {
      cursor: pointer;
   }
 
@@ -110,7 +113,7 @@ export default {
   }
 
   .search {
-    width: 60%;
+    width: 70vw;
     display:flex;
     flex-direction: column;
     padding: 4% 3%;

@@ -3,24 +3,16 @@
         <div class="item">
             <p>Где</p>
             <el-dropdown>
-                <input placeholder="Введите место" v-model="value"></input>
+                <input placeholder="Введите место" v-model="value" v-on:change="gettingCity"></input>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>Action 1</el-dropdown-item>
-                    <el-dropdown-item>Action 2</el-dropdown-item>
-                    <el-dropdown-item>Action 3</el-dropdown-item>
+                    <el-dropdown-item v-for='city in cities' v-bind:key="city.id"></el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
         <div class="item">
-            <p>Отбытие</p>
+            <p>Выберите даты</p>
             <el-dropdown>
-                <span v-if='curr'>{{ formattedDate }}</span>
-                <span v-else>Выберете дату</span>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>
-                        <app-date-picker v-model="curr"></app-date-picker>
-                    </el-dropdown-item>
-                </el-dropdown-menu>
+                <app-date-picker ></app-date-picker>
             </el-dropdown>
         </div>
         <div class="item">
@@ -28,7 +20,7 @@
             <el-dropdown>
             </el-dropdown>
         </div>
-        <button class="item button">Найти</button>
+        <button class="item button" v-on:click='search'>Найти</button>
     </div>
 </template>
 
@@ -36,20 +28,27 @@
 import DatePicker from './DatePicker.vue';
 
 export default {
-    data() {
+  data() {
     return {
         value: '',
-        curr: new Date(),
+        cities: '',
     };
   },
   components: {
-      "app-date-picker": DatePicker
+    "app-date-picker": DatePicker
   },
-  computed: {
-    formattedDate() {
-      return dateFns.format(this.curr, 'MM/DD/YYYY');
+  methods: {
+    gettingCity: function() {
+       axios
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities.json')
+            .then(response => { 
+                this.cities = response;
+      });
+    },
+    search: function () {
+
     }
-  },
+  }, 
 }
 </script>
 
@@ -103,5 +102,6 @@ button {
     align-items: center;
     background: #CE521D;
     border-radius:  0px 5px 5px 0px;
+    font-size: 1rem;
 }
 </style>
