@@ -3,7 +3,7 @@
         <div class="item">
             <p>Где</p>
             <el-dropdown>
-                <input placeholder="Введите место" v-model="value" v-on:change="gettingCity"></input>
+                <input placeholder="Введите место" v-model="value"></input>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item v-for='city in cities' v-bind:key="city.id"></el-dropdown-item>
                 </el-dropdown-menu>
@@ -16,8 +16,14 @@
             </el-dropdown>
         </div>
         <div class="item">
-            <p>Cтоимость</p>
+            <p>Стоимость</p>
             <el-dropdown>
+            <input placeholder="Определите стоимость" v-model="cost"></input>
+            <el-dropdown-menu slot="dropdown" class='slider'>
+                    <el-dropdown-item>
+                        <app-slider></app-slider>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
             </el-dropdown>
         </div>
         <button class="item button" v-on:click='search'>Найти</button>
@@ -26,25 +32,38 @@
 
 <script>
 import DatePicker from './DatePicker.vue';
+import Slider from './Slider.vue';
+import axios from 'axios';
+import Vuex from 'vuex';
 
 export default {
   data() {
     return {
         value: '',
-        cities: '',
+        cost: '',
+        cities: [],
+        store: new Vuex.Store({
+            state: {
+                cost: {}
+            },
+        }),
     };
   },
   components: {
-    "app-date-picker": DatePicker
+    "app-date-picker": DatePicker,
+    "app-slider": Slider
   },
-  methods: {
-    gettingCity: function() {
-       axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities.json')
+  
+  watch: {
+      value: function() {
+          axios
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities.json='+this.value)
             .then(response => { 
                 this.cities = response;
-      });
-    },
+         });
+      }
+  },
+  methods: {
     search: function () {
 
     }
@@ -80,6 +99,7 @@ span {
 
 input {
     border: none;
+    width: 95%;
 }
 
 input:focus {
@@ -103,5 +123,9 @@ button {
     background: #CE521D;
     border-radius:  0px 5px 5px 0px;
     font-size: 1rem;
+}
+
+.slider {
+    width: 20%;
 }
 </style>

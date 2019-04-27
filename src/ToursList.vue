@@ -12,7 +12,7 @@ import TourItem from './TourItem.vue';
 export default {
   data() {
     return {
-      tours: null,
+      tours: [],
       count: 3,
     };
   },

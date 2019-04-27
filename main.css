@@ -28,7 +28,20 @@ body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel_
 body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range.end-date > div > span,
 body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.today.in-range.start-date > div > span,
 body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.today.in-range.end-date > div > span,
-body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range > div > span {
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.today.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.today.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.in-range > div > span {
     color: black !important;
-    font-weight: normal;
+    font-weight: normal !important;
+}
+
+div.el-picker-panel__content.el-date-range-picker__content > div > div {
+    font-family: "Exo2";
+}
+
+th {
+    font-family: "Roboto";
 }
