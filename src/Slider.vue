@@ -3,6 +3,7 @@
     <span class="demonstration">до {{ value }} руб./час</span>
     <el-slider
       v-model="value"
+      :value="value"
       :step="10"
       :max='5000'>
     </el-slider>
@@ -10,14 +11,19 @@
 </template>
 
 <script>
-import Vuex from 'vuex';
+import store from '../store'
+
 
 export default {
     data() {
       return {
-        value: 0,
+        value: store.state.cost,
       }
     },
-    computed: Vuex.mapState(['cost']),
+    watch: {
+      value: function() {
+        store.dispatch('SET_COUNT', this.value)
+      }
+    },
 }
 </script>

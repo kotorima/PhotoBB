@@ -8,7 +8,7 @@
           <a href="#" id="logo"><span>PhotoBB</span></a>
         </el-menu-item>
         <el-menu-item index="3">
-          <a href="#" id="login">Войти</a>
+          <a href="" id="login">Войти</a>
         </el-menu-item>
       </el-menu>
 </template>

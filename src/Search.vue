@@ -3,10 +3,22 @@
         <div class="item">
             <p>Где</p>
             <el-dropdown>
-                <input placeholder="Введите место" v-model="value"></input>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item v-for='city in cities' v-bind:key="city.id"></el-dropdown-item>
-                </el-dropdown-menu>
+                <el-select
+                    v-model="value"
+                    multiple
+                    filterable
+                    remote
+                    reserve-keyword
+                    placeholder="Место поездки"
+                    :remote-method="remoteMethod"
+                    :loading="loading">
+                    <el-option
+                    v-for='city in cities' 
+                    v-bind:key="city.id"
+                    :label="city.label"
+                    :value="city.location_name.value">
+                    </el-option>
+                </el-select>
             </el-dropdown>
         </div>
         <div class="item">
@@ -18,7 +30,8 @@
         <div class="item">
             <p>Стоимость</p>
             <el-dropdown>
-            <input placeholder="Определите стоимость" v-model="cost"></input>
+            <input placeholder="Определите стоимость" v-if="cost==0" readonly></input>
+            <input v-else v-model="cost" readonly></input>
             <el-dropdown-menu slot="dropdown" class='slider'>
                     <el-dropdown-item>
                         <app-slider></app-slider>
@@ -34,36 +47,68 @@
 import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
 import axios from 'axios';
-import Vuex from 'vuex';
+import store from '../store'
 
 export default {
   data() {
     return {
-        value: '',
-        cost: '',
+        valueCost: 0,
         cities: [],
-        store: new Vuex.Store({
-            state: {
-                cost: {}
-            },
-        }),
+        options: [],
+        value: [],
+        list: [],
+        loading: false,
     };
   },
   components: {
     "app-date-picker": DatePicker,
     "app-slider": Slider
   },
+
+  mounted() {
+      this.list = this.cities.map(city => {
+        return { value: city, label: city };
+      });
+  },
   
   watch: {
       value: function() {
           axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities.json='+this.value)
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+this.value)
             .then(response => { 
-                this.cities = response;
+                this.cities = response.data.location_autocompletes;
+                
          });
+      },
+  },
+  computed: {
+      cost: {
+        get: function() {
+            return store.state.cost
+        },
+        set: function(value) {
+            store.dispatch('SET_COUNT', value)
+        }
       }
   },
   methods: {
+    remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            this.loading = false;
+            this.options = this.list.filter(item => {
+              return city.label.toLowerCase()
+                .indexOf(query.toLowerCase()) > -1;
+            });
+          }, 200);
+        } else {
+          this.options = [];
+        }
+      },
+    handleCommand: function (command) {
+        console.log(command);
+    },
     search: function () {
 
     }

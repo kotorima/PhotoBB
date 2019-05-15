@@ -186,10 +186,11 @@ export default {
  }
 
 .photos img {
-    width: 23vw;
-    height: 23vw;
-    margin-right: 3vw;
+    width: 24vw;
+    height: 24vw;
+    padding-right: 3vw;
     object-fit: cover;
+    box-sizing:content-box;
 }
 
 .next {
