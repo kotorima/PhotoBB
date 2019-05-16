@@ -42,6 +42,38 @@ div.el-picker-panel__content.el-date-range-picker__content > div > div {
     font-family: "Exo2";
 }
 
+#app > div.header > div.search > div.main > div:nth-child(2) > div > div > div > input {
+    text-align: left;
+}
+
 th {
     font-family: "Roboto";
+}
+
+#app > div.header > div.search > div.main > div:nth-child(1) > div > div > div.el-input.el-input--suffix > input {
+    border: none;
+    width: 100%;
+    padding: 0;
+    height: 22px;
+}
+#app > div.header > div.search > div.main > div:nth-child(1) > div > div > div.el-select__tags > input {
+    margin: 0;
+    width: 100%;
+}
+
+#app > div > form > div > div.block2 > div.el-checkbox-group.category > label > span {
+    background: #E8E8E8;
+    border: none;
+    border-radius: 4px;
+    color: #7E7E7E;
+    padding: 0.4rem;
+    width: 5.5rem;
+    text-align: center;
+    margin: 2vw 0.5rem 0;
+}
+
+#app > div > form > div > div.block2 > div.el-checkbox-group.category > label.el-checkbox-button.is-checked > span {
+    background: #4A5283;
+    color: #ffffff;
+    box-shadow: none;
 }

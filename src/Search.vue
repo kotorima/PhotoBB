@@ -11,7 +11,8 @@
                     reserve-keyword
                     placeholder="Место поездки"
                     :remote-method="remoteMethod"
-                    :loading="loading">
+                    :loading="loading"
+                    class = 'input-select'>
                     <el-option
                     v-for='city in cities' 
                     v-bind:key="city.id"
@@ -173,4 +174,5 @@ button {
 .slider {
     width: 20%;
 }
+
 </style>

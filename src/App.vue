@@ -1,21 +1,22 @@
 <template>
   <div id="app">
     <app-nav-menu></app-nav-menu>
-    <div class='header'>
+    <app-photo-form v-if="photographerReg"></app-photo-form>
+    <div v-if="!photographerReg" class='header'>
       <app-steps></app-steps>
       <div class='search'>
         <div class='description'>
           <div>
             <h2>Получите профессиональные фото с отдыха</h2>
-            <span>46 доступных фотографов, путешествующих по всему миру</span>
+            <span class='desc'>46 доступных фотографов, путешествующих по всему миру</span>
           </div>
-          <a>Вы фотограф?</a>
+          <a v-on:click="registration">Вы фотограф?</a>
         </div>
         <app-search></app-search>
       </div>
-      </div>
-      <app-form></app-form>
-      <app-tours-list></app-tours-list>
+    </div>
+    <app-form v-if="!photographerReg"></app-form>
+    <app-tours-list v-if="!photographerReg"></app-tours-list>
   </div>
 </template>
 
@@ -25,10 +26,12 @@ import Steps from './Steps.vue';
 import Search from './Search.vue';
 import FormLogin from './FormLogin.vue';
 import ToursList from './ToursList.vue';
+import PhotographerRegistration from './PhotographerRegistration.vue';
 
 export default {
   data() {
     return {
+      photographerReg: false,
     };
   },
   components: {
@@ -37,7 +40,13 @@ export default {
     "app-search": Search,
     "app-form": FormLogin,
     "app-tours-list": ToursList,
-  }
+    "app-photo-form": PhotographerRegistration,
+  },
+  methods: {
+    registration: function () {
+      this.photographerReg = true;
+    }
+  },
 };
 </script>
 
@@ -63,16 +72,14 @@ export default {
     font-style: normal;
 }
 
-#app {
-    background: url('assets/images/background.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-}
   
   a,
-  h2 {
+  h2,
+  h1,
+  h3 {
     font-family: "Exo2";
     color: #000000;
+    font-weight: normal;
   }
 
   a {
@@ -95,7 +102,7 @@ export default {
     font-size: 0.9rem;
   }
 
-  span {
+  desc {
     color: #8A8A8A;
   }
 
@@ -110,6 +117,7 @@ export default {
   .description > a{
     font-weight: normal;
     font-family: "Roboto";
+    margin-bottom: 0.7rem;
   }
 
   .search {
@@ -117,12 +125,16 @@ export default {
     display:flex;
     flex-direction: column;
     padding: 4% 3%;
+    margin-top: 65vh;
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
   }
 
   .header {
+    background: url('assets/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

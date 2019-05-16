@@ -56,7 +56,7 @@ export default {
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
         border-radius: 8px;
         padding: 2rem;
-        margin: 4rem auto;
+        margin: 10rem auto;
     }
 
     div {
