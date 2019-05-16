@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    <app-nav-menu></app-nav-menu>
+    <el-menu
+        default-active="1">
+        <el-menu-item index="1">
+          <a href="#" id="search"><img src="./assets/images/search.png" alt="search"></a>
+        </el-menu-item>
+        <el-menu-item index="2">
+          <a href="#" id="logo" v-on:click='backMain'><span>PhotoBB</span></a>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <a href="" id="login">Войти</a>
+        </el-menu-item>
+      </el-menu>
     <app-photo-form v-if="photographerReg"></app-photo-form>
     <div v-if="!photographerReg" class='header'>
       <app-steps></app-steps>
@@ -10,7 +21,7 @@
             <h2>Получите профессиональные фото с отдыха</h2>
             <span class='desc'>46 доступных фотографов, путешествующих по всему миру</span>
           </div>
-          <a v-on:click="registration">Вы фотограф?</a>
+          <a v-on:click="registration" v-bind:clickphopo="clickphoto">Вы фотограф?</a>
         </div>
         <app-search></app-search>
       </div>
@@ -21,7 +32,6 @@
 </template>
 
 <script>
-import NavMenu from "./NavMenu.vue";
 import Steps from './Steps.vue';
 import Search from './Search.vue';
 import FormLogin from './FormLogin.vue';
@@ -32,10 +42,10 @@ export default {
   data() {
     return {
       photographerReg: false,
+      clickphoto: false,
     };
   },
   components: {
-    "app-nav-menu": NavMenu,
     "app-steps": Steps,
     "app-search": Search,
     "app-form": FormLogin,
@@ -45,6 +55,11 @@ export default {
   methods: {
     registration: function () {
       this.photographerReg = true;
+    },
+    backMain: function() {
+      if(this.clickphoto == true) {
+        this.photographerReg = false;
+      }
     }
   },
 };
@@ -141,4 +156,27 @@ export default {
     align-items: center;
     height: 42rem;
   }
+  #logo > span {
+  font-size: 1.5rem;
+}
+
+a > img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.el-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 6rem;
+  background: #ffffff;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.el-menu-item:nth-child(2) {
+ margin: 0 30vw;
+}
 </style>
