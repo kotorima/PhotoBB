@@ -14,14 +14,14 @@ body {
 
 .el-range-editor .el-range-input {
     width: 35% !important;
-    color: #8a8a8a !important;
+    color: #000000 !important;
 }
 
 .el-date-editor .el-range-separator {
     padding: 0 !important;
     padding-bottom: 0.4rem !important;
     width: 7% !important;
-    color: #8a8a8a !important;
+    color: #000000 !important;
 }
 
 body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range.start-date > div > span,
@@ -59,6 +59,7 @@ th {
 #app > div.header > div.search > div.main > div:nth-child(1) > div > div > div.el-select__tags > input {
     margin: 0;
     width: 100%;
+    color: #000000;
 }
 
 #app > div > form > div > div.block2 > div.el-checkbox-group.category > label > span {

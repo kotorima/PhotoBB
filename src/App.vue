@@ -21,7 +21,7 @@
             <h2>Получите профессиональные фото с отдыха</h2>
             <span class='desc'>46 доступных фотографов, путешествующих по всему миру</span>
           </div>
-          <a v-on:click="registration" v-bind:clickphopo="clickphoto">Вы фотограф?</a>
+          <a v-on:click="registration">Вы фотограф?</a>
         </div>
         <app-search></app-search>
       </div>
@@ -55,10 +55,12 @@ export default {
   methods: {
     registration: function () {
       this.photographerReg = true;
+      this.clickphoto = true;
     },
     backMain: function() {
       if(this.clickphoto == true) {
         this.photographerReg = false;
+        this.clickphoto = false;
       }
     }
   },
