@@ -76,4 +76,9 @@ export default {
         padding: 1% 8%;
         width:100%;
     }
+    @media (max-width: 900px) {
+        .main {
+            display: none;
+        }
+    }
 </style>

@@ -3,66 +3,33 @@
     <el-menu
         default-active="1">
         <el-menu-item index="1">
-          <a href="#" id="search"><img src="./assets/images/search.png" alt="search"></a>
+          <a href="#" id="search"><img src="./assets/images/search.png" alt="search" class='loupe'></a>
         </el-menu-item>
         <el-menu-item index="2">
-          <a href="#" id="logo" v-on:click='backMain'><span>PhotoBB</span></a>
+          <router-link to="/"><span class='logo'>PhotoBB</span></router-link>
         </el-menu-item>
         <el-menu-item index="3">
-          <a href="" id="login">Войти</a>
+          <router-link :to="{ name: 'login'}">Войти</router-link>
         </el-menu-item>
       </el-menu>
-    <app-photo-form v-if="photographerReg"></app-photo-form>
-    <div v-if="!photographerReg" class='header'>
-      <app-steps></app-steps>
-      <div class='search'>
-        <div class='description'>
-          <div>
-            <h2>Получите профессиональные фото с отдыха</h2>
-            <span class='desc'>46 доступных фотографов, путешествующих по всему миру</span>
-          </div>
-          <a v-on:click="registration">Вы фотограф?</a>
-        </div>
-        <app-search></app-search>
-      </div>
-    </div>
-    <app-form v-if="!photographerReg"></app-form>
-    <app-tours-list v-if="!photographerReg"></app-tours-list>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Steps from './Steps.vue';
-import Search from './Search.vue';
-import FormLogin from './FormLogin.vue';
-import ToursList from './ToursList.vue';
-import PhotographerRegistration from './PhotographerRegistration.vue';
+import Main from './Main.vue';
 
 export default {
   data() {
     return {
-      photographerReg: false,
-      clickphoto: false,
+      reg: null,
     };
   },
   components: {
-    "app-steps": Steps,
-    "app-search": Search,
-    "app-form": FormLogin,
-    "app-tours-list": ToursList,
-    "app-photo-form": PhotographerRegistration,
+    "app-main": Main,
   },
   methods: {
-    registration: function () {
-      this.photographerReg = true;
-      this.clickphoto = true;
-    },
-    backMain: function() {
-      if(this.clickphoto == true) {
-        this.photographerReg = false;
-        this.clickphoto = false;
-      }
-    }
+    
   },
 };
 </script>
@@ -93,19 +60,25 @@ export default {
   a,
   h2,
   h1,
-  h3 {
+  h3,
+  .link {
     font-family: "Exo2";
     color: #000000;
     font-weight: normal;
   }
 
-  a {
+  a,
+  .link {
      text-decoration: none;
      font-size: 1rem;
      font-weight: bold;
   }
 
-  a, button, input[type='submit'], input[type='button'] {
+  a, 
+  button, 
+  input[type='submit'], 
+  input[type='button'],
+  .link {
      cursor: pointer;
   }
 
@@ -131,7 +104,7 @@ export default {
     padding-bottom: 1rem;
   }
 
-  .description > a{
+  .link {
     font-weight: normal;
     font-family: "Roboto";
     margin-bottom: 0.7rem;
@@ -158,7 +131,7 @@ export default {
     align-items: center;
     height: 42rem;
   }
-  #logo > span {
+  .logo {
   font-size: 1.5rem;
 }
 
@@ -181,4 +154,45 @@ a > img {
 .el-menu-item:nth-child(2) {
  margin: 0 30vw;
 }
+
+@media (max-width: 1050px) {
+  .search {
+    margin-top: 29vh;
+  }
+}
+
+@media (max-width: 950px) {
+  .search {
+    margin-top: 35vh;
+  }
+  .header {
+    height: 30rem;
+  }
+}
+
+@media (max-width: 800px) {
+  h2 {
+    font-size: 1.2rem;
+  }
+  span {
+    font-size: 0.8rem;
+  }
+  .el-menu-item:nth-child(2) {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+  .loupe {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .el-menu {
+    height: 4rem;
+  }
+}
+
 </style>

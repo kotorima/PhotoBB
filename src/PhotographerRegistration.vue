@@ -298,4 +298,13 @@ export default {
       display: flex;
       margin: 5vh auto;
   }
+
+  @media (max-width: 600px) {
+    .block1 {
+      flex-direction: column;
+    }
+    .block4 {
+      flex-direction: column;
+    }
+  }
 </style>

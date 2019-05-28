@@ -1,48 +1,65 @@
 <template>
-    <form>
-        <h2>{{ headline }}</h2>
-        <div>
-            <p>{{ question }}</p>
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+        <h2>Воход</h2>
+        <div class='center'>
+            <p>Авторизоваться через:</p>
             <a href="#"><img src="./assets/images/vk.png" alt="VK"></a>
-            <input type='text' placeholder="Имя" v-show='auth' required autofocus>
-            <input type='text' placeholder="Логин / e-mail" required>
-            <input type='password' placeholder='Пароль' required>
-            <input type='password' placeholder='Пароль' v-show='auth' required>
-            <input type='submit' v-bind:value='text'>
-            <input type='button' v-on:click='replacementForm' v-bind:value='sort'> 
-            <a href='#' v-show='auth'>Вы фотограф?</a>
+            <div>
+                <el-form-item label="Логин" prop="login" class='inputform'>
+                    <el-input type="text" placeholder="Логин / e-mail" v-model="ruleForm.login">
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="Пароль" prop="password" class='inputform'>
+                    <el-input placeholder="Пароль" type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+                </el-form-item>
+                <input type='button' value='Войти' class='one'> 
+                <router-link :to="{ name: 'usreg'}">
+                    <input type='button' value='Зарегистрироваться' class='two'>
+                </router-link>
+            </div>
         </div>
-    </form>
+    </el-form>
 </template>
 
 <script>
 export default {
     data() {
+        var checkLogin = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Заполните поле'));
+            } else {
+            if (this.ruleForm.login < 6) {
+                callback(new Error('Введите больше 5 символов'));
+            }
+            callback();
+            }
+        };
+        var checkPassword = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Заполните поле'));
+            } else {
+            if (this.ruleForm.login < 6) {
+                callback(new Error('Введите больше 5 символов'));
+            }
+            callback();
+            }
+        };
         return {
-            auth: false,
-            headline: 'Воход',
-            question: 'Войти через:',
-            sort: 'Зарегистрироваться',
-            text: 'Войти'
+            ruleForm: {
+                login: '',
+                password: '',
+            },
+            rules: {
+                login: [
+                    { validator: checkLogin, trigger: 'blur', required: true }
+                ],
+                password: [
+                    { validator: checkPassword, trigger: 'blur', required: true }
+                ],
+          }
         };
     },
     methods: {
-        replacementForm: function () {
-            if(this.auth == false) {
-                this.auth = true;
-                this.headline = 'Регистрация';
-                this.question = 'Авторизоваться через:';
-                this.text = 'Зарегистрироваться';
-                this.sort = 'Уже зарегистрирован';
-            }
-            else {
-                this.auth = false;
-                this.headline = 'Вход';
-                this.question = 'Войти через:';
-                this.text = 'Войти';
-                this.sort = 'Зарегистрироваться';
-            }
-        }
     }
 }
 </script>
@@ -51,15 +68,18 @@ export default {
     form {
         display: flex;
         flex-direction: column;
-        width: 30%;
+        width: 40%;
         background: #FFFFFF;
         box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
         border-radius: 8px;
         padding: 2rem;
         margin: 10rem auto;
     }
+    .el-form-item {
+      font-family: 'Exo2';
+  }
 
-    div {
+    .center {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -75,25 +95,26 @@ export default {
         border-radius: 5px;
     }
 
-    input[type='submit'] {
+    .one {
         background: #4A5283;
-        border: none;
+        border: 0.1rem solid #4A5283;
         color: #ffffff;
     }
 
-    input[type='button'] {
+    .two {
         border: 0.1rem solid #4A5283;
         color: #4A5283;
         background: #ffffff;
         font-weight: bold;
         margin-bottom: 1rem;
+        
     }
 
-    input[type='submit']:hover {
+    .one:hover {
         background: #323A6D;
     }
 
-    input[type='button'] {
+    .two {
         border: 0.1rem solid #323A6D;
         color: #323A6D;
     }
@@ -107,5 +128,11 @@ export default {
         font-family: 'Roboto';
         font-weight: normal;
         color: #8A8A8A;
+    }
+
+    @media (max-width: 600px) {
+        form{
+            width: 60%;
+        }
     }
 </style>

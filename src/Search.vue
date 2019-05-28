@@ -5,7 +5,6 @@
             <el-dropdown>
                 <el-select
                     v-model="value"
-                    multiple
                     filterable
                     remote
                     reserve-keyword
@@ -14,10 +13,10 @@
                     :loading="loading"
                     class = 'input-select'>
                     <el-option
-                    v-for='city in cities' 
-                    v-bind:key="city.id"
+                    v-for='city in list' 
+                    v-bind:key="city.label"
                     :label="city.label"
-                    :value="city.location_name.value">
+                    :value="city.value">
                     </el-option>
                 </el-select>
             </el-dropdown>
@@ -25,7 +24,7 @@
         <div class="item">
             <p>Выберите даты</p>
             <el-dropdown>
-                <app-date-picker ></app-date-picker>
+                <app-date-picker></app-date-picker>
             </el-dropdown>
         </div>
         <div class="item">
@@ -71,17 +70,6 @@ export default {
         return { value: city, label: city };
       });
   },
-  
-  watch: {
-      value: function() {
-          axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+this.value)
-            .then(response => { 
-                this.cities = response.data.location_autocompletes;
-                
-         });
-      },
-  },
   computed: {
       cost: {
         get: function() {
@@ -97,23 +85,33 @@ export default {
         if (query !== '') {
           this.loading = true;
           setTimeout(() => {
-            this.loading = false;
-            this.options = this.list.filter(item => {
-              return city.label.toLowerCase()
-                .indexOf(query.toLowerCase()) > -1;
+            axios
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+query)
+            .then(response => { 
+                this.cities = response.data.location_autocompletes;
+                this.list = this.cities.map(value => {
+                    return { value: value.location_name, label: value.location_name }
+                })
+                this.loading = false;
+                return this.list
             });
           }, 200);
         } else {
-          this.options = [];
+          this.list = [];
         }
       },
     handleCommand: function (command) {
         console.log(command);
     },
     search: function () {
-
+        axios
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?cost='+cost)
+            .then(response => { 
+                this.tours = response.data.items;
+            });
     }
   }, 
+  props: ['start-date', 'finish-date']
 }
 </script>
 
@@ -175,4 +173,22 @@ button {
     width: 20%;
 }
 
+@media (max-width: 600px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .item {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .item:not(:last-child) {
+    border-right: none;
+    border-bottom: 0.1rem solid rgba(226, 226, 226, 0.7);
+    }
+    button {
+        border-radius:  0px 0px 5px 5px;
+    }
+}
 </style>

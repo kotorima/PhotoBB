@@ -5,7 +5,9 @@
       type="daterange"
       range-separator="—"
       start-placeholder="Прибытие"
-      end-placeholder="Отбытие">
+      end-placeholder="Отбытие"
+      v-bind:start-date="value1"
+      v-bind:finish-date="value2">
     </el-date-picker>
   </div>
 </template>
@@ -44,7 +46,7 @@ export default {
         value1: '',
         value2: ''
       };
-    }
+    },
   };
 </script>
 

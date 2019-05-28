@@ -200,4 +200,32 @@ export default {
     left: 61vw;
     top: 8vw;
 }
+
+@media(max-width: 600px) {
+    .main-item {
+        width: 78%;
+        padding: 6vw;
+    }
+    .header-item {
+        flex-direction: column;
+    }
+
+    .right {
+        text-align: left;
+    }
+    .left > div > img {
+     width: 10vw;
+     height: 10vw;
+    }
+    .contact {
+        align-self: center;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+    .right > h3 {
+        font-size: 0.85rem;
+    }
+}
 </style>
