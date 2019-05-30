@@ -3,7 +3,7 @@
     <el-menu
         default-active="1">
         <el-menu-item index="1">
-          <a href="#" id="search"><img src="./assets/images/search.png" alt="search" class='loupe'></a>
+          <router-link :to="{name: 'search'}"><img src="./assets/images/search.png" alt="search" class='loupe'></router-link>
         </el-menu-item>
         <el-menu-item index="2">
           <router-link to="/"><span class='logo'>PhotoBB</span></router-link>
@@ -11,8 +11,11 @@
         <el-menu-item index="3">
           <router-link :to="{ name: 'login'}">Войти</router-link>
         </el-menu-item>
-      </el-menu>
+    </el-menu>
       <router-view></router-view>
+    <footer>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et</p>
+    </footer>
   </div>
 </template>
 
@@ -140,6 +143,20 @@ a > img {
   height: 2rem;
 }
 
+footer {
+  display: flex;
+  height: 6rem;
+  box-shadow: 0px -10px 10px rgba(0, 0, 0, 0.05);
+  color: #4F4F4F;
+  margin-top: auto;
+}
+
+footer > p {
+  width: 30%;
+  margin: auto;
+  text-align: center;
+}
+
 .el-menu {
   display: flex;
   flex-direction: row;
@@ -179,6 +196,15 @@ a > img {
   }
   .el-menu-item:nth-child(2) {
     margin: 0 auto;
+  }
+  footer > p {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  footer > p {
+    width: 70%;
   }
 }
 

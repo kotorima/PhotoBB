@@ -26,6 +26,7 @@ import Steps from './Steps.vue';
 import Search from './Search.vue';
 import FormLogin from './FormLogin.vue';
 import ToursList from './ToursList.vue';
+import store from '../store'
 
 export default {
     components: {

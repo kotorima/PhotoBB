@@ -48,7 +48,8 @@ export default {
   methods: {
       reformatDate: function(date) {
           this.date = new Date(date);
-          this.result = this.date.getDate() + ".0" + (this.date.getMonth() + 1)+ "." + this.date.getFullYear();
+          this.result = this.date.getDay() + "." + (this.date.getMonth() + 1)+ "." + this.date.getFullYear();
+          console.log(this.result)
           return this.result;
       },
       nextPhotos: function (countOfPhoto) {
@@ -101,7 +102,7 @@ export default {
      display: flex;
      flex-direction: column;
      width: 70vw;
-     margin: auto;
+     margin: 0;
      padding: 2vw 3vw;
      background: #FFFFFF;
      box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);

@@ -5,21 +5,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		cost: 0
+        cost: 0,
+        date: Date,
+        place: '',
 	},
 	mutations: {
-		SET_COUNT: (state, payload) => {
-            state.cost = payload
+		SET_COST: (state, payload) => {
+            state.cost = payload;
         }
     },
     actions: {
-        SET_COUNT: (context, payload) => {
-            context.commit('SET_COUNT', payload)
+        SET_COST: (context, payload) => {
+            context.commit('SET_COST', payload);
         }
     },
     getters: {
-        GET_COUNT: state => {
-            return state.cost
+        GET_COST: state => {
+            return state.cost;
         }
     }
 })

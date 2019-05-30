@@ -2,30 +2,26 @@
     <div class="main">
         <div class="item">
             <p>Где</p>
-            <el-dropdown>
-                <el-select
-                    v-model="value"
-                    filterable
-                    remote
-                    reserve-keyword
-                    placeholder="Место поездки"
-                    :remote-method="remoteMethod"
-                    :loading="loading"
-                    class = 'input-select'>
-                    <el-option
-                    v-for='city in list' 
-                    v-bind:key="city.label"
-                    :label="city.label"
-                    :value="city.value">
-                    </el-option>
-                </el-select>
-            </el-dropdown>
+            <el-select
+            v-model="value"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="Место поездки"
+            :remote-method="remoteMethod"
+            :loading="loading"
+            class = 'input-select'>
+                <el-option
+                v-for='city in list' 
+                v-bind:key="city.label"
+                :label="city.label"
+                :value="city.value">
+                </el-option>
+            </el-select>
         </div>
         <div class="item">
             <p>Выберите даты</p>
-            <el-dropdown>
-                <app-date-picker></app-date-picker>
-            </el-dropdown>
+            <app-date-picker></app-date-picker>
         </div>
         <div class="item">
             <p>Стоимость</p>
@@ -55,7 +51,7 @@ export default {
         valueCost: 0,
         cities: [],
         options: [],
-        value: [],
+        value: '',
         list: [],
         loading: false,
     };
@@ -73,10 +69,10 @@ export default {
   computed: {
       cost: {
         get: function() {
-            return store.state.cost
+            return store.state.cost;
         },
         set: function(value) {
-            store.dispatch('SET_COUNT', value)
+            store.dispatch('SET_COST', value);
         }
       }
   },
@@ -111,7 +107,6 @@ export default {
             });
     }
   }, 
-  props: ['start-date', 'finish-date']
 }
 </script>
 

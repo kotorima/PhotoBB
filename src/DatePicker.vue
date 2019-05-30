@@ -1,50 +1,24 @@
 <template>
   <div>
     <el-date-picker class='calendar'
-      v-model="value1"
+      v-model="value"
       type="daterange"
       range-separator="—"
       start-placeholder="Прибытие"
       end-placeholder="Отбытие"
-      v-bind:start-date="value1"
-      v-bind:finish-date="value2">
+      format="dd.MM.yyyy"
+      value-format="dd.MM.yyyy">
     </el-date-picker>
   </div>
 </template>
 
 <script>
+import store from '../store';
+
 export default {
     data() {
       return {
-        pickerOptions: {
-          shortcuts: [{
-            text: 'Last week',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last month',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last 3 months',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value1: '',
-        value2: ''
+        value: [],
       };
     },
   };

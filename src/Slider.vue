@@ -22,7 +22,7 @@ export default {
     },
     watch: {
       value: function() {
-        store.dispatch('SET_COUNT', this.value)
+        store.dispatch('SET_COST', this.value)
       }
     },
 }
