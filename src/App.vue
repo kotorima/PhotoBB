@@ -64,6 +64,7 @@ export default {
   h2,
   h1,
   h3,
+  h4,
   .link {
     font-family: "Exo2";
     color: #000000;

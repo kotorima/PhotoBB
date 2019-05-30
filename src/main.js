@@ -5,29 +5,15 @@ import Main from './Main.vue';
 import PhotographerRegistration from './PhotographerRegistration.vue';
 import UserRegistration from './UserRegistration.vue';
 import FormLogin from './FormLogin.vue';
-import FullSearch from './FullSearch';
-import PhotographerPage from './PhotographerPage';
+import FullSearch from './FullSearch.vue';
+import PhotographerPage from './PhotographerPage.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
 import 'element-ui/lib/theme-chalk/index.css';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(Router);
 Vue.use(ElementUI, { locale });
 
-library.add(faCoffee);
-
-Vue.component('awesome', FontAwesomeIcon);
-
-Vue.config.productionTip = false;
-
-new Vue({
-  el: '#photopage',
-  components: { PhotographerPage },
-  template: '<PhotographerPage/>'
-});
 
 const router = new Router({
  routes: [

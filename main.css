@@ -42,16 +42,23 @@ div.el-picker-panel__content.el-date-range-picker__content > div > div {
     font-family: "Exo2";
 }
 
-#app > div > div.header > div.search > div.main > div:nth-child(2) > div > div > div > input,
-#app > div > div > div:nth-child(2) > div > div > div > input {
+#app > div > div.main.search > div:nth-child(2) > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+#app > div > div.header > div.search > div.main > div:nth-child(2) > div > div > input,
+#app > div > div > div:nth-child(2) > div > div > input {
     text-align: left;
 }
 
-th {
+th,
+#photopage > main > div:nth-child(2) > div.block > div > ul > li.number {
     font-family: "Roboto";
 }
 
-#app > div > div.header > div.search > div.main > div:nth-child(1) > div > div.el-input.el-input--suffix > input {
+#app > div > div.header > div.search > div.main > div:nth-child(1) > div > div.el-input.el-input--suffix > input,
+#app > div > div.main.search > div:nth-child(1) > div > div.el-input.el-input--suffix > input {
     border: none;
     width: 100%;
     padding: 0;
@@ -116,6 +123,36 @@ th {
     width: 100%;
 }
 
+#photopage > main > div:nth-child(2) > div.block > div {
+    margin: 1rem auto;
+}
+
+@media (max-width: 800px) {
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 70%;
+    }
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > th,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > th,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td > div > span,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td > div > span {
+        font-size: 0.7rem !important;
+    }
+
+    .el-date-range-picker__header div {
+        font-size: 0.8rem;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td {
+        padding: 0;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left {
+        padding: 0.5rem;
+    }
+}
+
 @media (max-width: 600px) {
     #app > div > form > div > div.block2 > div.block3 > div.block4 > div > div > div > input,
     #app > div > form > div > div.block2 > div.block3 > div:nth-child(2) > div > div > div > input {
@@ -129,6 +166,19 @@ th {
     }
     #app > div > form > div > div.block2 > div.el-checkbox-group.category {
         margin-left: 0;
+    }
+    #app > div > div.header > div.search > div.main > div:nth-child(2) > div > div > input,
+    #app > div > div > div:nth-child(2) > div > div > input {
+        width: 20% !important;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 85%;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td > div,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td > div {
+        line-height: 0;
     }
 
 }

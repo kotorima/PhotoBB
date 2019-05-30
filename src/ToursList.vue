@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       tours: [],
-      count: 3,
+      count: 5,
     };
   },
   components: {

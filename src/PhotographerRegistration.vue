@@ -10,7 +10,7 @@
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <img v-else src="./assets/images/camera.png" alt='camera' v-else class="avatar-uploader-icon">
+                <img v-else src="./assets/images/camera.png" alt='camera' class="avatar-uploader-icon">
             </el-upload>
             <div class='block2'> 
                 <div class='block3'> 
@@ -220,14 +220,17 @@ export default {
     border: none;
   }
   .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    text-align: center;
+    display: flex;
+    margin: auto;
+    padding-top: 3.8rem;;
+    width: 2rem;
+    height: 2rem;
   }
   .avatar {
     width: 160px;
     height: 160px;
     display: block;
+    object-fit: cover;
   }
  
  .mainphoto {
