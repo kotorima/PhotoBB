@@ -1,9 +1,11 @@
 <template>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm" id='login'>
         <h2>Воход</h2>
         <div class='center'>
             <p>Авторизоваться через:</p>
-            <a href="#"><img src="./assets/images/vk.png" alt="VK"></a>
+            <a href="#">
+                <awesome icon="vk"></awesome>
+            </a>
             <div>
                 <el-form-item label="Логин" prop="login" class='inputform'>
                     <el-input type="text" placeholder="Логин / e-mail" v-model="ruleForm.login">
@@ -23,6 +25,7 @@
 
 <script>
 export default {
+    name: 'FormLogin',
     data() {
         var checkLogin = (rule, value, callback) => {
             if (value === '') {

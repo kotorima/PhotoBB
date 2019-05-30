@@ -1,5 +1,5 @@
 <template>
-    <div class='main' id='photopage'>
+    <div class='main'>
         <header>
             <div>
                 <div class='message'>

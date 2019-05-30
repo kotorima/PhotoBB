@@ -10,10 +10,24 @@ import PhotographerPage from './PhotographerPage.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
 import 'element-ui/lib/theme-chalk/index.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faVk } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 Vue.use(Router);
 Vue.use(ElementUI, { locale });
 
+library.add(faVk);
+
+Vue.component('awesome', FontAwesomeIcon);
+
+Vue.config.productionTip = false;
+
+new Vue({
+  el: '#login',
+  components: { FormLogin },
+  template: '<FormLogin/>'
+});
 
 const router = new Router({
  routes: [
