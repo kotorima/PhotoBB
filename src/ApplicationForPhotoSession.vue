@@ -1,0 +1,125 @@
+<template>
+    <div>
+        <h1>Заявка на фотосессию</h1>
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+            <el-form-item label="Город" prop="city" class='inputform'>
+                <el-input
+                placeholder="Введите местоположение"
+                v-model="ruleForm.name">
+                 </el-input>
+            </el-form-item>
+            <el-form-item label="Даты прибытия и отбытия" prop="date" class='inputform'>
+                <el-date-picker  
+                type="daterange" 
+                range-separator="—" 
+                start-placeholder="Прибытие"
+                end-placeholder="Отбытие" 
+                format="dd.MM.yyyy"
+                v-model="ruleForm.date"></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Стоимость" prop="cost" class='inputform'>
+                <span v-if='cost>=0' class="demonstration">до {{ ruleForm.cost }} руб./час</span>
+                <span v-else-if='cost==true' class="demonstration">Договорная</span>
+                <span v-else class="demonstration">Определите стоимость</span>
+                <el-slider
+                v-model="ruleForm.cost"
+                :step="10"
+                :max='5000'>
+                </el-slider>
+                <el-checkbox v-model="ruleForm.cost">Договорная</el-checkbox>
+            </el-form-item>
+            <el-form-item label="Области ваших фотосъемок" prop="category" class='inputform'>
+                
+            </el-form-item>
+            <el-form-item class='buttonform'>
+                <el-button type="primary" @click="submitForm('ruleForm')">Оформить</el-button>
+            </el-form-item>
+        </el-form>
+    </div>
+</template>
+
+<script>
+import DatePicker from './DatePicker.vue';
+import Slider from './Slider.vue';
+
+const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
+
+export default {
+    data() {
+        var checkCity = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Заполните поле'));
+            } else {
+            if (this.ruleForm.city.length < 3) {
+                callback(new Error('Введите больше 2 символа'));
+            }
+            callback();
+            }
+        };
+
+        var checkDate = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Заполните поле'));
+            } else {
+                callback();
+            }
+        };
+
+        var checkCost = (rule, value, callback) => {
+            if (value === 0) {
+                callback(new Error('Определите стоимость'));
+            } else {
+            callback();
+            }
+        };
+        return {
+            categories: categoriesOptions,
+            images: ['./assets/images/ras.jpg', './assets/images/ph.jpg', './assets/images/uh.jpg',
+            './assets/images/in.jpg', './assets/images/63.jpg', './assets/images/bt.jpg', './assets/images/ras.jpg'],
+            ruleForm: {
+                city: '',
+                date: Date,
+                cost: 0,
+            },
+            rules: {
+                city: [
+                    { validator: checkCity, trigger: 'blur', required: true }
+                ],
+                date: [
+                    { validator: checkDate, trigger: 'blur', required: true }
+                ],
+                cost: [
+                    { validator: checkCost, trigger: 'blur', required: true }
+                ],
+            },
+        }
+    },
+    components: {
+        "app-date-picker": DatePicker,
+        "app-slider": Slider
+    },
+    methods: {
+        submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+    },
+}
+</script>
+
+<style scoped>
+.calendar {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 1.5rem;
+  margin-right: auto;
+}
+</style>

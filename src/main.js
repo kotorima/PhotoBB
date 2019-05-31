@@ -7,6 +7,7 @@ import UserRegistration from './UserRegistration.vue';
 import FormLogin from './FormLogin.vue';
 import FullSearch from './FullSearch.vue';
 import PhotographerPage from './PhotographerPage.vue';
+import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue'
 import Dialogue from './Dialogue.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
@@ -70,6 +71,12 @@ const router = new Router({
     path: '/dialog',
     name:'dialog',
     component: Dialogue,
+    props: true,
+  },
+  {
+    path: '/reqphoto',
+    name:'reqphoto',
+    component: ApplicationForPhotoSession,
     props: true,
   },
  ]
