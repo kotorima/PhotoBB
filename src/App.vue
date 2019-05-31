@@ -91,7 +91,7 @@ export default {
     margin: 0;
   }
 
-  p, span {
+  p, span, textarea {
     font-family: "Roboto";
     font-size: 0.9rem;
   }

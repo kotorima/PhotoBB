@@ -2,9 +2,13 @@
     <div class='main'>
         <header>
             <div>
-                <div class='message'>
-                    <img src='./assets/images/message.png' alt='message'>
-                </div>
+                <router-link
+                class="link"
+                :to="{ name: 'dialog'}">
+                    <div class='message'>
+                        <img src='./assets/images/message.png' alt='message'>
+                    </div>
+                </router-link>
             </div>
             <div>
                 <div class='avatar'>
