@@ -1,12 +1,24 @@
 <template>
-    <div>
+    <div class='main'>
         <h1>Заявка на фотосессию</h1>
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
             <el-form-item label="Город" prop="city" class='inputform'>
-                <el-input
+                <el-select
+                v-model="ruleForm.city"
+                filterable
+                remote
+                reserve-keyword
                 placeholder="Введите местоположение"
-                v-model="ruleForm.name">
-                 </el-input>
+                :remote-method="remoteMethod"
+                :loading="loading"
+                class = 'input-select'>
+                    <el-option
+                    v-for='ruleForm.city in list' 
+                    v-bind:key="ruleForm.city.label"
+                    :label="ruleForm.city.label"
+                    :value="ruleForm.city.value">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="Даты прибытия и отбытия" prop="date" class='inputform'>
                 <el-date-picker  
@@ -74,6 +86,9 @@ export default {
         };
         return {
             categories: categoriesOptions,
+            cities: [],
+            list: [],
+            loading: false,
             images: ['./assets/images/ras.jpg', './assets/images/ph.jpg', './assets/images/uh.jpg',
             './assets/images/in.jpg', './assets/images/63.jpg', './assets/images/bt.jpg', './assets/images/ras.jpg'],
             ruleForm: {
@@ -109,17 +124,44 @@ export default {
           }
         });
       },
+      remoteMethod(query) {
+        if (query !== '') {
+          this.loading = true;
+          setTimeout(() => {
+            axios
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+query)
+            .then(response => { 
+                this.cities = response.data.location_autocompletes;
+                this.list = this.cities.map(value => {
+                    return { value: value.location_name, label: value.location_name }
+                })
+                this.loading = false;
+                return this.list
+            });
+          }, 200);
+        } else {
+          this.list = [];
+        }
+      },
+    },
+    mounted() {
+      this.list = this.cities.map(city => {
+        return { value: city, label: city };
+      });
     },
 }
 </script>
 
 <style scoped>
-.calendar {
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 1.5rem;
-  margin-right: auto;
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+}
+
+.el-form-item {
+    width: 40%;
+    font-family: 'Roboto';
 }
 </style>
