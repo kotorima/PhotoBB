@@ -13,10 +13,10 @@
                 :loading="loading"
                 class = 'input-select'>
                     <el-option
-                    v-for='ruleForm.city in list' 
-                    v-bind:key="ruleForm.city.label"
-                    :label="ruleForm.city.label"
-                    :value="ruleForm.city.value">
+                    v-for='city in list' 
+                    v-bind:key="city.label"
+                    :label="city.label"
+                    :value="city.value">
                     </el-option>
                 </el-select>
             </el-form-item>
@@ -41,8 +41,13 @@
                 <el-checkbox v-model="ruleForm.cost">Договорная</el-checkbox>
             </el-form-item>
             <el-form-item label="Области ваших фотосъемок" prop="category" class='inputform'>
-                
+                <el-checkbox-button v-for="category in categories" :label="category" :key="category">{{category}}</el-checkbox-button>
             </el-form-item>
+            <el-form-item label='Фотографии для ваших клиентов'>
+               <el-checkbox-button v-for="image in images" :label="image" :key="image">
+                    <img :src='image.item' alt='picture'>
+               </el-checkbox-button>
+            </el-form-item> 
             <el-form-item class='buttonform'>
                 <el-button type="primary" @click="submitForm('ruleForm')">Оформить</el-button>
             </el-form-item>
@@ -55,6 +60,7 @@ import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
 
 const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
+const imagesURL = [ {item: require("@/assets/images/ras.jpg")} ]; 
 
 export default {
     data() {
@@ -89,8 +95,7 @@ export default {
             cities: [],
             list: [],
             loading: false,
-            images: ['./assets/images/ras.jpg', './assets/images/ph.jpg', './assets/images/uh.jpg',
-            './assets/images/in.jpg', './assets/images/63.jpg', './assets/images/bt.jpg', './assets/images/ras.jpg'],
+            images: imagesURL,
             ruleForm: {
                 city: '',
                 date: Date,
