@@ -44,9 +44,7 @@
                 <el-checkbox-button v-for="category in categories" :label="category" :key="category">{{category}}</el-checkbox-button>
             </el-form-item>
             <el-form-item label='Фотографии для ваших клиентов'>
-               <el-checkbox-button v-for="image in images" :label="image" :key="image">
-                    <img :src='image.item' alt='picture'>
-               </el-checkbox-button>
+               
             </el-form-item> 
             <el-form-item class='buttonform'>
                 <el-button type="primary" @click="submitForm('ruleForm')">Оформить</el-button>
@@ -60,7 +58,6 @@ import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
 
 const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
-const imagesURL = [ {item: require("@/assets/images/ras.jpg")} ]; 
 
 export default {
     data() {
@@ -95,7 +92,6 @@ export default {
             cities: [],
             list: [],
             loading: false,
-            images: imagesURL,
             ruleForm: {
                 city: '',
                 date: Date,

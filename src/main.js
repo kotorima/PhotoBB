@@ -7,7 +7,10 @@ import UserRegistration from './UserRegistration.vue';
 import FormLogin from './FormLogin.vue';
 import FullSearch from './FullSearch.vue';
 import PhotographerPage from './PhotographerPage.vue';
-import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue'
+import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue';
+import PrivateOffice from './PrivateOffice.vue';
+import PageInformation from './PageInformation.vue';
+import PhotoGallery from './PhotoGallery.vue';
 import Dialogue from './Dialogue.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
@@ -37,7 +40,7 @@ const router = new Router({
     path: '/',
     component: Main,
   },
-   {
+  {
       path: '/reg',
       name:'reg',
       component: PhotographerRegistration,
@@ -78,6 +81,26 @@ const router = new Router({
     name:'reqphoto',
     component: ApplicationForPhotoSession,
     props: true,
+  },
+  {
+    path: '/lk',
+    name:'lk',
+    component: PrivateOffice,
+    props: true,
+    children: [
+      {
+        path: 'pageinf',
+        name:'pageinf',
+        component: PageInformation,
+        props: true,
+      },
+      {
+        path: 'gallery',
+        name:'gallery',
+        component: PhotoGallery,
+        props: true,
+      },
+    ],
   },
  ]
 })
