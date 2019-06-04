@@ -115,6 +115,7 @@ th,
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    margin-left: 0;
 }
 
 #app > form > div > div > div > div,

@@ -1,10 +1,9 @@
 <template>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm" id='login'>
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <h2>Воход</h2>
         <div class='center'>
             <p>Авторизоваться через:</p>
-            <a href="#">
-                <awesome icon="vk"></awesome>
+            <a href="#" >
             </a>
             <div>
                 <el-form-item label="Логин" prop="login" class='inputform'>
@@ -14,7 +13,7 @@
                 <el-form-item label="Пароль" prop="password" class='inputform'>
                     <el-input placeholder="Пароль" type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
                 </el-form-item>
-                <input type='button' value='Войти' class='one'> 
+                <input type='button' value='Войти' class='one' @click="signIn"> 
                 <router-link :to="{ name: 'usreg'}">
                     <input type='button' value='Зарегистрироваться' class='two'>
                 </router-link>
@@ -24,8 +23,9 @@
 </template>
 
 <script>
+import apiconfig from './apiconfig'
+import axios from 'axios'
 export default {
-    name: 'FormLogin',
     data() {
         var checkLogin = (rule, value, callback) => {
             if (value === '') {
@@ -49,8 +49,8 @@ export default {
         };
         return {
             ruleForm: {
-                login: '',
-                password: '',
+                login: 'asdasd',
+                password: 'asd',
             },
             rules: {
                 login: [
@@ -63,6 +63,20 @@ export default {
         };
     },
     methods: {
+        signIn() {
+            const response = axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/oauth/v2/token', {
+               method: 'GET',
+               params: {
+                    client_id: apiconfig.client_id,
+                    grant_type: 'password',
+                    username: this.ruleForm.login,
+                    password: this.ruleForm.password,
+                    client_secret: apiconfig.secret
+               }
+            })
+            
+            console.log(response)
+        }
     }
 }
 </script>

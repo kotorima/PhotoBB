@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+    <el-form :model="pageinf" status-icon :rules="rules" ref="pageinf" class="demo-pageinf">
             <div class='block'>
                 <el-upload
                 class="background-uploader"
@@ -27,26 +27,26 @@
                             <el-form-item label="Имя" prop="name" class='inputform'>
                                 <el-input
                                 placeholder="Ваше имя"
-                                v-model="ruleForm.name">
+                                v-model="pageinf.name">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Фамилия" prop="surname" class='inputform'>
                                 <el-input
                                 placeholder="Ваша фамилия"
-                                v-model="ruleForm.surname">
+                                v-model="pageinf.surname">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Логин" prop="login" class='inputform'>
                                 <el-input
                                 placeholder="Ваш логин"
-                                v-model="ruleForm.login">
+                                v-model="pageinf.login">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Телефон" prop="mobile" class='inputform'>
                                 <el-input
                                 type="tel"
                                 placeholder="Ваш номер"
-                                v-model="ruleForm.mobile">
+                                v-model="pageinf.mobile">
                                 </el-input>
                             </el-form-item>
                         </div>
@@ -55,15 +55,15 @@
                                 <el-input
                                 type="email"
                                 placeholder="Ваш email"
-                                v-model="ruleForm.email">
+                                v-model="pageinf.email">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Пароль" prop="passwordOne" class='inputform'>
-                                <el-input placeholder="Придумайте пароль" type="password" v-model="ruleForm.passwordOne" autocomplete="off"></el-input>
+                                <el-input placeholder="Придумайте пароль" type="password" v-model="pageinf.passwordOne" autocomplete="off"></el-input>
                             </el-form-item>
                             <el-form-item prop="passwordTwo" class='inputform'>
-                                <el-input type="password" placeholder="Повторите пароль" v-model="ruleForm.passwordTwo" autocomplete="off"></el-input>
-                            </el-form-item>
+                                <el-input type="password" placeholder="Повторите пароль" v-model="pageinf.passwordTwo" autocomplete="off"></el-input>
+                            </el-form-item> 
                             <el-form-item label="О себе" class='inputform'>
                                 <el-input type="textarea" v-model="text" resize='none' rows='7'></el-input>
                             </el-form-item>
@@ -87,7 +87,7 @@ export default {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.ruleForm.name.length < 2) {
+          if (this.pageinf.name.length < 2) {
             callback(new Error('Введите больше 1 символа'));
           }
           callback();
@@ -97,7 +97,7 @@ export default {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.ruleForm.surname.length < 2) {
+          if (this.pageinf.surname.length < 2) {
               callback(new Error('Введите больше 1 символа'));
           }
           callback();
@@ -107,7 +107,7 @@ export default {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.ruleForm.login < 7) {
+          if (this.pageinf.login < 7) {
               callback(new Error('Введите больше 5 символов'));
           }
           callback();
@@ -117,7 +117,7 @@ export default {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.ruleForm.mobile < 11 || this.ruleForm.mobile > 12) {
+          if (this.pageinf.mobile.length < 11 || this.pageinf.mobile.length > 12) {
               callback(new Error('Значение должно быть равно 11 символам'));
           }
           callback();
@@ -127,7 +127,7 @@ export default {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.ruleForm.email < 6) {
+          if (this.pageinf.email < 6) {
               callback(new Error('Введите больше 5 символов'));
           }
           callback();
@@ -137,8 +137,8 @@ export default {
         if (value === '') {
           callback(new Error('Введите пароль'));
         } else {
-          if (this.ruleForm.passwordTwo !== '') {
-            this.$refs.ruleForm.validateField('passwordTwo');
+          if (this.pageinf.passwordTwo !== '') {
+            this.$refs.pageinf.validateField('passwordTwo');
           }
           callback();
         }
@@ -146,7 +146,7 @@ export default {
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Введите пароль снова'));
-        } else if (value !== this.ruleForm.passwordOne) {
+        } else if (value !== this.pageinf.passwordOne) {
           callback(new Error('Введеные значения не совпадают!'));
         } else {
           callback();
@@ -158,7 +158,7 @@ export default {
         text: '',
         categories: categoriesOptions,
         checkboxGroup: [],
-        ruleForm: {
+        pageinf: {
           name: '',
           surname: '',
           login: '',

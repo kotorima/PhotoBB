@@ -2,9 +2,9 @@
     <div class='main'>
         <div>
             <h2>Личный кабинет</h2>
-            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+            <el-form status-icon ref="ruleForm" class="demo-ruleForm">
                 <el-form-item class='buttonform'>
-                    <el-button type="primary" @click="submitForm('ruleForm')">Сохранить</el-button>
+                    <el-button type="primary" @click="submitForm($route.name)">Сохранить</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -12,7 +12,7 @@
             <router-link :to="{name: 'pageinf'}" class='link active'>Информация страницы</router-link>
             <router-link :to="{name: 'gallery'}" class='link'>Фотогалерея</router-link>
         </div>
-            <router-view></router-view>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -20,18 +20,16 @@
 export default {
     data() {
       return {
-
       }
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
+        this.$children[3].$refs[formName].validate((valid) => {
+            if (valid) {
+                //сохраняем
+            } else {
+                //не сохраняем
+            }
         });
       },
     }

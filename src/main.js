@@ -15,24 +15,11 @@ import Dialogue from './Dialogue.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
 import 'element-ui/lib/theme-chalk/index.css';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faVk } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+window.$ = window.jQuery = require('jquery');
 
 Vue.use(Router);
 Vue.use(ElementUI, { locale });
-
-library.add(faVk);
-
-Vue.component('awesome', FontAwesomeIcon);
-
-Vue.config.productionTip = false;
-
-new Vue({
-  el: '#login',
-  components: { FormLogin },
-  template: '<FormLogin/>'
-});
 
 const router = new Router({
  routes: [
@@ -84,6 +71,7 @@ const router = new Router({
   },
   {
     path: '/lk',
+    redirect: '/lk/pageinf',
     name:'lk',
     component: PrivateOffice,
     props: true,
