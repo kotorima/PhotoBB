@@ -18,8 +18,13 @@ import store from '../store';
 export default {
     data() {
       return {
-        value: [],
+        value: store.state.date,
       };
+    },
+    watch: {
+      value: function() {
+        store.dispatch('SET_DATE', this.value);
+      }
     },
   };
 </script>

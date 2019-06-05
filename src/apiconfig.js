@@ -1,5 +1,5 @@
 export default {
-    "client_id": "8_4pnvgwkrlugws40c48wk0ogo84844csg4w0kc8k08484844c4o",
-    "secret": "1egxhyjw6z40wcos8swc88ko88oksocc0cswwk00c80ko4ssck",
-    "name": "kotorimass"
+    "client_id": "1_2llbxc5r6ku80kws04wc8c8o88gcgows0s8wcocwscwcwogw0w",
+    "secret": "6b4o5menaw4k0k4wok0c4gwcwwoo00k8s00gk4kocgcsos8s4w",
+    "name": "dgd"
 }

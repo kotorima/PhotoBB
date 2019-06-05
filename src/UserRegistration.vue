@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import apiconfig from './apiconfig';
+
 export default {
     data() {
         var checkName = (rule, value, callback) => {

@@ -231,6 +231,20 @@ export default {
     transform: translateY(-50%);
 }
 
+@media(max-width: 1050px) {
+    .photos img {
+        width: 240px;
+        height: 240px;
+    }
+}
+
+@media(max-width: 800px) {
+    .photos img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
 @media(max-width: 600px) {
     .main-item {
         width: 78%;
@@ -258,4 +272,5 @@ export default {
         font-size: 0.85rem;
     }
 }
+
 </style>

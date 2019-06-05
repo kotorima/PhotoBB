@@ -64,18 +64,25 @@ export default {
     },
     methods: {
         signIn() {
-            const response = axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/oauth/v2/token', {
+             axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/oauth/v2/token', {
                method: 'GET',
                params: {
                     client_id: apiconfig.client_id,
                     grant_type: 'password',
                     username: this.ruleForm.login,
                     password: this.ruleForm.password,
-                    client_secret: apiconfig.secret
+                    client_secret: apiconfig.secret,
                }
+            }).then(response=>{
+                const accessToken = response.data.access_token;
+                const refreshToken = response.data.refresh_token;
+                axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru//api/v1/user/current', {
+                    method: 'GET',
+                    headers: {
+                    Authorization: 'Bearer ' + accessToken
+                    }
+                });
             })
-            
-            console.log(response)
         }
     }
 }
