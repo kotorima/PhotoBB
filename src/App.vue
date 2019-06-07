@@ -141,6 +141,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 42rem;
+    margin-bottom: 30vh !important;
   }
   .logo {
   font-size: 1.5rem;
@@ -182,7 +183,10 @@ footer > p {
 
 @media (max-width: 1050px) {
   .search {
-    margin-top: 29vh;
+    margin-top: 30vh;
+  }
+  .header {
+    margin-bottom: 15vh !important;
   }
 }
 

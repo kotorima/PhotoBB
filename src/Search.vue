@@ -228,7 +228,9 @@ button,
         flex-direction: column;
     }
 
-    .item {
+    .item,
+    .a,
+    .a > button {
         width: 100%;
         box-sizing: border-box;
     }
@@ -237,7 +239,10 @@ button,
     border-right: none;
     border-bottom: 0.1rem solid rgba(226, 226, 226, 0.7);
     }
-    button {
+
+    button,
+    .a,
+    .a > button {
         border-radius:  0px 0px 5px 5px;
     }
 }
