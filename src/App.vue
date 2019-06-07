@@ -34,6 +34,13 @@ export default {
   methods: {
     
   },
+  beforeRouteLeave (to, from, next) {
+        //searchPath = from.path;
+        console.log(from);
+        console.log(to);
+        console.log('here')
+        next();
+  },
 };
 </script>
 

@@ -7,9 +7,12 @@ export default new Vuex.Store({
 	state: {
         cost: 0,
         date: [],
-        place: '',
+        placeId: '',
         tours: [],
-        search: false,
+        searchPath: '',
+        searchOn: false,
+        noResult: false,
+        countOfTours: 0,
 	},
 	mutations: {
 		SET_COST: (state, payload) => {
@@ -18,14 +21,23 @@ export default new Vuex.Store({
         SET_DATE: (state, payload) => {
             state.date = payload;
         },
-        SET_PLACE: (state, payload) => {
-            state.place = payload;
+        SET_PLACE_ID: (state, payload) => {
+            state.placeId = payload;
         },
         SET_TOURS: (state, payload) => {
             state.tours = payload;
         },
-        SET_SEARCH: (state, payload) => {
-            state.search = payload;
+        SET_SEARCH_PATH: (state, payload) => {
+            state.searchPath = payload;
+        },
+        SET_SEARCH_ON: (state, payload) => {
+            state.searchOn = payload;
+        },
+        SET_NO_RESULT: (state, payload) => {
+            state.noResult = payload;
+        },
+        SET_COUNT_OF_TOURS: (state, payload) => {
+            state.countOfTours = payload;
         },
     },
     actions: {
@@ -35,14 +47,23 @@ export default new Vuex.Store({
         SET_DATE: (context, payload) => {
             context.commit('SET_DATE', payload);
         },
-        SET_PLACE: (context, payload) => {
-            context.commit('SET_PLACE', payload);
+        SET_PLACE_ID: (context, payload) => {
+            context.commit('SET_PLACE_ID', payload);
         },
         SET_TOURS: (context, payload) => {
             context.commit('SET_TOURS', payload);
         },
-        SET_SEARCH: (context, payload) => {
-            context.commit('SET_SEARCH', payload);
+        SET_SEARCH_PATH: (context, payload) => {
+            context.commit('SET_SEARCH_PATH', payload);
+        },
+        SET_SEARCH_ON: (context, payload) => {
+            context.commit('SET_SEARCH_ON', payload);
+        },
+        SET_NO_RESULT: (context, payload) => {
+            context.commit('SET_NO_RESULT', payload);
+        },
+        SET_COUNT_OF_TOURS: (context, payload) => {
+            context.commit('SET_COUNT_OF_TOURS', payload);
         },
     },
     getters: {
@@ -52,14 +73,23 @@ export default new Vuex.Store({
         GET_DATE: state => {
             return state.date;
         },
-        GET_PLACE: state => {
-            return state.place;
+        GET_PLACE_ID: state => {
+            return state.placeId;
         },
         GET_TOURS: state => {
             return state.tours;
         },
-        GET_SEARCH: state => {
-            return state.search;
+        GET_SEARCH_PATH: state => {
+            return state.searchPath;
+        },
+        GET_SEARCH_ON: state => {
+            return state.searchOn;
+        },
+        GET_NO_RESULT: state => {
+            return state.noResult;
+        },
+        GET_COUNT_OF_TOURS: state => {
+            return state.countOfTours;
         },
     }
 })

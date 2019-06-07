@@ -1,33 +1,81 @@
 <template>
-    <div class='main'>
+    <div class='blockmain'>
         <app-search class='search'></app-search>
-        <div class='one'>
-            <el-checkbox-group v-model="checkboxGroup" class='category'>
-                <el-checkbox-button v-for="category in categories" :label="category" :key="category">{{category}}</el-checkbox-button>
-            </el-checkbox-group>
-        </div>
+        <app-tours-list class='two'></app-tours-list>
     </div>
 </template>
 
 <script>
 import Search from './Search.vue';
-const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
+import ToursList from './ToursList.vue';
+import store from '../store';
+import axios from "axios";
 
 export default {
     data() {
         return {
-            categories: categoriesOptions,
-            checkboxGroup: [],
+            
         }
     },
     components: {
         "app-search": Search,
+        "app-tours-list": ToursList,
+    },
+    computed: {
+        tours: {
+            get: function() {
+                return store.state.tours;
+            },
+            set: function(value) {
+                store.dispatch('SET_TOURS', value);
+            }
+        },
+        placeId: {
+            get: function() {
+                return store.state.placeId;
+            },
+            set: function(value) {
+                store.dispatch('SET_PLACE_ID', value);
+            }
+        },
+        searchOn: {
+            get: function() {
+                return store.state.searchOn;
+            },
+            set: function(value) {
+                store.dispatch('SET_SEARCH_ON', value);
+            }
+        },
+        noResult: {
+            get: function() {
+                return store.state.noResult;
+            },
+            set: function(value) {
+                store.dispatch('SET_NO_RESULT', value);
+            }
+        },
+    },
+    mounted() {
+        console.log('full search '+this.searchOn);
+        if(this.searchOn === true) {
+            this.noResult = false;
+            this.searchOn = false;
+            axios
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.placeId+'&all=true')
+            .then(response => { 
+              this.tours = response.data.items;
+              this.countOfTours = response.data.count;
+              if (this.countOfTours === 0) {
+                    this.noResult = true;
+                }
+            });
+        }
     }
 }
 </script>
 
 <style scoped>
-.main {
+.blockmain {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -51,5 +99,8 @@ export default {
 
 .one {
     margin-bottom: 5rem;
+}
+.two {
+    margin-bottom: 2rem;
 }
 </style>

@@ -17,7 +17,7 @@
         <app-search></app-search>
       </div>
     </div>
-    <app-tours-list></app-tours-list>
+    <app-tours-list class='tourslist'></app-tours-list>
 </div>
 </template>
 
@@ -39,6 +39,10 @@ export default {
 </script>
 
 <style>
+    .tourslist {
+      margin: auto;
+      width: 80% !important; 
+    }
     .header {
         margin-bottom: 10vh;
     }

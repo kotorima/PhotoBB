@@ -28,10 +28,10 @@ const router = new Router({
     component: Main,
   },
   {
-      path: '/reg',
-      name:'reg',
-      component: PhotographerRegistration,
-      props: true,
+    path: '/reg',
+    name:'reg',
+    component: PhotographerRegistration,
+    props: true,
   },
   {
     path: '/usreg',

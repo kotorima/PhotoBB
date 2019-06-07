@@ -12,11 +12,10 @@
             :loading="loading"
             class = 'input-select'>
                 <el-option
-                v-for='city in list' 
+                v-for="city in list" 
                 :key="city.id"
                 :label="city.label"
-                :value="city.value"
-                :placeName='city.label'>
+                :value="city.value">
                 </el-option>
             </el-select>
         </div>
@@ -36,15 +35,18 @@
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
-        <button class="item button" v-on:click='search'>Найти</button>
+        <button v-if="searchPath=='/search'" class="item button" v-on:click="search">Найти</button>
+        <router-link v-else :to="{ name: 'search'}" class='a'>
+            <button class="item button" v-on:click="changeSearch" >Найти</button>
+        </router-link>
     </div>
 </template>
 
 <script>
-import DatePicker from './DatePicker.vue';
-import Slider from './Slider.vue';
-import axios from 'axios';
-import store from '../store';
+import DatePicker from "./DatePicker.vue";
+import Slider from "./Slider.vue";
+import axios from "axios";
+import store from "../store";
 
 export default {
   data() {
@@ -52,11 +54,14 @@ export default {
         valueCost: 0,
         cities: [],
         options: [],
-        value: store.state.place,
-        placeName: '',
+        value: store.state.placeId,
         list: [],
         loading: false,
         tours: store.state.tours,
+        searchPath: store.state.searchPath,
+        searchOn: store.state.searchOn,
+        noResult: store.state.noResult,
+        countOfTours: store.state.countOfTours,
     };
   },
   components: {
@@ -64,16 +69,31 @@ export default {
     "app-slider": Slider
   },
   watch: {
-    value: function() {
-      store.dispatch('SET_PLACE', this.value);
+    value: function () {
+      store.dispatch('SET_PLACE_ID', this.value);
     },
     tours: function () {
       store.dispatch('SET_TOURS', this.tours);
     },
+    searchPath: function () {
+      store.dispatch('SET_SEARCH_PATH', this.searchPath);
+    },
+    searchOn: function () {
+      store.dispatch('SET_SEARCH_ON', this.searchOn);
+    },
+    noResult: function () {
+      store.dispatch('SET_NO_RESULT', this.noResult);
+    },
+    countOfTours: function () {
+        store.dispatch('SET_COUNT_OF_TOURS', this.countOfTours);
+    }
   },
   mounted() {
+      this.searchOn = false;
+      this.searchPath = this.$route.path;
+      console.log(this.searchPath);
       this.list = this.cities.map(city => {
-        return { value: city, label: city };
+        return { value: city, label: city, };
       });
   },
   computed: {
@@ -92,7 +112,8 @@ export default {
         set: function(value) {
           store.dispatch('SET_DATE', value);
         }
-      }
+      },
+      
   },
   methods: {
     remoteMethod(query) {
@@ -103,7 +124,7 @@ export default {
           .then(response => { 
               this.cities = response.data.location_autocompletes;
               this.list = this.cities.map(value => {
-                  return { value: value.google_place_id, label: value.location_name }
+                  return { value: value.google_place_id, label: value.location_name, }
               })
               this.loading = false;
               return this.list;
@@ -111,16 +132,22 @@ export default {
         } else {
           this.list = [];
         }
-      },
-    handleCommand: function (command) {
-        console.log(command);
     },
     search: function () {
+        this.noResult = false;
         axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name='+this.placeName+'&google_place_id='+this.value+'&all=true')
-            .then(response => { 
-                this.tours = response.data.items;
+        .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.value+'&all=true')
+        .then(response => { 
+            this.tours = response.data.items;
+            this.countOfTours = response.data.count;
+            if (this.countOfTours === 0) {
+                this.noResult = true;
+            }
         });
+    },
+    changeSearch: function () {
+        this.searchOn = true;
+        console.log('main ' +this.searchOn);
     }
   }, 
 }
@@ -137,7 +164,8 @@ export default {
     background: #ffffff;
 }
 
-button {
+button,
+.button {
     background: #CE521D;
     color: white;
     border: none;
@@ -170,7 +198,8 @@ input:focus {
     border-right: 0.1rem solid rgba(226, 226, 226, 0.7);
 }
 
-button {
+button,
+.button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -178,10 +207,20 @@ button {
     background: #CE521D;
     border-radius:  0px 5px 5px 0px;
     font-size: 1rem;
+    font-weight: normal;
 }
 
 .slider {
     width: 20%;
+}
+
+.a {
+    width: 25%;
+}
+
+.a > button {
+    width: 100%;
+    height: 3.5rem;
 }
 
 @media (max-width: 600px) {
