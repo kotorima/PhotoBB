@@ -10,7 +10,6 @@
                         <p>{{ touritem.user.email }}</p>
                     </div>
                 </div>
-                <p class='type'>{{ touritem.photos_type }}</p>
             </div>
             <div class='right'>
                 <h3>{{ touritem.city.location_name }}</h3>
@@ -182,16 +181,6 @@ export default {
      height: 2rem;
      color: #FFFFFF;
      font-weight: normal;
-     margin-top: 2vw;
- }
-
- .type {
-     background: #E8E8E8;
-     border-radius: 4px;
-     color: #7E7E7E;
-     padding: 0.4rem;
-     width: 5rem;
-     text-align: center;
      margin-top: 2vw;
  }
 

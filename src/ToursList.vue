@@ -7,7 +7,7 @@
       <app-tour-item v-else v-for="tour in tours" :key="tour.id" :touritem="tour" class='tours'></app-tour-item>
     </div>
     <div v-if='load' v-loading='load' class='empty'></div>
-    <a v-if='load && !noResult || this.startCount < this.countOfTours - this.number' v-on:click="loadingNextTours()">Смотреть ещё</a>
+    <a v-if='load && noResult===false || this.startCount < this.countOfTours - this.number' v-on:click="loadingNextTours()">Смотреть ещё</a>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       countOfToursAddToPage: 5,
-      loading: true,
+      loading: store.state.loading,
       load: false,
       toursInPage: 0,
       startCount: 0,
@@ -29,6 +29,11 @@ export default {
   },
   components: {
     "app-tour-item": TourItem
+  },
+  watch: {
+    loading: function () {
+      store.dispatch('SET_LOADING', this.loading);
+    },
   },
   computed: {
     tours: {
@@ -82,13 +87,13 @@ export default {
   },
   mounted() {
       if(this.searchOn === false) {
-      axios
-      .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?limit='+this.countOfToursAddToPage)
-      .then(response => { 
-        this.tours = response.data.items;
-        this.countOfTours = response.data.count;
-        this.loading = false;
-      });
+        axios
+        .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?limit='+this.countOfToursAddToPage)
+        .then(response => { 
+          this.tours = response.data.items;
+          this.countOfTours = response.data.count;
+          this.loading = false;
+        });
       }
   },
   methods: {
@@ -101,7 +106,6 @@ export default {
         .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?limit='+this.countOfToursAddToPage+'&start='+this.startCount)
         .then(response => { 
           this.tours = this.tours.concat(response.data.items);
-          console.log(this.tours);
           this.load = false;
         });
       }

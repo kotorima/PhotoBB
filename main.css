@@ -172,6 +172,10 @@ th,
     width: 60vw;
 }
 
+#app > div > main > div:nth-child(2) > div.block > div > ul > li  {
+    font-family: 'Roboto' !important;
+}
+
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
         width: 70%;

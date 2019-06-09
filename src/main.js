@@ -11,7 +11,6 @@ import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue';
 import PrivateOffice from './PrivateOffice.vue';
 import PageInformation from './PageInformation.vue';
 import PhotoGallery from './PhotoGallery.vue';
-import Dialogue from './Dialogue.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -55,12 +54,6 @@ const router = new Router({
     path: '/photopage',
     name:'photopage',
     component: PhotographerPage,
-    props: true,
-  },
-  {
-    path: '/dialog',
-    name:'dialog',
-    component: Dialogue,
     props: true,
   },
   {

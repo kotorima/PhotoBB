@@ -61,7 +61,7 @@ export default {
             this.noResult = false;
             this.searchOn = false;
             axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.placeId+'&all=true')
+            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.placeId.value+'&all=true')
             .then(response => { 
               this.tours = response.data.items;
               this.countOfTours = response.data.count;

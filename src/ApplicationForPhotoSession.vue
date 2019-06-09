@@ -40,11 +40,17 @@
                 </el-slider>
                 <el-checkbox v-model="ruleForm.cost">Договорная</el-checkbox>
             </el-form-item>
-            <el-form-item label="Области ваших фотосъемок" prop="category" class='inputform'>
-                <el-checkbox-button v-for="category in categories" :label="category" :key="category">{{category}}</el-checkbox-button>
-            </el-form-item>
             <el-form-item label='Фотографии для ваших клиентов'>
-               
+               <el-upload
+                action="https://jsonplaceholder.typicode.com/posts/"
+                list-type="picture-card"
+                :on-preview="handlePictureCardPreview"
+                :on-remove="handleRemove">
+                  <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                  <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
             </el-form-item> 
             <el-form-item class='buttonform'>
                 <el-button type="primary" @click="submitForm('ruleForm')">Оформить</el-button>
@@ -92,6 +98,8 @@ export default {
             cities: [],
             list: [],
             loading: false,
+            dialogImageUrl: '',
+            dialogVisible: false,
             ruleForm: {
                 city: '',
                 date: Date,
@@ -144,6 +152,13 @@ export default {
           this.list = [];
         }
       },
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      }
     },
     mounted() {
       this.list = this.cities.map(city => {

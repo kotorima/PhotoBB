@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,6 +13,11 @@ export default new Vuex.Store({
         searchOn: false,
         noResult: false,
         countOfTours: 0,
+        loading: true,
+        authorized: false,
+        accessToken: localStorage.getItem('access_token'),
+        refreshToken: localStorage.getItem('refresh_token'),
+        userId: 0,
 	},
 	mutations: {
 		SET_COST: (state, payload) => {
@@ -38,6 +43,21 @@ export default new Vuex.Store({
         },
         SET_COUNT_OF_TOURS: (state, payload) => {
             state.countOfTours = payload;
+        },
+        SET_LOADING: (state, payload) => {
+            state.loading = payload;
+        },
+        SET_AUTHORIZED: (state, payload) => {
+            state.authorized = payload
+        },
+        SET_ACCESS_TOKEN: (state, payload) => {
+            state.accessToken = payload
+        },
+        SET_REFRESH_TOKEN: (state, payload) => {
+            state.refreshToken = payload
+        },
+        SET_USER_ID: (state, payload) => {
+            state.refreshToken = payload
         },
     },
     actions: {
@@ -65,6 +85,77 @@ export default new Vuex.Store({
         SET_COUNT_OF_TOURS: (context, payload) => {
             context.commit('SET_COUNT_OF_TOURS', payload);
         },
+        SET_LOADING: (context, payload) => {
+            context.commit('SET_LOADING', payload);
+        },
+        SET_ACCESS_TOKEN: (context, payload) => {
+            context.commit('SET_ACCESS_TOKEN', payload);
+        },
+        SET_REFRESH_TOKEN: (context, payload) => {
+            context.commit('SET_REFRESH_TOKEN', payload);
+        },
+        SET_USER_ID: (context, payload) => {
+            context.commit('SET_USER_ID', payload);
+        },
+        CHANGE_AUTHORIZED: (context, payload) => {
+            let data
+            if (payload != null) {
+                data = payload
+            } else {
+                if (localStorage.getItem('access_token')){
+                    data = true
+                } else {
+                    data = false
+                }
+            }
+            context.commit('SET_AUTHORIZED', data)
+        },
+        CHANGE_TOKEN: (context, params) => {
+            let data
+            if (params.data != null) {
+                data = params.data
+            } else {
+                data = localStorage.getItem(`${params.type}_token`)
+            }
+            context.commit(`SET_${params.type.toUpperCase()}_TOKEN`, data)
+        },
+        AUTHORIZATION: (context, parametrs) =>  {
+            let access_token;
+            let refresh_token;
+            return axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/oauth/v2/token', {
+               method: 'GET',
+               params: {
+                    client_id: parametrs.client_id,
+                    grant_type: parametrs.grant_type,
+                    client_secret: parametrs.client_secret,
+                    username: parametrs.username,
+                    password: parametrs.password,
+               }
+            }).then(response=>{
+                access_token = response.data.access_token;
+                refresh_token = response.data.refresh_token;
+                localStorage.setItem('access_token', access_token);
+                localStorage.setItem('refresh_token', refresh_token);
+                return axios.get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru//api/v1/user/current', {
+                    headers: {
+                        Authorization: 'Bearer ' + access_token
+                    }
+                })
+                .then(answer => {
+                    context.dispatch('SET_USER_ID', answer.data.id);
+                    context.dispatch('CHANGE_AUTHORIZED', true);
+                    context.dispatch('CHANGE_TOKEN', {
+                        type: 'access', 
+                        data: access_token
+                    })
+                    context.dispatch('CHANGE_TOKEN', {
+                        type: 'refresh', 
+                        data: refresh_token
+                    })
+                })
+                })
+        },
+        
     },
     getters: {
         GET_COST: state => {
@@ -90,6 +181,18 @@ export default new Vuex.Store({
         },
         GET_COUNT_OF_TOURS: state => {
             return state.countOfTours;
+        },
+        GET_LOADING: state => {
+            return state.loading;
+        },
+        GET_AUTHORIZED: state => {
+            return state.authorized
+        },
+        GET_ACCESS_TOKEN: state => {
+            return state.accessToken
+        },
+        GET_REFRESH_TOKEN: state => {
+            return state.refreshToken
         },
     }
 })

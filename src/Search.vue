@@ -15,7 +15,7 @@
                 v-for="city in list" 
                 :key="city.id"
                 :label="city.label"
-                :value="city.value">
+                :value="city">
                 </el-option>
             </el-select>
         </div>
@@ -47,8 +47,10 @@ import DatePicker from "./DatePicker.vue";
 import Slider from "./Slider.vue";
 import axios from "axios";
 import store from "../store";
+import {mixin} from './mixins/AjaxFunctions.js';
 
 export default {
+    mixins: [mixin],
   data() {
     return {
         valueCost: 0,
@@ -59,7 +61,6 @@ export default {
         loading: false,
         tours: store.state.tours,
         searchPath: store.state.searchPath,
-        searchOn: store.state.searchOn,
         noResult: store.state.noResult,
         countOfTours: store.state.countOfTours,
     };
@@ -77,9 +78,6 @@ export default {
     },
     searchPath: function () {
       store.dispatch('SET_SEARCH_PATH', this.searchPath);
-    },
-    searchOn: function () {
-      store.dispatch('SET_SEARCH_ON', this.searchOn);
     },
     noResult: function () {
       store.dispatch('SET_NO_RESULT', this.noResult);
@@ -113,7 +111,6 @@ export default {
           store.dispatch('SET_DATE', value);
         }
       },
-      
   },
   methods: {
     remoteMethod(query) {
@@ -133,20 +130,8 @@ export default {
           this.list = [];
         }
     },
-    search: function () {
-        this.noResult = false;
-        axios
-        .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.value+'&all=true')
-        .then(response => { 
-            this.tours = response.data.items;
-            this.countOfTours = response.data.count;
-            if (this.countOfTours === 0) {
-                this.noResult = true;
-            }
-        });
-    },
     changeSearch: function () {
-        this.searchOn = true;
+        store.dispatch('SET_SEARCH_ON', true);
         console.log('main ' +this.searchOn);
     }
   }, 
@@ -228,9 +213,7 @@ button,
         flex-direction: column;
     }
 
-    .item,
-    .a,
-    .a > button {
+    .item {
         width: 100%;
         box-sizing: border-box;
     }
