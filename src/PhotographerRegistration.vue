@@ -60,10 +60,6 @@
                         </el-form-item>
                     </div>
                 </div>
-                <h3>Области ваших фотосъемок</h3>
-                <el-checkbox-group v-model="checkboxGroup" class='category'>
-                    <el-checkbox-button v-for="category in categories" :label="category" :key="category">{{category}}</el-checkbox-button>
-                </el-checkbox-group>
                 <el-form-item class='buttonform'>
                     <el-button type="primary" @click="submitForm('ruleForm')">Зарегистрироваться</el-button>
                 </el-form-item>
@@ -264,35 +260,14 @@ export default {
       flex-wrap: wrap;
   }
 
-  .inputform,
-  .category,
-  h3 {
+  .inputform, {
       margin-left: 2rem;
   }
 
   h1 {
       margin-bottom: 10vh;
   }
-
-  .category {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-  }
-
-  .type {
-     background: #E8E8E8;
-     border: none;
-     border-radius: 4px;
-     color: #7E7E7E;
-     padding: 0.4rem;
-     width: 5.5rem;
-     text-align: center;
-     margin-top: 2vw;
-     margin-left: 0.5rem;
-  }
-
+  
   .el-form-item {
       font-family: 'Exo2';
   }
