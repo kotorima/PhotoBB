@@ -2,30 +2,47 @@
     <div class='main'>
         <header>
             <div>
+<<<<<<< HEAD
                 <img v-if='user.avatar' class="avatar" v-bind:src="'http://photobb.dev.webant.ru/uploads/'+user.avatar.path" v-bind:alt='user.avatar.name'>
                 <div v-else class='avatar'>
+=======
+                <div class='avatar'>
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
                     <img src="./assets/images/camera.png" alt='camera'>
                 </div>
             </div>
         </header>
         <main>
             <div>
+<<<<<<< HEAD
                 <h1>{{ user.name }} {{ user.surname }} ({{ user.username }})</h1>
+=======
+                <h1>Андрей Иванов (AIvan)</h1>
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
                 <p>Фотограф на Кипре и по всему миру ,семейные, индивидуальные, и лавстори фотосессии. 
                 Создание семейных видеороликов. Провезу Вас по лучшим местам для фотосъемок</p>
                 <div class='contacts'>
                     <div>
                         <h3>Номер телефона</h3>
+<<<<<<< HEAD
                         <span>Не указан</span>
                     </div>
                     <div>
                         <h3>E-mail</h3>
                         <span>{{ user.email }}</span>
+=======
+                        <span>+7 909 999 99 99</span>
+                    </div>
+                    <div>
+                        <h3>E-mail</h3>
+                        <span>andri@mail.ru</span>
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
                     </div>
                 </div>
             </div>
             <div>
                 <h3>Ближайшие поездки</h3>
+<<<<<<< HEAD
                 <div class="block">
                     <paginate name="tours" :list="tours" ref="paginator" class="paginate-list">
                         <div class='card' v-for="tour in paginated('tours')" :key="tour.id">
@@ -41,6 +58,36 @@
                             for="tours"
                             :show-step-links="true">
                     </paginate-links>
+=======
+                <div>
+                    <div class='card'>
+                        <h4>Бали, Индонезия</h4>
+                        <div>
+                            <p>с 20.11.2018 по 20.12.2018</p>
+                            <span>1000 руб./час</span>
+                        </div>
+                    </div>
+                    <div class='card'>
+                        <h4>Петропавловск-Камчатский, Россия</h4>
+                        <div>
+                            <p>с 20.11.2018 по 20.12.2018</p>
+                            <span>договорная</span>
+                        </div>
+                    </div>
+                    <div class='card'>
+                        <h4>Бали, Индонезия</h4>
+                        <div>
+                            <p>с 20.11.2018 по 20.12.2018</p>
+                            <span>1000 руб./час</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="block">
+                    <el-pagination
+                        layout="prev, pager, next"
+                        :total="30">
+                    </el-pagination>
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
                 </div>
             </div>
         </main>
@@ -54,6 +101,7 @@ import store from "../store";
 export default {
     data() {
       return {
+<<<<<<< HEAD
           user: store.state.user,
           tours: [],
           paginate: ['tours'],
@@ -86,6 +134,17 @@ export default {
             let parseDate = day + "." + month + "." + fullYear;
             return parseDate;
         },
+=======
+      }
+    },
+    mounted() {
+        axios
+        .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru//api/v1/users/'+store.state.userId+'.json')
+        .then(response => { 
+            
+        });
+        
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
     },
 }
 </script>
@@ -96,7 +155,10 @@ export default {
     height: 8rem;
     background: #DBDBDB;
     border-radius: 50%;
+<<<<<<< HEAD
     object-fit: cover;
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 }
 
 .avatar > img {
@@ -168,15 +230,19 @@ main > div:first-child > p {
 }
 
 .card {
+<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     padding: 0.5rem;
     width: 30%;
     margin-right: 1.5rem;
 }
+<<<<<<< HEAD
 .block {
     display: flex;
     flex-direction: column;
@@ -194,6 +260,8 @@ main > div:first-child > p {
     list-style: none;
     margin-bottom: 5rem;
 }
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 
 .card p {
     font-size: 0.7rem;
@@ -216,6 +284,17 @@ h4 {
     margin-top: 0;
 }
 
+<<<<<<< HEAD
+=======
+main > div:last-child > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.el-pagination {
+    margin: 2rem auto;
+}
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 
 @media (max-width: 1100px) {
    .card > div {

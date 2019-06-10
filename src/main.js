@@ -14,13 +14,19 @@ import PhotoGallery from './PhotoGallery.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
 import 'element-ui/lib/theme-chalk/index.css';
+<<<<<<< HEAD
 import VuePaginate from 'vue-paginate';
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 
 window.$ = window.jQuery = require('jquery');
 
 Vue.use(Router);
 Vue.use(ElementUI, { locale });
+<<<<<<< HEAD
 Vue.use(VuePaginate);
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 
 const router = new Router({
  routes: [

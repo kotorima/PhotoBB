@@ -1,15 +1,20 @@
 <template>
   <div id="app">
     <el-menu
+<<<<<<< HEAD
         default-active="activeIndex"
         mode="horizontal"
         @select="handleSelect">
+=======
+        default-active="1">
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
         <el-menu-item index="1">
           <router-link :to="{name: 'search'}"><img src="./assets/images/search.png" alt="search" class='loupe'></router-link>
         </el-menu-item>
         <el-menu-item index="2">
           <router-link to="/"><span class='logo'>PhotoBB</span></router-link>
         </el-menu-item>
+<<<<<<< HEAD
         <el-menu-item v-if='!authorized' index="3">
           <router-link :to="{ name: 'login'}">Войти</router-link>
         </el-menu-item>
@@ -28,6 +33,11 @@
                 <router-link class="navselect" :to="{ name: 'lk'}">Личный кабинет</router-link>
             </el-menu-item>
         </el-submenu>
+=======
+        <el-menu-item index="3">
+          <router-link :to="{ name: 'login'}">Войти</router-link>
+        </el-menu-item>
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
     </el-menu>
       <router-view></router-view>
     <footer>
@@ -38,18 +48,25 @@
 
 <script>
 import Main from './Main.vue';
+<<<<<<< HEAD
 import  store from '../store';
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 
 export default {
   data() {
     return {
       reg: null,
+<<<<<<< HEAD
         activeIndex: '1',
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
     };
   },
   components: {
     "app-main": Main,
   },
+<<<<<<< HEAD
   computed: {
       authorized: {
           get: function() {
@@ -73,6 +90,11 @@ methods: {
         console.log(key, keyPath);
     }
 },
+=======
+  methods: {
+    
+  },
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
   beforeRouteLeave (to, from, next) {
         //searchPath = from.path;
         console.log(from);
@@ -137,10 +159,13 @@ methods: {
     margin: 0;
   }
 
+<<<<<<< HEAD
   p {
       margin: 0;
   }
 
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
   p, span, textarea {
     font-family: "Roboto";
     font-size: 0.9rem;
@@ -224,6 +249,7 @@ footer > p {
  margin: 0 30vw;
 }
 
+<<<<<<< HEAD
 .navselect {
     font-family: 'Roboto';
     font-weight: normal;
@@ -236,6 +262,8 @@ useravatar {
     border-radius: 50%;
 }
 
+=======
+>>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 @media (max-width: 1050px) {
   .search {
     margin-top: 30vh;
