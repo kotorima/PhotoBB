@@ -127,16 +127,6 @@
               <item name="PhotoBB" type="b2602c69:ProjectViewProjectNode" />
               <item name="PhotoBB" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="PhotoBB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PhotoBB" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="PhotoBB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PhotoBB" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="store" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -181,15 +171,15 @@
       <updated>1560154215301</updated>
       <workItem from="1560154217424" duration="959000" />
       <workItem from="1560155224006" duration="21731000" />
-      <workItem from="1560177321446" duration="3423000" />
+      <workItem from="1560177321446" duration="3802000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26113000" />
+    <option name="totallyTimeSpent" value="26492000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="310" y="23" width="1404" height="1337" extended-state="1" />
+    <frame x="310" y="23" width="1404" height="1337" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32599118" />
       <window_info anchor="bottom" id="TODO" order="6" />
