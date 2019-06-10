@@ -1,0 +1,286 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.el-input__icon{
+    display: none !important;
+}
+
+.el-range-editor .el-range-input::placeholder {
+    color: #8a8a8a !important;
+    font-size: 0.84rem !important;
+}
+
+.el-range-editor .el-range-input {
+    width: 35% !important;
+    color: #000000 !important;
+}
+
+.el-date-editor .el-range-separator {
+    padding: 0 !important;
+    padding-bottom: 0.4rem !important;
+    width: 7% !important;
+    color: #000000 !important;
+}
+
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.today.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.today.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td.available.in-range > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.today.in-range.start-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.today.in-range.end-date > div > span,
+body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td.available.in-range > div > span {
+    color: black !important;
+    font-weight: normal !important;
+}
+
+
+
+div.el-picker-panel__content.el-date-range-picker__content > div > div {
+    font-family: "Exo2";
+}
+
+#app > div > div.main.search > div:nth-child(2) > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+#app > div > div.header > div.search > div.main > div:nth-child(2) > div > div > input,
+#app > div > div > div:nth-child(2) > div > div > input {
+    text-align: left;
+}
+
+th,
+#photopage > main > div:nth-child(2) > div.block > div > ul > li.number {
+    font-family: "Roboto";
+}
+
+#app > div > div.header > div.search > div.main > div:nth-child(1) > div > div.el-input.el-input--suffix > input,
+#app > div > div.main.search > div:nth-child(1) > div > div.el-input.el-input--suffix > input {
+    border: none;
+    width: 100%;
+    padding: 0;
+    height: 22px;
+}
+#app > div.header > div.search > div.main > div:nth-child(1) > div > div > div.el-select__tags > input {
+    margin: 0;
+    width: 100%;
+    color: #000000;
+}
+
+#app > div > form > div > div.block2 > div.el-checkbox-group.category > label > span,
+.el-checkbox-button > .el-checkbox-button__inner {
+    background: #E8E8E8;
+    border: none;
+    border-radius: 4px;
+    color: #7E7E7E;
+    padding: 0.4rem;
+    width: 5.5rem;
+    text-align: center;
+    margin: 2vw 0.5rem 0;
+}
+
+#app > div > div:nth-child(2) > div{
+    margin: 0;
+}
+
+#app > div > form > div > div.block2 > div.el-checkbox-group.category > label.el-checkbox-button.is-checked > span,
+#app > div > div:nth-child(2) > div > label.el-checkbox-button.is-checked > span {
+    background: #4A5283;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+#app > div > div.header > div.search > div.main > div:nth-child(1) > div > div > div.el-input.el-input--suffix > input,
+#app > div > div > div:nth-child(1) > div > div > div.el-input.el-input--suffix > input {
+    width: 100%;
+    height: 24px;
+    padding: 0;
+    border: none;
+    color: #000000;
+}
+
+#app > div > div > div > p {
+    margin: 0;
+}
+
+#app > form > div > div > a {
+    width: 100%;
+}
+
+#app > form > div > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 0;
+}
+
+#app > form > div > div > div > div,
+#app > form > div > div,
+#app > form > div > div > div > div > div > input {
+    width: 100%;
+}
+
+#photopage > main > div:nth-child(2) > div.block > div {
+    margin: 1rem auto;
+}
+
+
+#app > div > form > div.block > div {
+    width: 100%;
+    height: 18rem;
+}
+
+#app > div > form > div.block > div > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 18rem;
+}
+
+#app > div > form > div.block5 > div.avatar-uploader {
+    width: 160px;
+    height: 160px;
+    background: #DBDBDB;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#app > div > form > div.block5 > div {
+    width: 160px;
+    height: 160px;
+}
+
+#app > div > form > div.block5 > div.block2 > div.block3 > div {
+    width: 63vw;
+}
+
+#app > div > form > div.block5 > div.block2 > div.block3 > div.block4 > div > div {
+    width: 25vw;
+}
+
+#app > div > form > div.block5 > div.block2 > h3,
+#app > div > form > div.block5 > div.block2 > div.el-checkbox-group.category {
+    width: 60vw;
+}
+
+div > ul.paginate-links.paginate-links.tours > li {
+    margin: 0 1rem;
+}
+
+div > ul.paginate-links.paginate-links.tours > li > a {
+    font-weight: normal;
+    font-family: 'Roboto' !important;
+}
+
+div > ul.paginate-links.paginate-links.tours > li.active {
+    border-bottom: 1px solid #EC7948;
+}
+
+body > div.el-menu--horizontal > ul {
+    display: flex;
+    flex-direction: column;
+    height: 9rem;
+    width: 12rem;
+}
+
+#app > ul > li.navselect.el-submenu.is-opened > ul > li {
+    display: flex;
+    height: 3rem;
+}
+
+.el-menu--horizontal>.el-menu-item.is-active,
+.el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
+    border-bottom: none !important;
+}
+#app > ul > li.navselect.el-submenu> div {
+    font-size: 1rem;
+}
+@media (max-width: 800px) {
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 70%;
+    }
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > th,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > th,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td > div > span,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td > div > span {
+        font-size: 0.7rem !important;
+    }
+
+    .el-date-range-picker__header div {
+        font-size: 0.8rem;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td {
+        padding: 0;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #app > div > form > div > div.block2 > div.block3 > div.block4 > div > div > div > input,
+    #app > div > form > div > div.block2 > div.block3 > div:nth-child(2) > div > div > div > input {
+        width: 60vw;
+    }
+    #app > div > form > div > div.avatar-uploader {
+        display: flex;
+    }
+    #app > div > form > div > div.avatar-uploader > div {
+        margin: auto;
+    }
+    #app > div > form > div > div.block2 > div.el-checkbox-group.category {
+        margin-left: 0;
+    }
+    #app > div > div.header > div.search > div.main > div:nth-child(2) > div > div > input,
+    #app > div > div > div:nth-child(2) > div > div > input {
+        width: 20% !important;
+    }
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div {
+        display: flex;
+        flex-direction: column;
+    }
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 62%;
+    }
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left {
+        border-right: none;
+        border-bottom: 1px solid #e4e4e4;
+    }
+
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-right > table > tbody > tr > td > div,
+    body > div.el-picker-panel.el-date-range-picker.el-popper > div.el-picker-panel__body-wrapper > div > div.el-picker-panel__content.el-date-range-picker__content.is-left > table > tbody > tr > td > div {
+        line-height: 0;
+    }
+
+}
+
+@media (max-width: 400px) { 
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 68%;
+    }
+}
+
+@media (max-width: 362px) { 
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 71%;
+    }
+}
+
+@media (max-width: 330px) { 
+    body > div.el-picker-panel.el-date-range-picker.el-popper {
+        width: 80%;
+    }
+}
