@@ -41,8 +41,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="23">
+              <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -109,10 +109,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="310" />
-    <option name="y" value="23" />
+    <option name="x" value="350" />
+    <option name="y" value="32" />
     <option name="width" value="1404" />
-    <option name="height" value="1337" />
+    <option name="height" value="1327" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -171,15 +171,16 @@
       <updated>1560154215301</updated>
       <workItem from="1560154217424" duration="959000" />
       <workItem from="1560155224006" duration="21731000" />
-      <workItem from="1560177321446" duration="3802000" />
+      <workItem from="1560177321446" duration="4206000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26492000" />
+    <option name="totallyTimeSpent" value="26896000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="310" y="23" width="1404" height="1337" extended-state="0" />
+    <frame x="350" y="32" width="1404" height="1327" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32599118" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -190,7 +191,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32924837" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33196047" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -333,8 +334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+        <state relative-caret-position="23">
+          <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
         </state>
       </provider>
     </entry>
