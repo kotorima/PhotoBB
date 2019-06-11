@@ -35,11 +35,7 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
 <style scoped>
-=======
-<style>
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
     .el-row {
         display: flex;
         flex-direction: row;

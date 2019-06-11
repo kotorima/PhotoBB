@@ -18,10 +18,7 @@ export default new Vuex.Store({
         accessToken: localStorage.getItem('access_token'),
         refreshToken: localStorage.getItem('refresh_token'),
         userId: 0,
-<<<<<<< HEAD
         user: [],
-=======
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 	},
 	mutations: {
 		SET_COST: (state, payload) => {
@@ -61,14 +58,10 @@ export default new Vuex.Store({
             state.refreshToken = payload
         },
         SET_USER_ID: (state, payload) => {
-<<<<<<< HEAD
             state.userId = payload
         },
         SET_USER: (state, payload) => {
             state.user = payload
-=======
-            state.refreshToken = payload
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
         },
     },
     actions: {
@@ -108,12 +101,9 @@ export default new Vuex.Store({
         SET_USER_ID: (context, payload) => {
             context.commit('SET_USER_ID', payload);
         },
-<<<<<<< HEAD
         SET_USER: (context, payload) => {
             context.commit('SET_USER', payload);
         },
-=======
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
         CHANGE_AUTHORIZED: (context, payload) => {
             let data
             if (payload != null) {
@@ -159,10 +149,7 @@ export default new Vuex.Store({
                     }
                 })
                 .then(answer => {
-<<<<<<< HEAD
                     console.log(answer.data.id);
-=======
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
                     context.dispatch('SET_USER_ID', answer.data.id);
                     context.dispatch('CHANGE_AUTHORIZED', true);
                     context.dispatch('CHANGE_TOKEN', {
@@ -174,14 +161,8 @@ export default new Vuex.Store({
                         data: refresh_token
                     })
                 })
-<<<<<<< HEAD
             })
         },
-=======
-                })
-        },
-        
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
     },
     getters: {
         GET_COST: state => {
@@ -211,15 +192,12 @@ export default new Vuex.Store({
         GET_LOADING: state => {
             return state.loading;
         },
-<<<<<<< HEAD
         GET_USER_ID: state => {
             return state.userId;
         },
         GET_USER: state => {
             return state.user;
         },
-=======
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
         GET_AUTHORIZED: state => {
             return state.authorized
         },

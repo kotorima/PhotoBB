@@ -172,7 +172,6 @@ th,
     width: 60vw;
 }
 
-<<<<<<< HEAD
 div > ul.paginate-links.paginate-links.tours > li {
     margin: 0 1rem;
 }
@@ -205,12 +204,6 @@ body > div.el-menu--horizontal > ul {
 #app > ul > li.navselect.el-submenu> div {
     font-size: 1rem;
 }
-=======
-#app > div > main > div:nth-child(2) > div.block > div > ul > li  {
-    font-family: 'Roboto' !important;
-}
-
->>>>>>> 4b611bd0d709569dd1cc625eacdcd08c1e4d5bc6
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
         width: 70%;
