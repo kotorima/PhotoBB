@@ -218,6 +218,12 @@ body > div.el-menu--horizontal > ul {
     align-items: flex-start;
 }
 
+#app > div > form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+} 
+
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
         width: 70%;
