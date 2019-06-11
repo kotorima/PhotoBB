@@ -14,7 +14,7 @@
                 class = 'input-select'>
                     <el-option
                     v-for='city in list' 
-                    v-bind:key="city.label"
+                    v-bind:key="city.value"
                     :label="city.label"
                     :value="city.value">
                     </el-option>
@@ -30,15 +30,13 @@
                 v-model="ruleForm.date"></el-date-picker>
             </el-form-item>
             <el-form-item label="Стоимость" prop="cost" class='inputform'>
-                <span v-if='cost>=0' class="demonstration">до {{ ruleForm.cost }} руб./час</span>
-                <span v-else-if='cost==true' class="demonstration">Договорная</span>
+                <span v-if='ruleForm.cost>=0' class="demonstration">до {{ ruleForm.cost }} руб./час</span>
                 <span v-else class="demonstration">Определите стоимость</span>
                 <el-slider
                 v-model="ruleForm.cost"
                 :step="10"
                 :max='5000'>
                 </el-slider>
-                <el-checkbox v-model="ruleForm.cost">Договорная</el-checkbox>
             </el-form-item>
             <el-form-item label='Фотографии для ваших клиентов'>
                <el-upload
@@ -62,12 +60,13 @@
 <script>
 import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
+import store from "../store";
 
 const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
 
 export default {
     data() {
-        var checkCity = (rule, value, callback) => {
+        let checkCity = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
@@ -78,7 +77,7 @@ export default {
             }
         };
 
-        var checkDate = (rule, value, callback) => {
+        let checkDate = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
@@ -86,7 +85,7 @@ export default {
             }
         };
 
-        var checkCost = (rule, value, callback) => {
+        let checkCost = (rule, value, callback) => {
             if (value === 0) {
                 callback(new Error('Определите стоимость'));
             } else {
@@ -122,13 +121,33 @@ export default {
         "app-date-picker": DatePicker,
         "app-slider": Slider
     },
+    computed: {
+        authorized: {
+            get: function() {
+                return store.state.authorized;
+            },
+            set: function(value) {
+                store.dispatch('SET_AUTHORIZED', value);
+            }
+        },
+    },
+    mounted() {
+        if (!this.authorized) {
+            this.$router.push('/login');
+        }
+        else {
+            this.list = this.cities.map(city => {
+                return { value: city, label: city };
+            });
+        }
+    },
     methods: {
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
           } else {
-            console.log('error submit!!');
+            console.log('error submit!');
             return false;
           }
         });
@@ -143,7 +162,7 @@ export default {
                 this.cities = response.data.location_autocompletes;
                 this.list = this.cities.map(value => {
                     return { value: value.location_name, label: value.location_name }
-                })
+                });
                 this.loading = false;
                 return this.list
             });
@@ -159,11 +178,6 @@ export default {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       }
-    },
-    mounted() {
-      this.list = this.cities.map(city => {
-        return { value: city, label: city };
-      });
     },
 }
 </script>

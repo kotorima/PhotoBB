@@ -17,10 +17,27 @@
 </template>
 
 <script>
+import store from "../store";
+
 export default {
     data() {
       return {
       }
+    },
+    computed: {
+        authorized: {
+            get: function() {
+                return store.state.authorized;
+            },
+            set: function(value) {
+                store.dispatch('SET_AUTHORIZED', value);
+            }
+        },
+    },
+    mounted() {
+        if (!this.authorized) {
+            this.$router.push('/login');
+        }
     },
     methods: {
       submitForm(formName) {

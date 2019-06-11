@@ -11,6 +11,7 @@ import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue';
 import PrivateOffice from './PrivateOffice.vue';
 import PageInformation from './PageInformation.vue';
 import PhotoGallery from './PhotoGallery.vue';
+import PageNotFound from './PageNotFound.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -28,6 +29,10 @@ const router = new Router({
     path: '/',
     component: Main,
   },
+ {
+     path: "*",
+     component: PageNotFound,
+ },
   {
     path: '/reg',
     name:'reg',
