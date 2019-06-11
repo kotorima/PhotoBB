@@ -19,7 +19,7 @@ export const searchFunction = {
     methods: {
       search: function () {
         this.loadingTours = true;
-        this.noResult = false;
+        this.noResult = false; 
         axios
         .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.value.value+'&all=true')
         .then(response => { 
