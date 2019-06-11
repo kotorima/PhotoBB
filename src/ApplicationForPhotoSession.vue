@@ -5,6 +5,7 @@
             <el-form-item label="Город" prop="city" class='inputform'>
                 <el-select
                 v-model="ruleForm.city"
+                :value='ruleForm.city'
                 filterable
                 remote
                 reserve-keyword
@@ -61,6 +62,7 @@
 import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
 import store from "../store";
+import  axios from "axios";
 
 const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
 
@@ -143,11 +145,20 @@ export default {
     },
     methods: {
         submitForm(formName) {
+            console.log(this.ruleForm.city);
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+              axios('http://photobb.dev.webant.ru/api/v1/tours.js', {
+                  method: 'POST',
+                  params: {
+                      city: {
+                          google_place_id: this.roleForm.city.value,
+                          location_name: this.roleForm.city.label,
+                      },
+                      cost: this.roleForm.cost,
+                  }
+              })
           } else {
-            console.log('error submit!');
             return false;
           }
         });
@@ -155,18 +166,16 @@ export default {
       remoteMethod(query) {
         if (query !== '') {
           this.loading = true;
-          setTimeout(() => {
             axios
             .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+query)
-            .then(response => { 
+            .then(response => {
                 this.cities = response.data.location_autocompletes;
                 this.list = this.cities.map(value => {
                     return { value: value.location_name, label: value.location_name }
                 });
                 this.loading = false;
-                return this.list
+                return this.list;
             });
-          }, 200);
         } else {
           this.list = [];
         }

@@ -69,21 +69,16 @@
                             </el-form-item>
                         </div>
                     </div>
-                    <h3>Области ваших фотосъемок</h3>
-                    <el-checkbox-group v-model="checkboxGroup" class='category'>
-                        <el-checkbox-button v-for="category in categories" :label="category" :key="category">{{category}}</el-checkbox-button>
-                    </el-checkbox-group>
                 </div>
             </div>
         </el-form>
 </template>
 
 <script>
-const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
 
 export default {
    data() {
-      var checkName = (rule, value, callback) => {
+      let checkName = (rule, value, callback) => {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
@@ -93,7 +88,7 @@ export default {
           callback();
         }
       };
-      var checkSurname = (rule, value, callback) => {
+      let checkSurname = (rule, value, callback) => {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
@@ -103,7 +98,7 @@ export default {
           callback();
         }
       };
-      var checkLogin = (rule, value, callback) => {
+      let checkLogin = (rule, value, callback) => {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
@@ -113,7 +108,7 @@ export default {
           callback();
         }
       };
-      var checkMobile = (rule, value, callback) => {
+      let checkMobile = (rule, value, callback) => {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
@@ -123,7 +118,7 @@ export default {
           callback();
         }
       };
-      var checkEmail = (rule, value, callback) => {
+      let checkEmail = (rule, value, callback) => {
         if (value === '') {
             callback(new Error('Заполните поле'));
         } else {
@@ -133,7 +128,7 @@ export default {
           callback();
         }
       };
-      var validatePass = (rule, value, callback) => {
+      let validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Введите пароль'));
         } else {
@@ -143,7 +138,7 @@ export default {
           callback();
         }
       };
-      var validatePass2 = (rule, value, callback) => {
+      let validatePass2 = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('Введите пароль снова'));
         } else if (value !== this.pageinf.passwordOne) {
@@ -156,7 +151,6 @@ export default {
         imageUrl: '',
         backgroundUrl: '',
         text: '',
-        categories: categoriesOptions,
         checkboxGroup: [],
         pageinf: {
           name: '',

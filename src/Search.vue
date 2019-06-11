@@ -71,7 +71,7 @@ export default {
   },
   watch: {
     value: function () {
-      store.dispatch('SET_PLACE_ID', this.value);
+      store.dispatch('SET_PLACE', this.value);
     },
     tours: function () {
       store.dispatch('SET_TOURS', this.tours);

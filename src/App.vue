@@ -28,7 +28,7 @@
                 <router-link class="navselect" :to="{ name: 'lk'}">Личный кабинет</router-link>
             </el-menu-item>
             <el-menu-item index="3-4">
-                <a href="#" class="navselect">Выход</a>
+                <a href="#" class="navselect" v-on:click="signOut">Выход</a>
             </el-menu-item>
         </el-submenu>
     </el-menu>
@@ -73,14 +73,15 @@ export default {
   },
 methods: {
     handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+
+    },
+    signOut(){
+        this.authorized = false;
+        this.$store.dispatch('SIGNOUT');
+        this.$router.push('/');
     }
 },
   beforeRouteLeave (to, from, next) {
-        //searchPath = from.path;
-        console.log(from);
-        console.log(to);
-        console.log('here')
         next();
   },
 };

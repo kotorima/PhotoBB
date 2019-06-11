@@ -7,7 +7,7 @@ export default new Vuex.Store({
 	state: {
         cost: 0,
         date: [],
-        placeId: '',
+        place: '',
         tours: [],
         searchPath: '',
         searchOn: false,
@@ -27,8 +27,8 @@ export default new Vuex.Store({
         SET_DATE: (state, payload) => {
             state.date = payload;
         },
-        SET_PLACE_ID: (state, payload) => {
-            state.placeId = payload;
+        SET_PLACE: (state, payload) => {
+            state.place = payload;
         },
         SET_TOURS: (state, payload) => {
             state.tours = payload;
@@ -71,8 +71,8 @@ export default new Vuex.Store({
         SET_DATE: (context, payload) => {
             context.commit('SET_DATE', payload);
         },
-        SET_PLACE_ID: (context, payload) => {
-            context.commit('SET_PLACE_ID', payload);
+        SET_PLACE: (context, payload) => {
+            context.commit('SET_PLACE', payload);
         },
         SET_TOURS: (context, payload) => {
             context.commit('SET_TOURS', payload);
@@ -103,6 +103,9 @@ export default new Vuex.Store({
         },
         SET_USER: (context, payload) => {
             context.commit('SET_USER', payload);
+        },
+        SET_AUTHORIZED: (state, payload) => {
+            state.authorized = payload
         },
         CHANGE_AUTHORIZED: (context, payload) => {
             let data
@@ -155,13 +158,21 @@ export default new Vuex.Store({
                     context.dispatch('CHANGE_TOKEN', {
                         type: 'access', 
                         data: access_token
-                    })
+                    });
                     context.dispatch('CHANGE_TOKEN', {
                         type: 'refresh', 
                         data: refresh_token
-                    })
+                    });
                 })
             })
+        },
+        SIGNOUT: (context) => {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+
+            context.commit('SET_AUTHORIZED', false);
+            context.commit('SET_ACCESS_TOKEN', '');
+            context.commit('SET_REFRESH_TOKEN', '');
         },
     },
     getters: {
@@ -171,8 +182,8 @@ export default new Vuex.Store({
         GET_DATE: state => {
             return state.date;
         },
-        GET_PLACE_ID: state => {
-            return state.placeId;
+        GET_PLACE: state => {
+            return state.place;
         },
         GET_TOURS: state => {
             return state.tours;

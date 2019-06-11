@@ -218,11 +218,38 @@ body > div.el-menu--horizontal > ul {
     align-items: flex-start;
 }
 
-#app > div > form > div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-} 
+#app > div > form > div > div > div > div.el-input.el-input--suffix > input {
+    width: 350px;
+}
+
+#app > div > form > div:nth-child(3) > div > div {
+    width: 350px;
+}
+
+.el-slider__bar,
+.el-slider__button,
+.el-button--primary {
+    border: none !important;
+    background-color: #EC7948 !important;
+}
+
+.el-upload--picture-card:hover {
+    border-color: #EC7948 !important;
+}
+
+.el-input__inner::placeholder,
+.el-date-editor .el-range-input::placeholder{
+    color: #606266 !important;
+}
+
+.el-range-input {
+    text-align: start !important;
+    padding-left: 0.21rem !important;
+}
+.el-date-editor .el-range-separator   {
+    padding-bottom: 0 !important;
+    padding-right: 10% !important;
+}
 
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
