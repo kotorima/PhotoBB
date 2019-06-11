@@ -10,8 +10,10 @@ import Search from './Search.vue';
 import ToursList from './ToursList.vue';
 import store from '../store';
 import axios from "axios";
+import {searchFunction} from './mixins/SearchFunction.js';
 
 export default {
+    mixins: [searchFunction],
     data() {
         return {
             
@@ -30,7 +32,7 @@ export default {
                 store.dispatch('SET_TOURS', value);
             }
         },
-        placeId: {
+        value: {
             get: function() {
                 return store.state.placeId;
             },
@@ -56,19 +58,8 @@ export default {
         },
     },
     mounted() {
-        console.log('full search '+this.searchOn);
         if(this.searchOn === true) {
-            this.noResult = false;
-            this.searchOn = false;
-            axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name=&google_place_id='+this.placeId.value+'&all=true')
-            .then(response => { 
-              this.tours = response.data.items;
-              this.countOfTours = response.data.count;
-              if (this.countOfTours === 0) {
-                    this.noResult = true;
-                }
-            });
+            search();
         }
     }
 }

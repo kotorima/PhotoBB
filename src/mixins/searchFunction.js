@@ -1,6 +1,6 @@
 import store from "../../store";
 import axios from 'axios';
-export const mixin = {
+export const searchFunction = {
     data: function () {
       return {
         

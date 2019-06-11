@@ -63,10 +63,10 @@ import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
 import store from "../store";
 import  axios from "axios";
-
-const categoriesOptions = ['wedding', 'Портрет', 'фыа', 'travel', 'grrrr', 'nature', '14124', 'Портретная', 'asf', 'wedd', 'Порт', 'asfasf'];
+import {remoteMethod} from './mixins/reformatDate.js';
 
 export default {
+    mixins: [remoteMethod],
     data() {
         let checkCity = (rule, value, callback) => {
             if (value === '') {
@@ -95,10 +95,6 @@ export default {
             }
         };
         return {
-            categories: categoriesOptions,
-            cities: [],
-            list: [],
-            loading: false,
             dialogImageUrl: '',
             dialogVisible: false,
             ruleForm: {
@@ -162,23 +158,6 @@ export default {
             return false;
           }
         });
-      },
-      remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-            axios
-            .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+query)
-            .then(response => {
-                this.cities = response.data.location_autocompletes;
-                this.list = this.cities.map(value => {
-                    return { value: value.location_name, label: value.location_name }
-                });
-                this.loading = false;
-                return this.list;
-            });
-        } else {
-          this.list = [];
-        }
       },
       handleRemove(file, fileList) {
         console.log(file, fileList);

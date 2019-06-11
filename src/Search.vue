@@ -47,18 +47,16 @@ import DatePicker from "./DatePicker.vue";
 import Slider from "./Slider.vue";
 import axios from "axios";
 import store from "../store";
-import {mixin} from './mixins/AjaxFunctions.js';
+import {searchFunction} from './mixins/SearchFunction.js';
+import {remoteMethod} from './mixins/remoteMethod.js';
 
 export default {
-    mixins: [mixin],
+    mixins: [searchFunction, remoteMethod],
   data() {
     return {
         valueCost: 0,
-        cities: [],
-        options: [],
         value: store.state.placeId,
         list: [],
-        loading: false,
         tours: store.state.tours,
         searchPath: store.state.searchPath,
         noResult: store.state.noResult,
@@ -113,23 +111,6 @@ export default {
       },
   },
   methods: {
-    remoteMethod(query) {
-        if (query !== '') {
-          this.loading = true;
-          axios
-          .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/cities?city='+query)
-          .then(response => { 
-              this.cities = response.data.location_autocompletes;
-              this.list = this.cities.map(value => {
-                  return { value: value.google_place_id, label: value.location_name, }
-              })
-              this.loading = false;
-              return this.list;
-          });
-        } else {
-          this.list = [];
-        }
-    },
     changeSearch: function () {
         store.dispatch('SET_SEARCH_ON', true);
         console.log('main ' +this.searchOn);

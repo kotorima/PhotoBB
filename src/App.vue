@@ -41,7 +41,7 @@
 
 <script>
 import Main from './Main.vue';
-import  store from '../store';
+import store from '../store';
 
 export default {
   data() {
@@ -77,7 +77,7 @@ methods: {
     },
     signOut(){
         this.authorized = false;
-        this.$store.dispatch('SIGNOUT');
+        store.dispatch('SIGNOUT');
         this.$router.push('/');
     }
 },

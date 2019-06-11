@@ -27,7 +27,10 @@
             </div>
             <div>
                 <h3>Ближайшие поездки</h3>
-                <div class="block">
+                <div v-if="tours == 0" class="block">
+                    <span>Туров не имеется</span>
+                </div>
+                <div v-else class="block">
                     <paginate name="tours" :list="tours" ref="paginator" class="paginate-list">
                         <div class='card' v-for="tour in paginated('tours')" :key="tour.id">
                             <h4>{{ tour.city.location_name }}</h4>
@@ -38,9 +41,10 @@
                             </div>
                         </div>
                     </paginate>
-                    <paginate-links class="paginate-links"
-                                    for="tours"
-                                    :show-step-links="true">
+                    <paginate-links 
+                    class="paginate-links"
+                    for="tours"
+                    :show-step-links="true">
                     </paginate-links>
                 </div>
             </div>
@@ -51,7 +55,10 @@
 <script>
     import axios from 'axios';
     import store from "../store";
+    import {reformatDate} from './mixins/reformatDate.js';
+
     export default {
+        mixins: [reformatDate],
         data() {
             return {
                 user: store.state.user,
@@ -102,16 +109,7 @@
                     });
             }
         },
-        methods: {
-            reformatDate: function(date) {
-                let newDate = new Date(date);
-                let day = newDate.getDate();
-                let month = newDate.getMonth() + 1;
-                let fullYear = newDate.getFullYear();
-                let parseDate = day + "." + month + "." + fullYear;
-                return parseDate;
-            },
-        },
+        
     }
 </script>
 
@@ -180,20 +178,18 @@
     .contacts > div > span {
         color: #4F4F4F;
     }
-    .card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-        border-radius: 8px;
-        padding: 0.5rem;
-        width: 30%;
-        margin-right: 1.5rem;
-    }
+    
     .block {
         display: flex;
         flex-direction: column;
     }
+
+    .block > span{
+        text-align: center;
+        color: #8A8A8A;
+        margin: 3rem 0 5rem;
+    }
+
     .paginate-list {
         display: flex;
         flex-direction: row;
