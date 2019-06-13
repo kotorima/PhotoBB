@@ -64,9 +64,10 @@ import Slider from './Slider.vue';
 import store from "../store";
 import  axios from "axios";
 import {reformatDate} from './mixins/reformatDate.js';
+import {remoteMethod} from './mixins/remoteMethod.js';
 
 export default {
-    mixins: [reformatDate],
+    mixins: [reformatDate, remoteMethod],
     data() {
         let checkCity = (rule, value, callback) => {
             if (value === '') {
