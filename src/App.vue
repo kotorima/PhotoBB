@@ -173,7 +173,7 @@ methods: {
     display:flex;
     flex-direction: column;
     padding: 4% 3%;
-    margin-top: 65vh;
+    margin-top: 27vh;
     background: rgba(255, 255, 255, 0.7);
     box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
@@ -234,14 +234,13 @@ footer > p {
     font-size: 1rem;
 }
 
-
-@media (max-width: 1050px) {
-  .search {
-    margin-top: 30vh;
-  }
-  .header {
-    margin-bottom: 15vh !important;
-  }
+@media (max-width: 1400px) {
+    .search {
+        margin-top: 20vh;
+    }
+    .header {
+        height: 30rem;
+    }
 }
 
 @media (max-width: 950px) {

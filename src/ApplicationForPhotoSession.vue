@@ -129,6 +129,14 @@ export default {
                 store.dispatch('SET_AUTHORIZED', value);
             }
         },
+        user: {
+            get: function () {
+                return store.state.user;
+            },
+            set: function (value) {
+                store.dispatch('SET_USER', value);
+            }
+        },
     },
     mounted() {
         if (!this.authorized) {
@@ -143,16 +151,33 @@ export default {
     methods: {
         submitForm(formName) {
             console.log(this.ruleForm.city);
+            console.log(this.user);
         this.$refs[formName].validate((valid) => {
           if (valid) {
-              axios('http://photobb.dev.webant.ru/api/v1/tours.js', {
+              axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours', {
                   method: 'POST',
                   params: {
                       city: {
-                          google_place_id: this.roleForm.city.value,
-                          location_name: this.roleForm.city.label,
+                          google_place_id: this.ruleForm.city.value,
+                          location_name: this.ruleForm.city.label,
                       },
-                      cost: this.roleForm.cost,
+                      cost: this.ruleForm.cost,
+                      date_create: Date.now(),
+                      start_date: this.ruleForm.date[0],
+                      finish_date: this.ruleForm.date[1],
+                      deadline_info: '',
+                      user: {
+                          id: this.user.id,
+                          email: this.user.email,
+                          name: this.user.name,
+                          surname: this.user.surname,
+                          username: this.user.username,
+                          vk_auth: this.user.vk_auth,
+                          roles: this.user.roles,
+                      },
+                      file: {
+
+                      }
                   }
               })
           } else {

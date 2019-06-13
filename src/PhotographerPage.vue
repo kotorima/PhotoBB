@@ -193,6 +193,7 @@
     .paginate-list {
         display: flex;
         flex-direction: row;
+        padding: 0;
     }
     .paginate-links {
         display: flex;
@@ -201,6 +202,14 @@
         list-style: none;
         margin-bottom: 5rem;
     }
+    .card {
+        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-right: 1rem;
+        width: 36vw;
+    }
+
     .card p {
         font-size: 0.7rem;
         margin: 0.5rem 0;

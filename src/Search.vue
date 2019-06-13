@@ -148,6 +148,12 @@ span {
 input {
     border: none;
     width: 95%;
+    font-size: inherit;
+    color: #606266;
+}
+
+input::placeholder {
+    color: #606266;
 }
 
 input:focus {

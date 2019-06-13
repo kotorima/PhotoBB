@@ -14,7 +14,6 @@ body {
 
 .el-range-editor .el-range-input {
     width: 35% !important;
-    color: #000000 !important;
 }
 
 .el-date-editor .el-range-separator {
