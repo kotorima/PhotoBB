@@ -55,7 +55,7 @@ export default {
   data() {
     return {
         valueCost: 0,
-        value: store.state.placeId,
+        value: store.state.place,
         list: [],
         tours: store.state.tours,
         searchPath: store.state.searchPath,
@@ -87,7 +87,6 @@ export default {
   mounted() {
       this.searchOn = false;
       this.searchPath = this.$route.path;
-      console.log(this.searchPath);
       this.list = this.cities.map(city => {
         return { value: city, label: city, };
       });

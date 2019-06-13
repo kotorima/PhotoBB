@@ -34,10 +34,10 @@ export default {
         },
         value: {
             get: function() {
-                return store.state.placeId;
+                return store.state.place;
             },
             set: function(value) {
-                store.dispatch('SET_PLACE_ID', value);
+                store.dispatch('SET_PLACE', value);
             }
         },
         searchOn: {
@@ -59,9 +59,9 @@ export default {
     },
     mounted() {
         if(this.searchOn === true) {
-            search();
+            this.search();
         }
-    }
+    },
 }
 </script>
 

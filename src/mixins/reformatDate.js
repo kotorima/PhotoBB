@@ -1,4 +1,9 @@
 export const reformatDate = { 
+    data() {
+        return {
+          
+        };
+    },
     methods: {
         reformatDate: function(date) {
             let newDate = new Date(date);

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const remoteMethod = { 
     data: function () {
         return {

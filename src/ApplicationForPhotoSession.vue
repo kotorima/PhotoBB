@@ -63,10 +63,10 @@ import DatePicker from './DatePicker.vue';
 import Slider from './Slider.vue';
 import store from "../store";
 import  axios from "axios";
-import {remoteMethod} from './mixins/reformatDate.js';
+import {reformatDate} from './mixins/reformatDate.js';
 
 export default {
-    mixins: [remoteMethod],
+    mixins: [reformatDate],
     data() {
         let checkCity = (rule, value, callback) => {
             if (value === '') {

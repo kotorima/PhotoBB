@@ -18,6 +18,7 @@ export const searchFunction = {
     },
     methods: {
       search: function () {
+        console.log(this.value)
         this.loadingTours = true;
         this.noResult = false; 
         axios
@@ -25,7 +26,7 @@ export const searchFunction = {
         .then(response => { 
             this.tours = response.data.items;
             this.countOfTours = response.data.count;
-            this.value = store.state.placeId.label;
+            this.value = store.state.place.label;
             if (this.countOfTours === 0) {
                 this.noResult = true;
             }
