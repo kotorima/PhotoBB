@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e5d66eb-917c-493a-ad1b-9fd4f7caf0b3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApplicationForPhotoSession.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApplicationForPhotoSession.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PhotographerPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhotographerPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Search.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/Search.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +17,8 @@
       <file leaf-file-name="PhotographerPage.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PhotographerPage.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="177" column="28" lean-forward="true" selection-start-line="177" selection-start-column="28" selection-end-line="177" selection-end-column="28" />
+            <state relative-caret-position="458">
+              <caret line="195" column="20" selection-start-line="195" selection-start-column="20" selection-end-line="195" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -205,7 +200,7 @@
       <workItem from="1560155224006" duration="21731000" />
       <workItem from="1560177321446" duration="2198000" />
       <workItem from="1560416349577" duration="79000" />
-      <workItem from="1560416445874" duration="5585000" />
+      <workItem from="1560416445874" duration="5702000" />
     </task>
     <task id="LOCAL-00001" summary="merge code">
       <created>1560246638368</created>
@@ -256,26 +251,33 @@
       <option name="project" value="LOCAL" />
       <updated>1560266147562</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="sing out">
+      <created>1560423564193</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1560423564193</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49213000" />
+    <option name="totallyTimeSpent" value="49330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="162" y="40" width="1451" height="1320" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33498937" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33498937" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.33496732" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32974318" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32974318" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32891467" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32891467" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -353,7 +355,8 @@
     <MESSAGE value="changed git ignore" />
     <MESSAGE value="changed css application for photo session" />
     <MESSAGE value="sing out" />
-    <option name="LAST_COMMIT_MESSAGE" value="sing out" />
+    <MESSAGE value="correct css and application query" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct css and application query" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -635,8 +638,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PhotographerPage.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="177" column="28" lean-forward="true" selection-start-line="177" selection-start-column="28" selection-end-line="177" selection-end-column="28" />
+        <state relative-caret-position="458">
+          <caret line="195" column="20" selection-start-line="195" selection-start-column="20" selection-end-line="195" selection-end-column="20" />
         </state>
       </provider>
     </entry>
