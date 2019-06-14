@@ -33,6 +33,14 @@ export default {
                 store.dispatch('SET_AUTHORIZED', value);
             }
         },
+        userId: {
+            get: function() {
+                return store.state.userId;
+            },
+            set: function(value) {
+                store.dispatch('SET_USER_ID', value);
+            }
+        },
     },
     mounted() {
         if (!this.authorized) {
@@ -43,7 +51,19 @@ export default {
       submitForm(formName) {
         this.$children[2].$refs[formName].validate((valid) => {
             if (valid) {
-                //сохраняем
+                axios({
+                    method: 'PUT',
+                    url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/users/' + this.userId + '.json',
+                    data: {
+                        name: formName.name,
+                        surname: formName.surname,
+                        username: formName.username,
+                        mobile: formName.mobile,
+                        email: formName.email,
+                        password: formName.password,
+                        description: formName.description,
+                    }
+                })
             } else {
                 this.$message.error('Форма не прошла валидацию');
             }

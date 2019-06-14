@@ -28,21 +28,24 @@
                                 <el-input
                                 placeholder="Ваше имя"
                                 v-model="pageinf.name = user.name"
-                                :disabled="true">
+                                :disabled="true"
+                                v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Фамилия" prop="surname" class='inputform'>
                                 <el-input
                                 placeholder="Ваша фамилия"
                                 v-model="pageinf.surname = user.surname"
-                                :disabled="true">
+                                :disabled="true"
+                                v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Логин" prop="login" class='inputform'>
                                 <el-input
                                 placeholder="Ваш логин"
                                 v-model="pageinf.login = user.username"
-                                :disabled="true">
+                                :disabled="true"
+                                v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                             <el-form-item v-if='userRole[0] === "ROLE_PHOTO"' label="Телефон" prop="mobile" class='inputform'>
@@ -50,7 +53,8 @@
                                 type="tel"
                                 placeholder="Ваш номер"
                                 v-model="pageinf.mobile = user.mobile"
-                                :disabled="true">
+                                :disabled="true"
+                                v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                         </div>
@@ -60,7 +64,8 @@
                                 type="email"
                                 placeholder="Ваш email"
                                 v-model="pageinf.email = user.email"
-                                :disabled="true">
+                                :disabled="true"
+                                v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Пароль" prop="passwordOne" class='inputform'>
@@ -69,7 +74,8 @@
                                         type="password"
                                         v-model="pageinf.passwordOne = user.password"
                                         autocomplete="off"
-                                        :disabled="true">
+                                        :disabled="true"
+                                        v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                             <el-form-item prop="passwordTwo" class='inputform'>
@@ -78,11 +84,17 @@
                                         placeholder="Повторите пароль"
                                         v-model="pageinf.passwordTwo = user.password"
                                         autocomplete="off"
-                                        :disabled="true">
+                                        :disabled="true"
+                                        v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item> 
                             <el-form-item label="О себе" class='inputform'>
-                                <el-input type="textarea" v-model="pageinf.text = user.description" resize='none' rows='7' :disabled="true">
+                                <el-input type="textarea"
+                                          v-model="pageinf.text = user.description"
+                                          resize='none'
+                                          rows='7'
+                                          :disabled="true"
+                                          v-on:click.native="available($event)">
                                 </el-input>
                             </el-form-item>
                         </div>
@@ -170,6 +182,7 @@ export default {
         imageUrl: '',
         backgroundUrl: '',
         checkboxGroup: [],
+          disabled: true,
         pageinf: {
           name: '',
           surname: '',
@@ -253,7 +266,21 @@ export default {
           this.$message.error('Avatar picture size can not exceed 4MB!');
         }
         return isJPG && isLt2M;
-      }, 
+      },
+       available(event) {
+          let element = $(event.target);
+          if (this.disabled === true) {
+              element.prop('disabled', false);
+              element.parent().removeClass('is-disabled');
+              this.disabled = false;
+          }
+          else {
+              element.prop('disabled', true);
+              element.parent().addClass('is-disabled');
+              this.disabled = true;
+          }
+
+       }
     }
 }
 </script>
@@ -306,12 +333,7 @@ export default {
         display: block;
         object-fit: cover;
     }
- 
-    .mainphoto {
-        display: flex;
-        flex-direction: column;
-        margin: 5vh 10vw;
-    }
+
 
     .block5 {
         display: flex;
@@ -336,7 +358,6 @@ export default {
     }
 
     .inputform,
-    .category,
     h3 {
         margin-left: 2rem;
     }
