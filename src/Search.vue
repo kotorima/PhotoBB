@@ -14,7 +14,7 @@
                 <el-option
                 v-for="city in list" 
                 :key="city.id"
-                :label="city.label"
+                :label="city.value"
                 :value="city">
                 </el-option>
             </el-select>

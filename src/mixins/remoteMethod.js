@@ -17,7 +17,7 @@ export const remoteMethod = {
                 .then(response => {
                     this.cities = response.data.location_autocompletes;
                     this.list = this.cities.map(value => {
-                        return { value: value.location_name, label: value.location_name }
+                        return { value: value.location_name, label: value.google_place_id }
                     });
                     this.loading = false;
                     return this.list;
