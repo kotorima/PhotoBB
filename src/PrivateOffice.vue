@@ -17,6 +17,7 @@
 
 <script>
 import store from "../store";
+import axios from "axios";
 
 export default {
     data() {
@@ -40,11 +41,11 @@ export default {
     },
     methods: {
       submitForm(formName) {
-        this.$children[3].$refs[formName].validate((valid) => {
+        this.$children[2].$refs[formName].validate((valid) => {
             if (valid) {
                 //сохраняем
             } else {
-                //не сохраняем
+                this.$message.error('Форма не прошла валидацию');
             }
         });
       },

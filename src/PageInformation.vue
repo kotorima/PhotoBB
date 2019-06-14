@@ -27,26 +27,30 @@
                             <el-form-item label="Имя" prop="name" class='inputform'>
                                 <el-input
                                 placeholder="Ваше имя"
-                                v-model="pageinf.name">
+                                v-model="pageinf.name = user.name"
+                                :disabled="true">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Фамилия" prop="surname" class='inputform'>
                                 <el-input
                                 placeholder="Ваша фамилия"
-                                v-model="pageinf.surname">
+                                v-model="pageinf.surname = user.surname"
+                                :disabled="true">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Логин" prop="login" class='inputform'>
                                 <el-input
                                 placeholder="Ваш логин"
-                                v-model="pageinf.login">
+                                v-model="pageinf.login = user.username"
+                                :disabled="true">
                                 </el-input>
                             </el-form-item>
-                            <el-form-item label="Телефон" prop="mobile" class='inputform'>
+                            <el-form-item v-if='userRole[0] === "ROLE_PHOTO"' label="Телефон" prop="mobile" class='inputform'>
                                 <el-input
                                 type="tel"
                                 placeholder="Ваш номер"
-                                v-model="pageinf.mobile">
+                                v-model="pageinf.mobile = user.mobile"
+                                :disabled="true">
                                 </el-input>
                             </el-form-item>
                         </div>
@@ -55,17 +59,31 @@
                                 <el-input
                                 type="email"
                                 placeholder="Ваш email"
-                                v-model="pageinf.email">
+                                v-model="pageinf.email = user.email"
+                                :disabled="true">
                                 </el-input>
                             </el-form-item>
                             <el-form-item label="Пароль" prop="passwordOne" class='inputform'>
-                                <el-input placeholder="Придумайте пароль" type="password" v-model="pageinf.passwordOne" autocomplete="off"></el-input>
+                                <el-input
+                                        placeholder="Придумайте пароль"
+                                        type="password"
+                                        v-model="pageinf.passwordOne = user.password"
+                                        autocomplete="off"
+                                        :disabled="true">
+                                </el-input>
                             </el-form-item>
                             <el-form-item prop="passwordTwo" class='inputform'>
-                                <el-input type="password" placeholder="Повторите пароль" v-model="pageinf.passwordTwo" autocomplete="off"></el-input>
+                                <el-input
+                                        type="password"
+                                        placeholder="Повторите пароль"
+                                        v-model="pageinf.passwordTwo = user.password"
+                                        autocomplete="off"
+                                        :disabled="true">
+                                </el-input>
                             </el-form-item> 
                             <el-form-item label="О себе" class='inputform'>
-                                <el-input type="textarea" v-model="text" resize='none' rows='7'></el-input>
+                                <el-input type="textarea" v-model="pageinf.text = user.description" resize='none' rows='7' :disabled="true">
+                                </el-input>
                             </el-form-item>
                         </div>
                     </div>
@@ -75,6 +93,7 @@
 </template>
 
 <script>
+import store from '../store';
 
 export default {
    data() {
@@ -150,7 +169,6 @@ export default {
       return {
         imageUrl: '',
         backgroundUrl: '',
-        text: '',
         checkboxGroup: [],
         pageinf: {
           name: '',
@@ -160,6 +178,7 @@ export default {
           email: '',
           passwordOne: '',
           passwordTwo: '',
+            text: '',
         },
         rules: {
           name: [
@@ -174,8 +193,8 @@ export default {
           mobile: [
             { validator: checkMobile, trigger: 'blur', required: true }
           ],
-          login: [
-            { validator: checkLogin, trigger: 'blur', required: true }
+          email: [
+            { validator: checkEmail, trigger: 'blur', required: true }
           ],
           passwordOne: [
             { validator: validatePass, trigger: 'blur', required: true }
@@ -185,6 +204,24 @@ export default {
           ]
         },
       };
+    },
+    computed: {
+        userRole: {
+            get: function () {
+                return store.state.userRole;
+            },
+            set: function (value) {
+                store.dispatch('SET_USER_ROLE', value);
+            }
+        },
+        user: {
+            get: function () {
+                return store.state.user;
+            },
+            set: function (value) {
+                store.dispatch('SET_USER', value);
+            }
+        },
     },
     methods: {
       handleBackgroundSuccess(res, file) {

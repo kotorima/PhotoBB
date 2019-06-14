@@ -10,6 +10,7 @@ export default new Vuex.Store({
         place: '',
         tours: [],
         searchPath: '',
+        registrationPath: '',
         searchOn: false,
         noResult: false,
         countOfTours: 0,
@@ -18,6 +19,7 @@ export default new Vuex.Store({
         accessToken: localStorage.getItem('access_token'),
         refreshToken: localStorage.getItem('refresh_token'),
         userId: 0,
+        userRole: '',
         user: [],
 	},
 	mutations: {
@@ -35,6 +37,9 @@ export default new Vuex.Store({
         },
         SET_SEARCH_PATH: (state, payload) => {
             state.searchPath = payload;
+        },
+        SET_REGISTRATION_PATH: (state, payload) => {
+            state.registrationPath = payload;
         },
         SET_SEARCH_ON: (state, payload) => {
             state.searchOn = payload;
@@ -60,6 +65,9 @@ export default new Vuex.Store({
         SET_USER_ID: (state, payload) => {
             state.userId = payload
         },
+        SET_USER_ROLE: (state, payload) => {
+            state.userRole = payload
+        },
         SET_USER: (state, payload) => {
             state.user = payload
         },
@@ -79,6 +87,9 @@ export default new Vuex.Store({
         },
         SET_SEARCH_PATH: (context, payload) => {
             context.commit('SET_SEARCH_PATH', payload);
+        },
+        SET_REGISTRATION_PATH: (context, payload) => {
+            context.commit('SET_REGISTRATION_PATH', payload);
         },
         SET_SEARCH_ON: (context, payload) => {
             context.commit('SET_SEARCH_ON', payload);
@@ -100,6 +111,9 @@ export default new Vuex.Store({
         },
         SET_USER_ID: (context, payload) => {
             context.commit('SET_USER_ID', payload);
+        },
+        SET_USER_ROLE: (context, payload) => {
+            context.commit('SET_USER_ROLE', payload);
         },
         SET_USER: (context, payload) => {
             context.commit('SET_USER', payload);
@@ -129,6 +143,40 @@ export default new Vuex.Store({
             }
             context.commit(`SET_${params.type.toUpperCase()}_TOKEN`, data)
         },
+        REGISTRATION: (context, parametrs) => {
+            let userParams = {
+                client_id: parametrs.client_id,
+                grant_type: parametrs.grant_type,
+                client_secret: parametrs.client_secret,
+                name: parametrs.name,
+                surname: parametrs.surname,
+                username: parametrs.username,
+                email: parametrs.email,
+                password: parametrs.password,
+                roles: ['ROLE_USER'],
+            };
+            console.log(userParams);
+            if (this.registrationPath === 'reg') {
+                userParams.roles[0] = 'ROLE_PHOTO';
+                let photoParams = {
+                    mobile: parametrs.mobile,
+                    description: parametrs.description,
+                    avatar: {
+                        name: parametrs.name,
+                        path: parametrs.path,
+                    },
+                };
+                userParams = Object.assign(userParams, photoParams);
+                console.log('merge ' +userParams);
+            }
+
+            return axios({
+                method: 'POST',
+                url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/users.json',
+                data: userParams,
+            })
+        },
+
         AUTHORIZATION: (context, parametrs) =>  {
             let access_token;
             let refresh_token;
@@ -152,8 +200,8 @@ export default new Vuex.Store({
                     }
                 })
                 .then(answer => {
-                    console.log(answer.data.id);
                     context.dispatch('SET_USER_ID', answer.data.id);
+                    context.dispatch('SET_USER_ROLE', answer.data.roles);
                     context.dispatch('CHANGE_AUTHORIZED', true);
                     context.dispatch('CHANGE_TOKEN', {
                         type: 'access', 
@@ -191,6 +239,9 @@ export default new Vuex.Store({
         GET_SEARCH_PATH: state => {
             return state.searchPath;
         },
+        GET_REGISTRATION_PATH: state => {
+            return state.registrationPath;
+        },
         GET_SEARCH_ON: state => {
             return state.searchOn;
         },
@@ -205,6 +256,9 @@ export default new Vuex.Store({
         },
         GET_USER_ID: state => {
             return state.userId;
+        },
+        GET_USER_ROLE: state => {
+            return state.userRole;
         },
         GET_USER: state => {
             return state.user;

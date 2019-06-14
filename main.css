@@ -304,6 +304,11 @@ body > div.el-menu--horizontal > ul {
 #app > div > form > div:nth-child(4) > div > div:nth-child(1) > ul > li > div > div.el-progress-circle > svg > path.el-progress-circle__path {
     stroke: #EC7948 !important;
 }
+
+.el-input.is-disabled .el-input__inner::placeholder {
+    color:#C0C4CC !important;
+}
+
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
         width: 70%;

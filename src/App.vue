@@ -18,7 +18,7 @@
                 <img v-if="user.avatar" v-bind:src="'http://photobb.dev.webant.ru/uploads/'+user.avatar.path" :alt="user.avatar.name">
                 {{ user.name }}
             </template>
-            <el-menu-item index="3-1">
+            <el-menu-item v-if='user.roles[0] === "ROLE_PHOTO"' index="3-1">
                 <router-link class="navselect" :to="{ name: 'reqphoto'}">Создать заявку</router-link>
             </el-menu-item>
             <el-menu-item index="3-2">

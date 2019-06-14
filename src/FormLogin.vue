@@ -50,8 +50,8 @@
             };
             return {
                 ruleForm: {
-                    login: 'asdasd',
-                    password: 'asd',
+                    login: '',
+                    password: '',
                 },
                 rules: {
                     login: [
@@ -72,6 +72,14 @@
                     store.dispatch('SET_LOADING', value);
                 }
             },
+            userRole: {
+                get: function () {
+                    return store.state.userRole;
+                },
+                set: function (value) {
+                    store.dispatch('SET_ROLE', value);
+                }
+            },
         },
         mounted() {
             this.loading = false;
@@ -87,12 +95,16 @@
                     password: this.ruleForm.password,
                 })
                     .then(response => {
-                        this.$router.push('/photopage');
+                        if(this.userRole[0] === 'ROLE_PHOTO'){
+                            this.$router.push('/photopage');
+                        }
+                        else {
+                            this.$router.push('/userpage');
+                        }
                         this.loading = false;
                     })
                     .catch((error) => {
-                        console.log(error)
-                        this.$message.error('Incorrect login or password');
+                        this.$message.error('Не корректный логин или пароль');
                         this.loading = false;
                     })
             }

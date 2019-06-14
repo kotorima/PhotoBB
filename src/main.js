@@ -7,6 +7,7 @@ import UserRegistration from './UserRegistration.vue';
 import FormLogin from './FormLogin.vue';
 import FullSearch from './FullSearch.vue';
 import PhotographerPage from './PhotographerPage.vue';
+import UserPage from './UserPage.vue';
 import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue';
 import PrivateOffice from './PrivateOffice.vue';
 import PageInformation from './PageInformation.vue';
@@ -63,6 +64,12 @@ const router = new Router({
     component: PhotographerPage,
     props: true,
   },
+     {
+         path: '/userpage',
+         name:'userpage',
+         component: UserPage,
+         props: true,
+     },
   {
     path: '/reqphoto',
     name:'reqphoto',

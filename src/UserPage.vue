@@ -15,37 +15,10 @@
                 <p v-else> Информация о себе не указана </p>
                 <div class='contacts'>
                     <div>
-                        <h3>Номер телефона</h3>
-                        <span>Не указан</span>
-                    </div>
-                    <div>
                         <h3>E-mail</h3>
                         <span v-if="user.email">{{ user.email }}</span>
                         <span v-else>Не указан</span>
                     </div>
-                </div>
-            </div>
-            <div>
-                <h3>Ближайшие поездки</h3>
-                <div v-if="tours == 0" class="block">
-                    <span>Туров не имеется</span>
-                </div>
-                <div v-else class="block">
-                    <paginate name="tours" :list="tours" ref="paginator" class="paginate-list">
-                        <div class='card' v-for="tour in paginated('tours')" :key="tour.id">
-                            <h4>{{ tour.city.location_name }}</h4>
-                            <div>
-                                <p>c {{ reformatDate(tour.start_date) }} по {{ reformatDate(tour.finish_date) }}</p>
-                                <span v-if="!tour.cost"> договорная </span>
-                                <span v-else>{{ tour.cost }} руб./час</span>
-                            </div>
-                        </div>
-                    </paginate>
-                    <paginate-links 
-                    class="paginate-links"
-                    for="tours"
-                    :show-step-links="true">
-                    </paginate-links>
                 </div>
             </div>
         </main>
@@ -55,15 +28,11 @@
 <script>
     import axios from 'axios';
     import store from "../store";
-    import {reformatDate} from './mixins/reformatDate.js';
 
     export default {
-        mixins: [reformatDate],
         data() {
             return {
                 user: store.state.user,
-                tours: [],
-                paginate: ['tours'],
             }
         },
         watch: {
@@ -101,15 +70,8 @@
                         this.user = response.data;
                         this.loading = false;
                     });
-                axios
-                    .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?user=' + store.state.userId)
-                    .then(response => {
-                        this.tours = response.data.items;
-                        this.countOfTours = response.data.count;
-                    });
             }
         },
-        
     }
 </script>
 
@@ -149,6 +111,7 @@
         flex-direction: column;
         margin: auto;
         width: 80%;
+        height: 50vh;
         padding-left: 1rem;
     }
     h1 {
@@ -167,7 +130,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        margin-top: 2rem;
+        margin: 2rem 0 5rem;
         width: 70%;
     }
     .contacts > div {
@@ -178,11 +141,6 @@
     .contacts > div > span {
         color: #4F4F4F;
     }
-    
-    .block {
-        display: flex;
-        flex-direction: column;
-    }
 
     .block > span{
         text-align: center;
@@ -190,51 +148,11 @@
         margin: 3rem 0 5rem;
     }
 
-    .paginate-list {
-        display: flex;
-        flex-direction: row;
-        padding: 0;
-    }
-    .paginate-links {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        list-style: none;
-        margin-bottom: 5rem;
-    }
-    .card {
-        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-        border-radius: 8px;
-        padding: 1rem;
-        margin-right: 1rem;
-        width: 28%;
-    }
-
-    .card p {
-        font-size: 0.7rem;
-        margin: 0.5rem 0;
-    }
-    .card span {
-        color: #EC7948;
-        font-size: 0.85rem;
-        margin: 0.5rem 0;
-    }
-    .card > div {
-        display: flex;
-        flex-direction:row;
-        justify-content: space-between;
-    }
     h4 {
         margin-top: 0;
     }
     @media (max-width: 1100px) {
-        .card > div {
-            display: flex;
-            flex-direction: column;
-        }
-        .card > h4 {
-            margin: 0;
-        }
+
     }
     @media (max-width: 900px) {
         .block2 > div > div {
@@ -250,18 +168,11 @@
             display: flex;
             flex-direction: column;
         }
-        .card {
-            width: 90%;
-            margin-bottom: 1rem;
-        }
     }
     @media (max-width: 450px) {
         .contacts {
             flex-direction: column;
             margin-top: 2rem;
-        }
-        .block2 {
-            width: 70%;
         }
         .block2 > div {
             flex-direction: column;

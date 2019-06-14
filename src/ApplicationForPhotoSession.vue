@@ -175,9 +175,7 @@ export default {
                           vk_auth: this.user.vk_auth,
                           roles: this.user.roles,
                       },
-                      file: {
-
-                      }
+                      file: [{name: '', path: ''}],
                   }
               })
           } else {

@@ -2,30 +2,30 @@
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <h2>Регистрация</h2>
         <div class='center'>
-            <p>Зарегистрироваться через:</p>
-            <a href="#"><img src="./assets/images/vk.png" alt="VK"></a>
-            <div>
                 <el-form-item label="Имя" prop="name" class='inputform'>
                     <el-input placeholder="Ваше имя" v-model="ruleForm.name"></el-input>
                 </el-form-item>
                 <el-form-item label="Фамилия" prop="surname" class='inputform'>
                     <el-input placeholder="Ваша фамилия" v-model="ruleForm.surname"></el-input>
                 </el-form-item>
+                <el-form-item label="Логин" prop="login" class='inputform'>
+                    <el-input type="login" placeholder="Ваш логин" v-model="ruleForm.login">
+                    </el-input>
+                </el-form-item>
                 <el-form-item label="E-mail" prop="email" class='inputform'>
                     <el-input type="email" placeholder="Ваш е-mail" v-model="ruleForm.email">
                     </el-input>
                 </el-form-item>
                 <el-form-item label="Пароль" prop="passwordOne" class='inputform'>
-                    <el-input placeholder="Придумайте пароль" type="passwordOne" v-model="ruleForm.passwordOne" autocomplete="off"></el-input>
+                    <el-input placeholder="Придумайте пароль" type="password" v-model="ruleForm.passwordOne" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="Пароль" prop="passwordTwo" class='inputform'>
-                    <el-input placeholder="Повторите пароль" type="passwordTwo" v-model="ruleForm.passwordTwo" autocomplete="off"></el-input>
+                    <el-input placeholder="Повторите пароль" type="password" v-model="ruleForm.passwordTwo" autocomplete="off"></el-input>
                 </el-form-item>
-                <input type='submit' value='Зарегистрироваться' class='one'> 
+                <input type='submit' value='Зарегистрироваться' class='one' v-on:click="registration">
                 <router-link :to="{ name: 'login'}" class='button'>
                     <input type='button' value='Войти' class='two'> 
                 </router-link>
-            </div>
             <router-link :to="{ name: 'reg'}"> Вы фотограф? </router-link>
         </div>
     </el-form>
@@ -33,10 +33,12 @@
 
 <script>
 import apiconfig from './apiconfig';
+import axios from 'axios';
+import store from '../store';
 
 export default {
     data() {
-        var checkName = (rule, value, callback) => {
+        let checkName = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
@@ -46,7 +48,7 @@ export default {
             callback();
             }
         };
-        var checkSurname = (rule, value, callback) => {
+        let checkSurname = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
@@ -56,7 +58,17 @@ export default {
             callback();
             }
         };
-        var checkEmail = (rule, value, callback) => {
+        let checkLogin = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('Заполните поле'));
+            } else {
+                if (this.ruleForm.login.length < 2) {
+                    callback(new Error('Введите больше 1 символа'));
+                }
+                callback();
+            }
+        };
+        let checkEmail = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
@@ -66,7 +78,7 @@ export default {
             callback();
             }
         };
-        var validatePass = (rule, value, callback) => {
+        let validatePass = (rule, value, callback) => {
             if (value === '') {
             callback(new Error('Введите пароль'));
             } else {
@@ -76,7 +88,7 @@ export default {
             callback();
             }
         };
-        var validatePass2 = (rule, value, callback) => {
+        let validatePass2 = (rule, value, callback) => {
             if (value === '') {
             callback(new Error('Введите пароль снова'));
             } else if (value !== this.ruleForm.passwordOne) {
@@ -86,9 +98,11 @@ export default {
             }
         };
         return {
+            registrationPath: store.state.registrationPath,
             ruleForm: {
                 name: '',
                 surname: '',
+                login: '',
                 email: '',
                 passwordOne: '',
                 passwordTwo: '',
@@ -99,6 +113,9 @@ export default {
                 ],
                 surname: [
                     { validator: checkSurname, trigger: 'blur', required: true }
+                ],
+                login: [
+                    { validator: checkLogin, trigger: 'blur', required: true }
                 ],
                 email: [
                     { validator: checkEmail, trigger: 'blur', required: true }
@@ -112,7 +129,56 @@ export default {
           }
         };
     },
+    watch: {
+        registrationPath: function () {
+            store.dispatch('SET_REGISTRATION_PATH', this.registrationPath);
+        },
+    },
+    computed: {
+        loading: {
+            get: function () {
+                return store.state.loading;
+            },
+            set: function (value) {
+                store.dispatch('SET_LOADING', value);
+            }
+        },
+    },
+    mounted() {
+        this.registrationPath = this.$route.path;
+        this.loading = false;
+    },
     methods: {
+        registration() {
+            this.loading = true;
+            store.dispatch('REGISTRATION', {
+                client_id: apiconfig.client_id,
+                grant_type: 'password',
+                client_secret: apiconfig.secret,
+                name: this.ruleForm.name,
+                surname: this.ruleForm.surname,
+                username: this.ruleForm.login,
+                email: this.ruleForm.email,
+                password: this.ruleForm.passwordTwo,
+            })
+                .then(response => {
+                    store.dispatch('AUTHORIZATION', {
+                        client_id: apiconfig.client_id,
+                        grant_type: 'password',
+                        client_secret: apiconfig.secret,
+                        username: this.ruleForm.login,
+                        password: this.ruleForm.passwordTwo,
+                    })
+                        .then(answer => {
+                            this.$router.push('/userpage');
+                            this.loading = false;
+                        })
+                })
+                .catch((error) => {
+                    this.$message.error('Регистрация не удалась');
+                    this.loading = false;
+                })
+        }
     }
 }
 </script>
