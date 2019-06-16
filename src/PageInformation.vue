@@ -27,7 +27,7 @@
                             <el-form-item label="Имя" prop="name" class='inputform'>
                                 <el-input
                                 placeholder="Ваше имя"
-                                v-model="pageinf.name = user.name"
+                                v-model="pageinf.name = changingUser.name"
                                 :disabled="true"
                                 v-on:click.native="available($event)">
                                 </el-input>
@@ -35,7 +35,7 @@
                             <el-form-item label="Фамилия" prop="surname" class='inputform'>
                                 <el-input
                                 placeholder="Ваша фамилия"
-                                v-model="pageinf.surname = user.surname"
+                                v-model="pageinf.surname = changingUser.surname"
                                 :disabled="true"
                                 v-on:click.native="available($event)">
                                 </el-input>
@@ -43,7 +43,7 @@
                             <el-form-item label="Логин" prop="login" class='inputform'>
                                 <el-input
                                 placeholder="Ваш логин"
-                                v-model="pageinf.login = user.username"
+                                v-model="pageinf.login = changingUser.username"
                                 :disabled="true"
                                 v-on:click.native="available($event)">
                                 </el-input>
@@ -52,7 +52,7 @@
                                 <el-input
                                 type="tel"
                                 placeholder="Ваш номер"
-                                v-model="pageinf.mobile = user.mobile"
+                                v-model="pageinf.mobile = changingUser.mobile"
                                 :disabled="true"
                                 v-on:click.native="available($event)">
                                 </el-input>
@@ -63,7 +63,7 @@
                                 <el-input
                                 type="email"
                                 placeholder="Ваш email"
-                                v-model="pageinf.email = user.email"
+                                v-model="pageinf.email = changingUser.email"
                                 :disabled="true"
                                 v-on:click.native="available($event)">
                                 </el-input>
@@ -72,7 +72,7 @@
                                 <el-input
                                         placeholder="Придумайте пароль"
                                         type="password"
-                                        v-model="pageinf.passwordOne = user.password"
+                                        v-model="pageinf.passwordOne = changingUser.password"
                                         autocomplete="off"
                                         :disabled="true"
                                         v-on:click.native="available($event)">
@@ -82,7 +82,7 @@
                                 <el-input
                                         type="password"
                                         placeholder="Повторите пароль"
-                                        v-model="pageinf.passwordTwo = user.password"
+                                        v-model="pageinf.passwordTwo = changingUser.password"
                                         autocomplete="off"
                                         :disabled="true"
                                         v-on:click.native="available($event)">
@@ -90,7 +90,7 @@
                             </el-form-item> 
                             <el-form-item label="О себе" class='inputform'>
                                 <el-input type="textarea"
-                                          v-model="pageinf.text = user.description"
+                                          v-model="pageinf.text = changingUser.description"
                                           resize='none'
                                           rows='7'
                                           :disabled="true"
@@ -182,7 +182,9 @@ export default {
         imageUrl: '',
         backgroundUrl: '',
         checkboxGroup: [],
-          disabled: true,
+        disabled: true,
+        countOfClicks: 0,
+        changingUser: store.state.changingUser,
         pageinf: {
           name: '',
           surname: '',
@@ -204,7 +206,7 @@ export default {
             { validator: checkLogin, trigger: 'blur', required: true }
           ],
           mobile: [
-            { validator: checkMobile, trigger: 'blur', required: true }
+            { validator: checkMobile, trigger: 'blur', required: false }
           ],
           email: [
             { validator: checkEmail, trigger: 'blur', required: true }
@@ -217,6 +219,11 @@ export default {
           ]
         },
       };
+    },
+    watch: {
+      changingUser: function () {
+        store.dispatch('SET_CHANGING_USER', this.changingUser);
+      },
     },
     computed: {
         userRole: {
@@ -235,6 +242,9 @@ export default {
                 store.dispatch('SET_USER', value);
             }
         },
+    },
+    mounted() {
+      this.changingUser = this.user;
     },
     methods: {
       handleBackgroundSuccess(res, file) {
@@ -269,12 +279,14 @@ export default {
       },
        available(event) {
           let element = $(event.target);
+          this.countOfClicks += 1;
           if (this.disabled === true) {
               element.prop('disabled', false);
               element.parent().removeClass('is-disabled');
               this.disabled = false;
           }
-          else {
+          else if(this.disabled === false && this.countOfClicks === 3) {
+              this.countOfClicks = 0;
               element.prop('disabled', true);
               element.parent().addClass('is-disabled');
               this.disabled = true;

@@ -309,6 +309,21 @@ body > div.el-menu--horizontal > ul {
     color:#C0C4CC !important;
 }
 
+.el-upload-list__item.is-success .el-upload-list__item-status-label {
+    display: none !important;
+}
+
+.el-upload-list__item,
+.el-upload-list--picture-card .el-upload-list__item,
+.el-upload--picture-card {
+    border-radius: 0px !important;
+}
+
+.el-upload-list--picture-card .el-upload-list__item-thumbnail {
+    object-fit: cover !important;
+}
+
+
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
         width: 70%;

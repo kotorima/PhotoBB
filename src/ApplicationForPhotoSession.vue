@@ -39,12 +39,14 @@
                 :max='5000'>
                 </el-slider>
             </el-form-item>
-            <el-form-item label='Фотографии для ваших клиентов'>
+            <el-form-item label='Фотографии для ваших клиентов' class='images'>
                <el-upload
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files"
                 list-type="picture-card"
                 :on-preview="handlePictureCardPreview"
-                :on-remove="handleRemove">
+                :on-remove="handleRemove"
+                :headers= "{Authorization: 'Bearer ' + token}"
+                :limit="9">
                   <i class="el-icon-plus"></i>
                 </el-upload>
                 <el-dialog :visible.sync="dialogVisible">
@@ -137,6 +139,14 @@ export default {
                 store.dispatch('SET_USER', value);
             }
         },
+        token: {
+            get: function () {
+                return store.state.accessToken;
+            },
+            set: function (value) {
+                store.dispatch('SET_ACCESS_TOKEN', value);
+            }
+        }
     },
     mounted() {
         if (!this.authorized) {
@@ -151,7 +161,6 @@ export default {
     methods: {
         submitForm(formName) {
             console.log(this.ruleForm.city);
-            console.log(this.user);
         this.$refs[formName].validate((valid) => {
           if (valid) {
               axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours', {
@@ -205,5 +214,10 @@ export default {
 .el-form-item {
     width: 40%;
     font-family: 'Roboto';
+}
+
+.images {
+    width: 100%;
+
 }
 </style>

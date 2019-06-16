@@ -41,6 +41,30 @@ export default {
                 store.dispatch('SET_USER_ID', value);
             }
         },
+        accessToken: {
+            get: function() {
+                return store.state.accessToken;
+            },
+            set: function(value) {
+                store.dispatch('SET_ACCESS_TOKEN', value);
+            }
+        },
+        user: {
+            get: function () {
+                return store.state.user;
+            },
+            set: function (value) {
+                store.dispatch('SET_USER', value);
+            }
+        },
+        changingUser: {
+            get: function () {
+                return store.state.changingUser;
+            },
+            set: function (value) {
+                store.dispatch('SET_CHANGING_USER', value);
+            }
+        },
     },
     mounted() {
         if (!this.authorized) {
@@ -54,6 +78,9 @@ export default {
                 axios({
                     method: 'PUT',
                     url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/users/' + this.userId + '.json',
+                    headers: {
+                        Authorization: 'Bearer ' + this.accessToken
+                    },
                     data: {
                         name: formName.name,
                         surname: formName.surname,
@@ -63,6 +90,8 @@ export default {
                         password: formName.password,
                         description: formName.description,
                     }
+                }).then(response => {
+                    this.user = this.changingUser;
                 })
             } else {
                 this.$message.error('Форма не прошла валидацию');

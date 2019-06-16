@@ -21,6 +21,7 @@ export default new Vuex.Store({
         userId: 0,
         userRole: '',
         user: [],
+        changingUser: [],
 	},
 	mutations: {
 		SET_COST: (state, payload) => {
@@ -71,6 +72,9 @@ export default new Vuex.Store({
         SET_USER: (state, payload) => {
             state.user = payload
         },
+        SET_CHANGING_USER: (state, payload) => {
+            state.changingUser = payload
+        },
     },
     actions: {
         SET_COST: (context, payload) => {
@@ -117,6 +121,9 @@ export default new Vuex.Store({
         },
         SET_USER: (context, payload) => {
             context.commit('SET_USER', payload);
+        },
+        SET_CHANGING_USER: (context, payload) => {
+            context.commit('SET_CHANGING_USER', payload);
         },
         SET_AUTHORIZED: (state, payload) => {
             state.authorized = payload
@@ -262,6 +269,9 @@ export default new Vuex.Store({
         },
         GET_USER: state => {
             return state.user;
+        },
+        GET_CHANGING_USER: state => {
+            return state.changingUser;
         },
         GET_AUTHORIZED: state => {
             return state.authorized

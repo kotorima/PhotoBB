@@ -18,7 +18,7 @@
                 <img v-if="user.avatar" v-bind:src="'http://photobb.dev.webant.ru/uploads/'+user.avatar.path" :alt="user.avatar.name">
                 {{ user.name }}
             </template>
-            <el-menu-item v-if='user.roles === "ROLE_PHOTO"' index="3-1">
+            <el-menu-item v-if='userRole[0] === "ROLE_PHOTO"' index="3-1">
                 <router-link class="navselect" :to="{ name: 'reqphoto'}">Создать заявку</router-link>
             </el-menu-item>
             <el-menu-item index="3-2">
@@ -70,6 +70,14 @@ export default {
               store.dispatch('SET_USER', value);
           }
       },
+      userRole: {
+            get: function () {
+                return store.state.userRole;
+            },
+            set: function (value) {
+                store.dispatch('SET_USER_ROLE', value);
+            }
+        },
   },
 methods: {
     handleSelect(key, keyPath) {
