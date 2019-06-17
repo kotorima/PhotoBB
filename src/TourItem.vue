@@ -6,7 +6,7 @@
                     <img v-if="touritem.user.ava_social" v-bind:src="touritem.user.ava_social" v-bind:alt='touritem.user.username' >
                     <img v-else src='./assets/images/ava.png' v-bind:alt='touritem.user.username' >
                     <div class='discription'>
-                        <h3>{{ touritem.user.name }} {{ touritem.user.surname }} ({{ touritem.user.username }})</h3>
+                        <h3 class='a' v-on='openPhotoPage(touritem.user.id)'>{{ touritem.user.name }} {{ touritem.user.surname }} ({{ touritem.user.username }})</h3>
                         <p>{{ touritem.user.email }}</p>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <h4>Нет фото</h4>
             </div>
         </div>
-        <button class='contact'>Связаться</button>
+        <button class='contact'>Откликнуться</button>
     </div>
 </template>
 <script>
@@ -75,7 +75,9 @@ export default {
                 parent.css('transform', 'translateX(-'+this.distance+'vw)');
                 parent.css('transition', 'all 1s ease 0s');
             }
-
+      },
+      openPhotoPage: function (photoId) {
+          
       }
   },
   props: ['touritem']
@@ -93,6 +95,14 @@ export default {
  h3{
      font-family:'Exo2';
      font-weight: normal;
+ }
+
+ .a {
+    cursor: pointer;
+ }
+
+ .a:hover {
+     color: #EC7948;
  }
 
  p, span, img, button, h4 {

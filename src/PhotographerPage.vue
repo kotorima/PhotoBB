@@ -17,7 +17,7 @@
                     <div>
                         <h3>Номер телефона</h3>
                         <span>Не указан</span>
-                    </div>
+                    </div> 
                     <div>
                         <h3>E-mail</h3>
                         <span v-if="user.email">{{ user.email }}</span>

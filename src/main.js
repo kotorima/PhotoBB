@@ -59,17 +59,23 @@ const router = new Router({
     props: true,
   },
   {
+    path: '/photographer',
+    name:'photographer',
+    component: PhotographerPage,
+    props: true,
+  },
+  {
     path: '/photopage',
     name:'photopage',
     component: PhotographerPage,
     props: true,
   },
-     {
-         path: '/userpage',
-         name:'userpage',
-         component: UserPage,
-         props: true,
-     },
+  {
+      path: '/userpage',
+      name:'userpage',
+      component: UserPage,
+      props: true,
+  },
   {
     path: '/reqphoto',
     name:'reqphoto',

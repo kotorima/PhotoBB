@@ -4,7 +4,7 @@
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
             <el-form-item label="Город" prop="city" class='inputform'>
                 <el-select
-                v-model="ruleForm.city"
+                v-model="ruleForm.value"
                 filterable
                 remote
                 reserve-keyword
@@ -16,7 +16,7 @@
                     v-for='city in list' 
                     :key="city.value"
                     :label="city.label"
-                    :value="city.value">
+                    :value="city">
                     </el-option>
                 </el-select>
             </el-form-item>
@@ -49,7 +49,7 @@
                   <i class="el-icon-plus"></i>
                 </el-upload>
                 <el-dialog :visible.sync="dialogVisible">
-                  <img width="100%" :src="dialogImageUrl" alt="">
+                  <img width="100%" :src="dialogImageUrl" alt="dialogImageUrl">
                 </el-dialog>
             </el-form-item> 
             <el-form-item class='buttonform'>
@@ -100,12 +100,12 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             ruleForm: {
-                city: {},
+                value: {},
                 date: Date,
                 cost: 0,
             },
             rules: {
-                city: [
+                value: [
                     { validator: checkCity, trigger: 'blur', required: true }
                 ],
                 date: [
@@ -159,9 +159,10 @@ export default {
     },
     methods: {
         submitForm(formName) {
-        console.log(this.ruleForm.city);
         this.$refs[formName].validate((valid) => {
           if (valid) {
+              let todayDate = Date();
+              console.log(todayDate);
               axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours', {
                   method: 'POST',
                   headers: {
@@ -169,11 +170,11 @@ export default {
                   },
                   params: {
                       city: {
-                          google_place_id: this.ruleForm.city.value,
-                          location_name: this.ruleForm.city.label,
+                          google_place_id: this.ruleForm.value.value,
+                          location_name: this.ruleForm.value.label,
                       },
                       cost: this.ruleForm.cost,
-                      date_create: Date.now(),
+                      date_create: todayDate.toISOString(),
                       start_date: this.ruleForm.date[0],
                       finish_date: this.ruleForm.date[1],
                       deadline_info: '',
