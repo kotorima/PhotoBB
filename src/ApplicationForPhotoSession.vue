@@ -38,10 +38,13 @@
                 :max='5000'>
                 </el-slider>
             </el-form-item>
-            <el-form-item label='Фотографии для ваших клиентов' class='images'>
+            <el-form-item props='files' label='Фотографии для ваших клиентов' class='images'>
                <el-upload
-                action="https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files"
+                action="https://jsonplaceholder.typicode.com/posts/"
                 list-type="picture-card"
+                :auto-upload="false"
+                :file-list="files"
+                :on-change="handleChange"
                 :on-preview="handlePictureCardPreview"
                 :on-remove="handleRemove"
                 :headers= "{Authorization: 'Bearer ' + token}"
@@ -99,6 +102,8 @@ export default {
         return {
             dialogImageUrl: '',
             dialogVisible: false,
+            files: [],
+            falesId: [],
             ruleForm: {
                 value: {},
                 date: Date,
@@ -113,6 +118,9 @@ export default {
                 ],
                 cost: [
                     { validator: checkCost, trigger: 'blur', required: true }
+                ],
+                files: [
+                    { required: false }
                 ],
             },
         }
@@ -161,8 +169,20 @@ export default {
         submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-              let todayDate = Date();
-              console.log(todayDate);
+            let todayDate = Date();
+            //   console.log(this.files.id)
+            this.files.forEach(file => {
+                axios({
+                    url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files',
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'Bearer ' + this.token
+                    },
+                    data: {
+                        file
+                    }
+                })
+            })
               axios({
                   url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours',
                   method: 'POST',
@@ -186,8 +206,8 @@ export default {
                           vk_auth: this.user.vk_auth,
                           roles: this.user.roles,
                       },
-                      files: [{name: '', path: ''}],
-                      images: [],
+                      files: this.files,
+                      images: this.files,
                   }
               })
           } else {
@@ -197,6 +217,9 @@ export default {
       },
       handleRemove(file, fileList) {
         console.log(file, fileList);
+      },
+      handleChange(file, fileList) {
+        this.files = fileList;
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
