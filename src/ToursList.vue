@@ -1,6 +1,7 @@
 <template>
   <div class='main'>
     <div v-loading="loading">
+      <h2 v-if='!searchOn'>Ближайшие поездки фотографов</h2>
       <div v-if='noResult' class='noResult'>
         <h3>По вашему запросу туров не найдено</h3>
       </div>
@@ -144,6 +145,8 @@ export default {
   }
 
   h2 {
+    display: flex;
+    align-self: flex-start;
     margin-left: 5vw;
     margin-bottom: 2rem
   }

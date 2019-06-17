@@ -14,7 +14,7 @@
                 <el-option
                 v-for="city in list" 
                 :key="city.id"
-                :label="city.value"
+                :label="city.label"
                 :value="city">
                 </el-option>
             </el-select>
@@ -112,7 +112,6 @@ export default {
   methods: {
     changeSearch: function () {
         store.dispatch('SET_SEARCH_ON', true);
-        console.log('main ' +this.searchOn);
     }
   }, 
 }

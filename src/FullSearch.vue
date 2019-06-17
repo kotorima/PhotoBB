@@ -59,6 +59,7 @@ export default {
     },
     mounted() {
         if(this.searchOn === true) {
+            this.searchOn === false;
             this.search();
         }
     },

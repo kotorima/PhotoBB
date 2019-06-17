@@ -7,7 +7,7 @@ export default new Vuex.Store({
 	state: {
         cost: 0,
         date: [],
-        place: '',
+        place: {},
         tours: [],
         searchPath: '',
         registrationPath: '',

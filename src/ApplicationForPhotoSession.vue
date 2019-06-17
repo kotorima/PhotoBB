@@ -5,7 +5,6 @@
             <el-form-item label="Город" prop="city" class='inputform'>
                 <el-select
                 v-model="ruleForm.city"
-                :value='ruleForm.city'
                 filterable
                 remote
                 reserve-keyword
@@ -15,7 +14,7 @@
                 class = 'input-select'>
                     <el-option
                     v-for='city in list' 
-                    v-bind:key="city.value"
+                    :key="city.value"
                     :label="city.label"
                     :value="city.value">
                     </el-option>
@@ -101,7 +100,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             ruleForm: {
-                city: '',
+                city: {},
                 date: Date,
                 cost: 0,
             },
@@ -160,11 +159,14 @@ export default {
     },
     methods: {
         submitForm(formName) {
-            console.log(this.ruleForm.city);
+        console.log(this.ruleForm.city);
         this.$refs[formName].validate((valid) => {
           if (valid) {
               axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours', {
                   method: 'POST',
+                  headers: {
+                        Authorization: 'Bearer ' + this.token
+                  },
                   params: {
                       city: {
                           google_place_id: this.ruleForm.city.value,
@@ -184,7 +186,7 @@ export default {
                           vk_auth: this.user.vk_auth,
                           roles: this.user.roles,
                       },
-                      file: [{name: '', path: ''}],
+                      file: [{name: this.dialogImageUrl, path: this.dialogImageUrl}],
                   }
               })
           } else {

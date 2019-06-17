@@ -1,7 +1,6 @@
 <template>
 <div>
     <div class='header'>
-      <app-steps></app-steps>
       <div class='search'>
         <div class='description'>
           <div class='block'>
@@ -22,7 +21,6 @@
 </template>
 
 <script>
-import Steps from './Steps.vue';
 import Search from './Search.vue';
 import FormLogin from './FormLogin.vue';
 import ToursList from './ToursList.vue';
@@ -30,7 +28,6 @@ import store from '../store'
 
 export default {
     components: {
-    "app-steps": Steps,
     "app-search": Search,
     "app-form": FormLogin,
     "app-tours-list": ToursList,
@@ -41,10 +38,8 @@ export default {
 <style>
     .tourslist {
       margin: auto;
+      margin-bottom: 15px;
       width: 80% !important; 
-    }
-    .header {
-        margin-bottom: 10vh;
     }
 @media (max-width: 600px) {
     .block {
