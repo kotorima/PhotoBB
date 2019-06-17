@@ -18,7 +18,6 @@ export const searchFunction = {
     },
     methods: {
       search: function () {
-        console.log(this.value)
         this.loadingTours = true;
         this.noResult = false; 
         axios

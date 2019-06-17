@@ -73,6 +73,7 @@ export default {
     },
     methods: {
       submitForm(formName) {
+          console.log(formName.name);
         this.$children[2].$refs[formName].validate((valid) => {
             if (valid) {
                 axios({

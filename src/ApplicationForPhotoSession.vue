@@ -163,18 +163,17 @@ export default {
           if (valid) {
               let todayDate = Date();
               console.log(todayDate);
-              axios('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours', {
+              axios({
+                  url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours',
                   method: 'POST',
                   headers: {
                         Authorization: 'Bearer ' + this.token
                   },
-                  params: {
-                      city: {
-                          google_place_id: this.ruleForm.value.value,
-                          location_name: this.ruleForm.value.label,
-                      },
+                  data: {
+                      google_place_id: this.ruleForm.value.value,
+                      location_name: this.ruleForm.value.label,
                       cost: this.ruleForm.cost,
-                      date_create: todayDate.toISOString(),
+                      date_create: todayDate,
                       start_date: this.ruleForm.date[0],
                       finish_date: this.ruleForm.date[1],
                       deadline_info: '',
@@ -187,7 +186,8 @@ export default {
                           vk_auth: this.user.vk_auth,
                           roles: this.user.roles,
                       },
-                      file: [{name: this.dialogImageUrl, path: this.dialogImageUrl}],
+                      files: [{name: '', path: ''}],
+                      images: [],
                   }
               })
           } else {
@@ -210,6 +210,7 @@ export default {
 .main {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 80%;
     margin: auto;
 }
@@ -217,6 +218,11 @@ export default {
 .el-form-item {
     width: 40%;
     font-family: 'Roboto';
+}
+
+.buttonform{
+    width: 100%;
+    align-items: center !important;
 }
 
 .images {

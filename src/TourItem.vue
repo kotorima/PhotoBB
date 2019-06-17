@@ -6,7 +6,7 @@
                     <img v-if="touritem.user.ava_social" v-bind:src="touritem.user.ava_social" v-bind:alt='touritem.user.username' >
                     <img v-else src='./assets/images/ava.png' v-bind:alt='touritem.user.username' >
                     <div class='discription'>
-                        <h3 class='a' v-on='openPhotoPage(touritem.user.id)'>{{ touritem.user.name }} {{ touritem.user.surname }} ({{ touritem.user.username }})</h3>
+                        <h3>{{ touritem.user.name }} {{ touritem.user.surname }} ({{ touritem.user.username }})</h3>
                         <p>{{ touritem.user.email }}</p>
                     </div>
                 </div>
@@ -36,6 +36,7 @@
 </template>
 <script>
 import {reformatDate} from './mixins/reformatDate.js';
+import store from '../store';
 
 export default {
    mixins: [reformatDate],
@@ -49,6 +50,7 @@ export default {
         countOfPhotos: 0,
     };
   },
+
   methods: {
       nextPhotos: function (event, countOfPhotos) {
         let element = $(event.target);
@@ -76,9 +78,6 @@ export default {
                 parent.css('transition', 'all 1s ease 0s');
             }
       },
-      openPhotoPage: function (photoId) {
-          
-      }
   },
   props: ['touritem']
 
@@ -95,14 +94,6 @@ export default {
  h3{
      font-family:'Exo2';
      font-weight: normal;
- }
-
- .a {
-    cursor: pointer;
- }
-
- .a:hover {
-     color: #EC7948;
  }
 
  p, span, img, button, h4 {

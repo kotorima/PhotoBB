@@ -196,7 +196,7 @@ methods: {
     justify-content: space-between;
     align-items: center;
     height: 42rem;
-    margin-bottom: 30vh !important;
+    margin-bottom: 10vh !important;
   }
   .logo {
   font-size: 1.5rem;

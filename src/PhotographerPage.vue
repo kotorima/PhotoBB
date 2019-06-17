@@ -90,7 +90,7 @@
             },
         },
         mounted() {
-            if(!this.authorized) {
+            if (!this.authorized) {
                 this.$router.push('/login');
             }
             else {
@@ -109,7 +109,6 @@
                     });
             }
         },
-        
     }
 </script>
 
