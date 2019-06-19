@@ -4,7 +4,7 @@
             <h2>Личный кабинет</h2>
             <el-form status-icon ref="ruleForm" class="demo-ruleForm">
                 <el-form-item class='buttonform'>
-                    <el-button type="primary" @click="submitForm($route.name)">Сохранить</el-button>
+                    <el-button type="primary" @click="submitForm($route.name, changingUser)">Сохранить</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -72,8 +72,9 @@ export default {
         }
     },
     methods: {
-      submitForm(formName) {
-          console.log(formName.name);
+      submitForm(formName, user) {
+          user = this.changingUser;
+          console.log(user);
         this.$children[2].$refs[formName].validate((valid) => {
             if (valid) {
                 axios({
@@ -83,13 +84,7 @@ export default {
                         Authorization: 'Bearer ' + this.accessToken
                     },
                     data: {
-                        name: formName.name,
-                        surname: formName.surname,
-                        username: formName.username,
-                        mobile: formName.mobile,
-                        email: formName.email,
-                        password: formName.password,
-                        description: formName.description,
+                        user
                     }
                 }).then(response => {
                     this.user = this.changingUser;

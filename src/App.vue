@@ -15,7 +15,7 @@
         </el-menu-item>
         <el-submenu v-else index="3" class="navselect">
             <template slot="title">
-                <img v-if="user.avatar" v-bind:src="'http://photobb.dev.webant.ru/uploads/'+user.avatar.path" :alt="user.avatar.name">
+                <img v-if="user.avatar" class="useravatar" v-bind:src="'http://photobb.dev.webant.ru/uploads/'+user.avatar.path" :alt="user.avatar.name">
                 {{ user.name }}
             </template>
             <el-menu-item v-if='userRole[0] === "ROLE_PHOTO"' index="3-1">
@@ -278,6 +278,9 @@ footer > p {
 @media (max-width: 600px) {
   footer > p {
     width: 70%;
+  }
+  .useravatar {
+    display: none;
   }
 }
 

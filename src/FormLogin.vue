@@ -2,9 +2,6 @@
     <el-form v-loading='loading' :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
         <h2>Воход</h2>
         <div class='center'>
-            <p>Авторизоваться через:</p>
-            <a href="#" >
-            </a>
             <div>
                 <el-form-item label="Логин" prop="login" class='inputform'>
                     <el-input type="text" placeholder="Логин / e-mail" v-model="ruleForm.login">
@@ -28,22 +25,12 @@
     import store from '../store'
     export default {
         data() {
-            let checkLogin = (rule, value, callback) => {
+            let checkLogin = (rule, value, callback, field, number) => {
                 if (value === '') {
                     callback(new Error('Заполните поле'));
                 } else {
-                    if (this.ruleForm.login < 6) {
-                        callback(new Error('Введите больше 5 символов'));
-                    }
-                    callback();
-                }
-            };
-            let checkPassword = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('Заполните поле'));
-                } else {
-                    if (this.ruleForm.login < 6) {
-                        callback(new Error('Введите больше 5 символов'));
+                    if (this.ruleForm.field < number) {
+                        callback(new Error('Введите больше '+ number-1 +' символов'));
                     }
                     callback();
                 }
@@ -55,10 +42,10 @@
                 },
                 rules: {
                     login: [
-                        { validator: checkLogin, trigger: 'blur', required: true }
+                        { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.login, 6), trigger: 'blur', required: true }
                     ],
                     password: [
-                        { validator: checkPassword, trigger: 'blur', required: true }
+                        { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.name, 6), trigger: 'blur', required: true }
                     ],
                 }
             };

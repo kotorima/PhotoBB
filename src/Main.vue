@@ -7,11 +7,11 @@
             <h2>Получите профессиональные фото с отдыха</h2>
             <span class='desc'>46 доступных фотографов, путешествующих по всему миру</span>
           </div>
-          <router-link
+          <!--<router-link
             class="link"
             :to="{ name: 'reg'}">
             Вы фотограф?
-          </router-link>
+          </router-link>-->
         </div>
         <app-search></app-search>
       </div>

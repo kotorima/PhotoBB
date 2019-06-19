@@ -11,7 +11,6 @@ import UserPage from './UserPage.vue';
 import ApplicationForPhotoSession from './ApplicationForPhotoSession.vue';
 import PrivateOffice from './PrivateOffice.vue';
 import PageInformation from './PageInformation.vue';
-import PhotoGallery from './PhotoGallery.vue';
 import PageNotFound from './PageNotFound.vue';
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/ru-RU';
@@ -93,12 +92,6 @@ const router = new Router({
         path: 'pageinf',
         name:'pageinf',
         component: PageInformation,
-        props: true,
-      },
-      {
-        path: 'gallery',
-        name:'gallery',
-        component: PhotoGallery,
         props: true,
       },
     ],

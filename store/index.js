@@ -21,7 +21,7 @@ export default new Vuex.Store({
         userId: 0,
         userRole: '',
         user: [],
-        changingUser: [],
+        changingUser: {},
 	},
 	mutations: {
 		SET_COST: (state, payload) => {

@@ -1,6 +1,6 @@
 <template>
     <div class='main'>
-        <h1>Заявка на фотосессию</h1>
+        <h2>Заявка на фотосессию</h2>
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
             <el-form-item label="Город" prop="city" class='inputform'>
                 <el-select
@@ -73,29 +73,13 @@ import {remoteMethod} from './mixins/remoteMethod.js';
 export default {
     mixins: [reformatDate, remoteMethod],
     data() {
-        let checkCity = (rule, value, callback) => {
-            if (value === '') {
+        let checkValidate = (rule, value, callback, field, number) => {
+            if (value === '' || value === 0) {
                 callback(new Error('Заполните поле'));
             } else {
-            if (this.ruleForm.city.length < 3) {
-                callback(new Error('Введите больше 2 символа'));
+            if (number && this.ruleForm.field.length < number) {
+                callback(new Error('Введите больше '+ number-1 +' символа'));
             }
-            callback();
-            }
-        };
-
-        let checkDate = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('Заполните поле'));
-            } else {
-                callback();
-            }
-        };
-
-        let checkCost = (rule, value, callback) => {
-            if (value === 0) {
-                callback(new Error('Определите стоимость'));
-            } else {
             callback();
             }
         };
@@ -103,7 +87,7 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             files: [],
-            falesId: [],
+            filesId: [],
             ruleForm: {
                 value: {},
                 date: Date,
@@ -111,13 +95,13 @@ export default {
             },
             rules: {
                 value: [
-                    { validator: checkCity, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.value, 2), trigger: 'blur', required: true }
                 ],
                 date: [
-                    { validator: checkDate, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.date), trigger: 'blur', required: true }
                 ],
                 cost: [
-                    { validator: checkCost, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.cost), trigger: 'blur', required: true }
                 ],
                 files: [
                     { required: false }
@@ -170,50 +154,58 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             let todayDate = Date();
-            //   console.log(this.files.id)
-            this.files.forEach(file => {
-                axios({
-                    url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files',
-                    method: 'POST',
-                    headers: {
-                        Authorization: 'Bearer ' + this.token
-                    },
-                    data: {
-                        file
-                    }
-                })
-            })
-              axios({
-                  url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours',
-                  method: 'POST',
-                  headers: {
-                        Authorization: 'Bearer ' + this.token
-                  },
-                  data: {
-                      google_place_id: this.ruleForm.value.value,
-                      location_name: this.ruleForm.value.label,
-                      cost: this.ruleForm.cost,
-                      date_create: todayDate,
-                      start_date: this.ruleForm.date[0],
-                      finish_date: this.ruleForm.date[1],
-                      deadline_info: '',
-                      user: {
-                          id: this.user.id,
-                          email: this.user.email,
-                          name: this.user.name,
-                          surname: this.user.surname,
-                          username: this.user.username,
-                          vk_auth: this.user.vk_auth,
-                          roles: this.user.roles,
-                      },
-                      files: this.files,
-                      images: this.files,
-                  }
-              })
-          } else {
-            return false;
-          }
+                this.sendData();
+            } else {
+                return false;
+            }
         });
+      },
+      async sendData() {
+        await this.sendImage();
+        axios({
+            url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours',
+            method: 'POST',
+            headers: {
+                    Authorization: 'Bearer ' + this.token
+            },
+            data: {
+                google_place_id: this.ruleForm.value.value,
+                location_name: this.ruleForm.value.label,
+                cost: this.ruleForm.cost,
+                date_create: todayDate,
+                start_date: this.ruleForm.date[0],
+                finish_date: this.ruleForm.date[1],
+                deadline_info: '',
+                user: {
+                    id: this.user.id,
+                    email: this.user.email,
+                    name: this.user.name,
+                    surname: this.user.surname,
+                    username: this.user.username,
+                    vk_auth: this.user.vk_auth,
+                    roles: this.user.roles,
+                },
+                files: this.files,
+                images: this.filesId,
+            }
+        })
+      },
+      sendImage() {
+        const formData = new FormData();
+        this.files.forEach(file => {
+            formData.append("file", file.raw);
+            axios({
+                url: 'https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files',
+                method: 'POST',
+                headers: {
+                    Authorization: 'Bearer ' + this.token
+                },
+                data: formData
+            }).then (response => {
+                this.filesId.push(response.data.id);
+                console.log(this.filesId)
+            })
+        })
       },
       handleRemove(file, fileList) {
         console.log(file, fileList);
@@ -224,7 +216,7 @@ export default {
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
-      }
+      },
     },
 }
 </script>
@@ -241,6 +233,8 @@ export default {
 .el-form-item {
     width: 40%;
     font-family: 'Roboto';
+    display: flex;
+    flex-direction: column;
 }
 
 .buttonform{
@@ -251,5 +245,29 @@ export default {
 .images {
     width: 100%;
 
+}
+
+h2 {
+    margin-top: 2rem;
+}
+
+@media (max-width: 1100px) {
+    .main{
+        height: 85vh;
+    }
+}
+
+@media (max-width: 800px) {
+    .main{
+        height: 80vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .el-form {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+    }
 }
 </style>

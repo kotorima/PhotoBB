@@ -26,7 +26,7 @@
                 <router-link :to="{ name: 'login'}" class='button'>
                     <input type='button' value='Войти' class='two'> 
                 </router-link>
-            <router-link :to="{ name: 'reg'}"> Вы фотограф? </router-link>
+            <!--<router-link :to="{ name: 'reg'}"> Вы фотограф? </router-link>-->
         </div>
     </el-form>
 </template>
@@ -38,42 +38,12 @@ import store from '../store';
 
 export default {
     data() {
-        let checkName = (rule, value, callback) => {
+        let checkValidate = (rule, value, callback, field, number) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
-            if (this.ruleForm.name.length < 2) {
-                callback(new Error('Введите больше 1 символа'));
-            }
-            callback();
-            }
-        };
-        let checkSurname = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('Заполните поле'));
-            } else {
-            if (this.ruleForm.surname.length < 2) {
-                callback(new Error('Введите больше 1 символа'));
-            }
-            callback();
-            }
-        };
-        let checkLogin = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('Заполните поле'));
-            } else {
-                if (this.ruleForm.login.length < 2) {
-                    callback(new Error('Введите больше 1 символа'));
-                }
-                callback();
-            }
-        };
-        let checkEmail = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('Заполните поле'));
-            } else {
-            if (this.ruleForm.email < 6) {
-                callback(new Error('Введите больше 5 символов'));
+            if (this.ruleForm.field.length < number) {
+                callback(new Error('Введите больше '+ number-1 +' символа'));
             }
             callback();
             }
@@ -109,16 +79,16 @@ export default {
             },
             rules: {
                 name: [
-                    { validator: checkName, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.name, 2), trigger: 'blur', required: true }
                 ],
                 surname: [
-                    { validator: checkSurname, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.surname, 2), trigger: 'blur', required: true }
                 ],
                 login: [
-                    { validator: checkLogin, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.login, 2), trigger: 'blur', required: true }
                 ],
                 email: [
-                    { validator: checkEmail, trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.email, 6), trigger: 'blur', required: true }
                 ],
                 passwordOne: [
                     { validator: validatePass, trigger: 'blur', required: true }

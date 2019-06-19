@@ -213,8 +213,12 @@ body > div.el-menu--horizontal > ul {
 
 #app > div > form > div {
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
+}
+
+#app > div > form > div > label {
+    text-align: left !important;
+    width: 150%;
 }
 
 #app > div > form > div > div > div > div.el-input.el-input--suffix > input {
@@ -385,6 +389,21 @@ body > div.el-menu--horizontal > ul {
         line-height: 0;
     }
 
+    #app > div > form > div > div > div > div.el-input.el-input--suffix > input,
+    .el-date-editor--daterange.el-input__inner,
+    .el-slider__runway {
+        width: 250px !important;
+    }
+
+    .images {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .images > label {
+        text-align: center !important;
+    }
 }
 
 @media (max-width: 400px) { 

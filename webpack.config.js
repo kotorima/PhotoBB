@@ -1,5 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
+require("babel-polyfill")
+
+module.exports = {
+  entry: ["babel-polyfill", "./app.js"]
+};
 
 module.exports = {
   entry: './src/main.js',

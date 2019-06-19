@@ -178,6 +178,7 @@ export default {
      color: #FFFFFF;
      font-weight: normal;
      margin-top: 2vw;
+     align-items: center;
  }
 
  span {
