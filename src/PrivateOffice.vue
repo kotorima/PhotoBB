@@ -65,6 +65,14 @@ export default {
                 store.dispatch('SET_CHANGING_USER', value);
             }
         },
+        loading: {
+            get: function () {
+                return store.state.loading;
+            },
+            set: function (value) {
+                store.dispatch('SET_LOADING', value);
+            }
+        },
     },
     mounted() {
         if (!this.authorized) {
@@ -73,7 +81,7 @@ export default {
     },
     methods: {
       submitForm(formName, user) {
-          console.log(user);
+        this.loading = true;
         this.$children[2].$refs[formName].validate((valid) => {
             if (valid) {
                 axios({
@@ -85,9 +93,11 @@ export default {
                     data: user
                 }).then(response => {
                     console.log(response)
-                    //this.user = this.changingUser;
+                    this.loading = false;
+                    this.$message.success('Профиль успешно отредактирован');
                 })
             } else {
+                this.loading = false;
                 this.$message.error('Форма не прошла валидацию');
             }
         });
@@ -141,6 +151,7 @@ export default {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      width: 100% !important;
   }
 
   .navigation {

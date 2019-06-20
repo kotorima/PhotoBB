@@ -1,4 +1,5 @@
 <template>
+    <div v-loading="loading"> 
     <el-form :model="pageinf" status-icon :rules="rules" ref="pageinf" class="demo-pageinf">
         <div class="block5"> 
             <el-upload
@@ -92,6 +93,7 @@
             </div>
         </div>
     </el-form>
+    </div>
 </template>
 
 <script>
@@ -204,6 +206,14 @@ export default {
                 store.dispatch('SET_USER', value);
             }
         },
+        loading: {
+            get: function () {
+                return store.state.loading;
+            },
+            set: function (value) {
+                store.dispatch('SET_LOADING', value);
+            }
+        },
     },
     mounted() {
       this.changingUser = this.user;
@@ -238,7 +248,6 @@ export default {
               element.parent().addClass('is-disabled');
               this.disabled = true;
           }
-
        }
     }
 }
@@ -283,6 +292,10 @@ export default {
         width: 70vw;
     }
 
+    .block3 > .el-form-item  {
+      width: 40%;
+    }
+
     .block4 {
         display: flex;
         flex-direction: row;
@@ -302,20 +315,13 @@ export default {
         font-family: 'Exo2';
     }
 
-    .el-form {
-        height: 120vh;
-    }
     @media (max-width: 600px){
       .block5 {
         flex-direction: column;
       }
 
       .avatar-uploader-icon  {
-          padding-top: 0.8rem;
-      }
-
-      .el-form {
-        height: 140vh;
+        padding-top: 0.8rem;
       }
 
       .block4,
@@ -324,38 +330,11 @@ export default {
       }
     }
 
-    @media screen and (max-width: 400px) , screen and (max-height: 700px){
+    @media (max-width: 400px) {
       .block4,
       .block3 > div {
         margin: 0;
       }
-
-      .el-form {
-        height: 165vh;
-      }
     }
 
-    @media screen and (max-width: 400px) , screen and (max-height: 850px){
-      .el-form {
-        height: 135vh;
-      }
-    }
-
-    @media screen and (max-width: 400px) , screen and (max-height: 750px){
-      .el-form {
-        height: 150vh;
-      }
-    }
-
-    @media (max-width: 370px) {
-      .el-form {
-        height: 170vh;
-      }
-    }
-
-    @media (max-width: 330px) {
-      .el-form {
-        height: 190vh;
-      }
-    }
 </style>

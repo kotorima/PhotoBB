@@ -1,58 +1,60 @@
 <template>
   <div class="main">
     <h2>Заявка на фотосессию</h2>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
-      <el-form-item label="Город" prop="city" class="inputform">
-        <el-select
-          v-model="ruleForm.value"
-          filterable
-          remote
-          reserve-keyword
-          placeholder="Введите местоположение"
-          :remote-method="remoteMethod"
-          :loading="loading"
-          class="input-select"
-        >
-          <el-option v-for="city in list" :key="city.value" :label="city.label" :value="city"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Даты прибытия и отбытия" prop="date" class="inputform">
-        <el-date-picker
-          type="daterange"
-          range-separator="—"
-          start-placeholder="Прибытие"
-          end-placeholder="Отбытие"
-          format="dd.MM.yyyy"
-          v-model="ruleForm.date"
-        ></el-date-picker>
-      </el-form-item>
-      <el-form-item label="Стоимость" prop="cost" class="inputform">
-        <span v-if="ruleForm.cost>=0" class="demonstration">до {{ ruleForm.cost }} руб./час</span>
-        <span v-else class="demonstration">Определите стоимость</span>
-        <el-slider v-model="ruleForm.cost" :step="10" :max="5000"></el-slider>
-      </el-form-item>
-      <el-form-item props="files" label="Фотографии для ваших клиентов" class="images">
-        <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
-          list-type="picture-card"
-          :auto-upload="false"
-          :file-list="files"
-          :on-change="handleChange"
-          :on-preview="handlePictureCardPreview"
-          :on-remove="handleRemove"
-          :headers="{Authorization: 'Bearer ' + token}"
-          :limit="9"
-        >
-          <i class="el-icon-plus"></i>
-        </el-upload>
-        <el-dialog :visible.sync="dialogVisible">
-          <img width="100%" :src="dialogImageUrl" alt="dialogImageUrl">
-        </el-dialog>
-      </el-form-item>
-      <el-form-item class="buttonform">
-        <el-button type="primary" @click="submitForm('ruleForm')">Оформить</el-button>
-      </el-form-item>
-    </el-form>
+    <div v-loading="load">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+        <el-form-item label="Город" prop="city" class="inputform">
+          <el-select
+            v-model="ruleForm.value"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="Введите местоположение"
+            :remote-method="remoteMethod"
+            :loading="loading"
+            class="input-select"
+          >
+            <el-option v-for="city in list" :key="city.value" :label="city.label" :value="city"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Даты прибытия и отбытия" prop="date" class="inputform">
+          <el-date-picker
+            type="daterange"
+            range-separator="—"
+            start-placeholder="Прибытие"
+            end-placeholder="Отбытие"
+            format="dd.MM.yyyy"
+            v-model="ruleForm.date"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item label="Стоимость" prop="cost" class="inputform">
+          <span v-if="ruleForm.cost>=0" class="demonstration">до {{ ruleForm.cost }} руб./час</span>
+          <span v-else class="demonstration">Определите стоимость</span>
+          <el-slider v-model="ruleForm.cost" :step="10" :max="5000"></el-slider>
+        </el-form-item>
+        <el-form-item props="files" label="Фотографии для ваших клиентов" class="images">
+          <el-upload
+            action="https://jsonplaceholder.typicode.com/posts/"
+            list-type="picture-card"
+            :auto-upload="false"
+            :file-list="files"
+            :on-change="handleChange"
+            :on-preview="handlePictureCardPreview"
+            :on-remove="handleRemove"
+            :headers="{Authorization: 'Bearer ' + token}"
+            :limit="9"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="dialogImageUrl">
+          </el-dialog>
+        </el-form-item>
+        <el-form-item class="buttonform">
+          <el-button type="primary" @click="submitForm('ruleForm')">Оформить</el-button>
+        </el-form-item>
+      </el-form>
+      </div>
   </div>
 </template>
 
@@ -63,23 +65,20 @@ import store from "../store";
 import axios from "axios";
 import { reformatDate } from "./mixins/reformatDate.js";
 import { remoteMethod } from "./mixins/remoteMethod.js";
-
 export default {
   mixins: [reformatDate, remoteMethod],
   data() {
     let checkValidate = (rule, value, callback, field, number) => {
-      if (value === "" || value === 0) {
+      if (value === undefined || value === "" || value === 0) {
         callback(new Error("Заполните поле"));
       } else {
-        if (number && value.length < number) {
-          callback(new Error("Введите больше " + number - 1 + " символа"));
-        }
         callback();
       }
     };
     return {
       dialogImageUrl: "",
       dialogVisible: false,
+      load: false,
       files: [],
       filesId: {},
       ruleForm: {
@@ -92,24 +91,24 @@ export default {
           {
             validator: (rule, value, callback) =>
               checkValidate(rule, value, callback, this.value, 2),
-            trigger: "blur",
-            required: true
+                trigger: "blur",
+                required: true
           }
         ],
         date: [
           {
             validator: (rule, value, callback) =>
               checkValidate(rule, value, callback, this.date),
-            trigger: "blur",
-            required: true
+              trigger: "blur",
+              required: true
           }
         ],
         cost: [
           {
             validator: (rule, value, callback) =>
               checkValidate(rule, value, callback, this.cost),
-            trigger: "blur",
-            required: true
+              trigger: "blur",
+              required: true
           }
         ],
         files: [{ required: false }]
@@ -157,10 +156,12 @@ export default {
   },
   methods: {
     submitForm(formName) {
+      this.load = true;
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.sendImage();
         } else {
+          this.load = false;
           return false;
         }
       });
@@ -193,23 +194,33 @@ export default {
             files: this.files,
             images: this.filesId
           }
-        });
+        }).then(() => {
+          this.files = [];
+          this.filesId = {};
+          this.cost = 0;
+          this.value.value = '';
+          this.value.label = '';
+          this.date[0] = '';
+          this.date[1] = '';
+          this.load = false;
+          this.$message.success('Заявка успешно создана');
+        })
     },
     sendImage() {
-            let files = new FormData()
-            for(let i=0;i < this.files.length; i++) {
-                files.append(`file${i}`, this.files[i].raw)
-            }
-            axios({
-              url: "https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files",
-              method: "POST",
-              headers: {
-                Authorization: "Bearer " + this.token
-              },
-              data: files
-            }).then(response => {
-                this.filesId = response.data
-            }).then(() => this.sendData())
+      let files = new FormData()
+      for(let i=0;i < this.files.length; i++) {
+          files.append(`file${i}`, this.files[i].raw)
+      }
+      axios({
+        url: "https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files",
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + this.token
+        },
+        data: files
+      }).then(response => {
+          this.filesId = response.data
+      }).then(() => this.sendData())
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -232,10 +243,10 @@ export default {
   align-items: center;
   width: 80%;
   margin: auto;
+  padding-bottom: 2rem;
 }
 
 .el-form-item {
-  width: 40%;
   font-family: "Roboto";
   display: flex;
   flex-direction: column;
@@ -251,58 +262,24 @@ export default {
 }
 
 h2 {
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
-@media (max-width: 1100px) {
-  .main {
-    height: 85vh;
-  }
-}
-
-@media (max-width: 800px) {
-  .main {
-    height: 80vh;
-  }
-}
 
 @media (max-width: 600px) {
   .el-form {
     display: flex;
     flex-direction: column;
-    width: 80%;
   }
 
   .el-form-item {
     width: 70%;
   }
-
-  .main {
-    height: 90vh;
-  }
 }
 
-@media screen and (max-height: 750px), screen and (max-width: 450px){ 
-  .main {
-    height: 100vh;
-  }
-}
-
-@media screen and (max-height: 700px), screen and (max-width: 400px){ 
-  .main {
-    height: 110vh;
-  }
-}
-
-@media screen and (max-height: 850px), screen and (max-width: 400px){ 
-  .main {
-    height: 90vh;
-  }
-}
 
 @media (max-width: 370px){ 
   .main {
-    height: 110vh;
     margin: 0 1rem;
     width: 90vw;
   }

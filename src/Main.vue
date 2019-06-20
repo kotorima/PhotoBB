@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class='main-block'>
     <div class='header'>
       <div class='search'>
         <div class='description'>
@@ -41,6 +41,12 @@ export default {
       margin-bottom: 15px;
       width: 80% !important; 
     }
+
+    .main-blok,
+    .header {
+      width: 100% !important;
+    }
+
 @media (max-width: 600px) {
     .block {
         display: none;
@@ -48,5 +54,6 @@ export default {
     .header {
         height: 100vh;
     }
+
 }
 </style>

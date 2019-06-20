@@ -82,7 +82,7 @@ export default {
     margin: auto;
 }
 .search {
-    width: 100%;
+    width: 100% !important;
     margin: 3rem 0;
 }
 
@@ -102,5 +102,6 @@ export default {
 }
 .two {
     margin-bottom: 2rem;
+    width: 100% !important;
 }
 </style>

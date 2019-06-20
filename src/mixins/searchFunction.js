@@ -24,20 +24,26 @@ export const searchFunction = {
         let cityId = '&google_place_id=';
         let startDate = 'start_date=';
         let finishDate = '&finish_date=';
+        let price = '&cost=';
         if(this.value.value === undefined || this.value.value === '' ) {
           this.value.value = '';
           this.value.label = '';
           cityName = '';
           cityId = '';
         }
-        else if (this.date[0] === undefined || this.date[0] === '') {
+        if (this.date[0] === undefined || this.date[0] === '') {
           this.date[0] = '';
           this.date[1] = '';
           startDate = '';
           finishDate = '';
         }
+        if (this.cost === undefined || this.cost === 0) {
+          this.cost = '';
+          price = '';
+        }
+        console.log(this.cost)
         axios
-          .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?'+startDate+this.date[0]+finishDate+this.date[1]+cityName+this.value.label+cityId+this.value.value+'&all=true')
+          .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?'+startDate+this.date[0]+finishDate+this.date[1]+cityName+this.value.label+cityId+this.value.value+price+this.cost+'&all=true')
           .then(response => { 
               this.tours = response.data.items;
               this.countOfTours = response.data.count;
