@@ -197,11 +197,9 @@ export default {
         }).then(() => {
           this.files = [];
           this.filesId = {};
-          this.cost = 0;
-          this.value.value = '';
-          this.value.label = '';
-          this.date[0] = '';
-          this.date[1] = '';
+          this.ruleForm.cost = 0;
+          this.ruleForm.value.value = '';
+          this.ruleForm.value.label = '';
           this.load = false;
           this.$message.success('Заявка успешно создана');
         })
