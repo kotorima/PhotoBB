@@ -274,6 +274,7 @@ export default {
         width: 160px;
         height: 160px;
         display: block;
+        border-radius: 50%;
         object-fit: cover;
     }
 
