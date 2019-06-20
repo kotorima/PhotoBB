@@ -159,4 +159,13 @@ export default {
       cursor: default;
   }
 
+  @media (max-width: 370px) {
+      .main > div:first-child {
+        flex-direction: column;
+      }
+      .buttonform { 
+          margin-top: 1rem;
+      }
+    }
+
 </style>

@@ -199,8 +199,8 @@ export default {
  }
 
 .photos img {
-    width: 200px;
-    height: 200px;
+    width: 290px;
+    height: 290px;
     padding-right: 3vw;
     object-fit: cover;
     box-sizing:content-box;
@@ -243,20 +243,44 @@ export default {
     .right {
         text-align: left;
     }
+
+    .left > div {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .left > div > img {
      width: 10vw;
      height: 10vw;
     }
+
     .contact {
         align-self: center;
     }
 
+    .discription {
+        align-items: center;
+    }
+
     h3 {
         font-size: 1rem;
+        text-align: center;
     }
+
     .right > h3 {
         font-size: 0.85rem;
     }
+
+    .photos img {
+        width: 210px;
+        height: 210px;
+    }
 }
 
+@media (max-width: 350px) {
+    .photos img {
+        width: 180px;
+        height: 180px;
+    }
+}
 </style>

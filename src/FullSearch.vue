@@ -40,6 +40,14 @@ export default {
                 store.dispatch('SET_PLACE', value);
             }
         },
+        date: {
+            get: function() {
+                return store.state.date;
+            },
+            set: function(value) {
+                store.dispatch('SET_DATE', value);
+            }
+        },
         searchOn: {
             get: function() {
                 return store.state.searchOn;

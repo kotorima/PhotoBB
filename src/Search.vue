@@ -212,6 +212,7 @@ button,
     .a,
     .a > button {
         border-radius:  0px 0px 5px 5px;
+        width: 70vw;
     }
 }
 </style>

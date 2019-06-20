@@ -207,6 +207,7 @@
         padding: 1rem;
         margin-right: 1rem;
         width: 28%;
+        height: 100px;
     }
 
     .card p {
@@ -269,6 +270,12 @@
             text-align: left;
             font-size: 1.05rem;
             margin-top: 0.5rem;
+        }
+        .paginate-list {
+            flex-direction: column;
+        }
+        .paginate-links {
+            padding-left: 0;
         }
     }
 </style>

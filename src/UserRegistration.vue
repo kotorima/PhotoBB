@@ -22,7 +22,12 @@
                 <el-form-item label="Пароль" prop="passwordTwo" class='inputform'>
                     <el-input placeholder="Повторите пароль" type="password" v-model="ruleForm.passwordTwo" autocomplete="off"></el-input>
                 </el-form-item>
-                <input type='submit' value='Зарегистрироваться' class='one' v-on:click="registration">
+                <el-form-item class='conf'>
+                    <el-checkbox v-model="checked" v-on:click='buttonUndisebled'>
+                        <a href="../politikaconf.pdf" >Я согласен с политикой конфиденциальности</a>
+                    </el-checkbox>
+                </el-form-item>
+                <input type='submit' value='Зарегистрироваться' class='one is-disabled' v-on:click="registration" :disabled="true">
                 <router-link :to="{ name: 'login'}" class='button'>
                     <input type='button' value='Войти' class='two'> 
                 </router-link>
@@ -38,12 +43,12 @@ import store from '../store';
 
 export default {
     data() {
-        let checkValidate = (rule, value, callback, field, number) => {
+        let checkValidate = (rule, value, callback, number) => {
             if (value === '') {
                 callback(new Error('Заполните поле'));
             } else {
-            if (this.ruleForm.field.length < number) {
-                callback(new Error('Введите больше '+ number-1 +' символа'));
+            if (value.length < number) {
+                callback(new Error('Введите больше '+ (number-1) +' символа'));
             }
             callback();
             }
@@ -69,6 +74,7 @@ export default {
         };
         return {
             registrationPath: store.state.registrationPath,
+            checked: false,
             ruleForm: {
                 name: '',
                 surname: '',
@@ -79,16 +85,16 @@ export default {
             },
             rules: {
                 name: [
-                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.name, 2), trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, 2), trigger: 'blur', required: true }
                 ],
                 surname: [
-                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.surname, 2), trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, 2), trigger: 'blur', required: true }
                 ],
                 login: [
-                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.login, 2), trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, 2), trigger: 'blur', required: true }
                 ],
                 email: [
-                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.email, 6), trigger: 'blur', required: true }
+                    { validator: (rule, value, callback) => checkValidate(rule, value, callback, 6), trigger: 'blur', required: true }
                 ],
                 passwordOne: [
                     { validator: validatePass, trigger: 'blur', required: true }
@@ -119,6 +125,18 @@ export default {
         this.loading = false;
     },
     methods: {
+        buttonUndisebled() {
+            let button = $('.one');
+            console.log(button);
+            if (this.checked === true) {
+              button.prop('disabled', false);
+              button.parent().removeClass('is-disabled');
+            }
+            else if(this.checked === false) {
+                button.prop('disabled', true);
+                button.parent().addClass('is-disabled');
+            }
+        },
         registration() {
             this.loading = true;
             store.dispatch('REGISTRATION', {
@@ -222,6 +240,24 @@ export default {
         font-family: 'Roboto';
         font-weight: normal;
         color: #8A8A8A;
+    }
+
+    .conf {
+        display: flex;
+        flex-direction: row !important;
+    }
+
+    .conf a {
+        font-size: 0.8rem;
+    }
+
+    .conf a:hover {
+        color: #EC7948;
+    }
+
+    .is-disabled {
+        background-color: #7089B2;
+        border-color: #7089B2;
     }
 
     @media (max-width: 600px) {

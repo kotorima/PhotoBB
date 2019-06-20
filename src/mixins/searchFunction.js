@@ -19,18 +19,34 @@ export const searchFunction = {
     methods: {
       search: function () {
         this.loadingTours = true;
-        this.noResult = false; 
+        this.noResult = false;
+        let cityName = '&location_name=';
+        let cityId = '&google_place_id=';
+        let startDate = 'start_date=';
+        let finishDate = '&finish_date=';
+        if(this.value.value === undefined || this.value.value === '' ) {
+          this.value.value = '';
+          this.value.label = '';
+          cityName = '';
+          cityId = '';
+        }
+        else if (this.date[0] === undefined || this.date[0] === '') {
+          this.date[0] = '';
+          this.date[1] = '';
+          startDate = '';
+          finishDate = '';
+        }
         axios
-        .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?location_name='+this.value.label+'&google_place_id='+this.value.value+'&all=true')
-        .then(response => { 
-            this.tours = response.data.items;
-            this.countOfTours = response.data.count;
-            this.value = store.state.place;
-            if (this.countOfTours === 0) {
-                this.noResult = true;
-            }
-            this.loadingTours = false;
-        });
+          .get('https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json?'+startDate+this.date[0]+finishDate+this.date[1]+cityName+this.value.label+cityId+this.value.value+'&all=true')
+          .then(response => { 
+              this.tours = response.data.items;
+              this.countOfTours = response.data.count;
+              this.value = store.state.place;
+              if (this.countOfTours === 0) {
+                  this.noResult = true;
+              }
+              this.loadingTours = false;
+          });
       },
     },
 }

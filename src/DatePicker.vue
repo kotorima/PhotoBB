@@ -7,7 +7,7 @@
       start-placeholder="Прибытие"
       end-placeholder="Отбытие"
       format="dd.MM.yyyy"
-      value-format="dd-MM-yyyy">
+      value-format="yyyy-MM-dd">
     </el-date-picker>
   </div>
 </template>

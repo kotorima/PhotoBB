@@ -1,6 +1,6 @@
 <template>
     <el-form v-loading='loading' :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
-        <h2>Воход</h2>
+        <h2>Вход</h2>
         <div class='center'>
             <div>
                 <el-form-item label="Логин" prop="login" class='inputform'>
@@ -25,12 +25,12 @@
     import store from '../store'
     export default {
         data() {
-            let checkLogin = (rule, value, callback, field, number) => {
+            let checkValidate = (rule, value, callback, number) => {
                 if (value === '') {
                     callback(new Error('Заполните поле'));
                 } else {
-                    if (this.ruleForm.field < number) {
-                        callback(new Error('Введите больше '+ number-1 +' символов'));
+                    if (value.field < number) {
+                        callback(new Error('Введите больше '+ (number-1) +' символов'));
                     }
                     callback();
                 }
@@ -42,10 +42,10 @@
                 },
                 rules: {
                     login: [
-                        { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.login, 6), trigger: 'blur', required: true }
+                        { validator: (rule, value, callback) => checkValidate(rule, value, callback, 6), trigger: 'blur', required: true }
                     ],
                     password: [
-                        { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.name, 6), trigger: 'blur', required: true }
+                        { validator: (rule, value, callback) => checkValidate(rule, value, callback, 6), trigger: 'blur', required: true }
                     ],
                 }
             };

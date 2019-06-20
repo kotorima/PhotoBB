@@ -327,6 +327,16 @@ body > div.el-menu--horizontal > ul {
     object-fit: cover !important;
 }
 
+.el-checkbox__inner:hover,
+.el-checkbox__input.is-checked .el-checkbox__inner {
+    border-color: #EC7948 !important;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner {
+    background-color: #EC7948 !important;
+}
+
+
 
 @media (max-width: 800px) {
     body > div.el-picker-panel.el-date-range-picker.el-popper {
@@ -360,7 +370,7 @@ body > div.el-menu--horizontal > ul {
         width: 60vw;
     }
     #app > div > form > div > div.avatar-uploader {
-        display: flex;
+        margin: 0 20vw;
     }
     #app > div > form > div > div.avatar-uploader > div {
         margin: auto;
@@ -404,6 +414,11 @@ body > div.el-menu--horizontal > ul {
     .images > label {
         text-align: center !important;
     }
+
+    #app > div > form > div.el-form-item.images.el-form-item--feedback > label {
+        text-align: center;
+        margin-left: 10rem;
+    }
 }
 
 @media (max-width: 400px) { 
@@ -415,6 +430,21 @@ body > div.el-menu--horizontal > ul {
 @media (max-width: 362px) { 
     body > div.el-picker-panel.el-date-range-picker.el-popper {
         width: 71%;
+    }
+
+    #app > div > form > div > div.avatar-uploader {
+        margin: 0 15vw;
+    }
+
+    #app > div > form > div.el-form-item.images.el-form-item--feedback > label {
+        margin-left: 5rem;
+    }
+
+    #app > div > form > div > div > div > div.el-input.el-input--suffix > input,
+    .el-date-editor--daterange.el-input__inner,
+    .el-slider__runway,
+    #app > div > form > div:nth-child(3) > div > div {
+        width: 230px !important;
     }
 }
 
