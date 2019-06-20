@@ -75,8 +75,14 @@ export default new Vuex.Store({
         SET_CHANGING_USER: (state, payload) => {
             state.changingUser = payload
         },
+        SET_USER_AVATAR: (state, payload) => {
+            state.user.avatar = payload
+        }
     },
     actions: {
+        SET_USER_AVATAR: (context, payload) => {
+            context.commit('SET_USER_AVATAR', payload)
+        },
         SET_COST: (context, payload) => {
             context.commit('SET_COST', payload);
         },

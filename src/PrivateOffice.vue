@@ -73,7 +73,6 @@ export default {
     },
     methods: {
       submitForm(formName, user) {
-          user = this.changingUser;
           console.log(user);
         this.$children[2].$refs[formName].validate((valid) => {
             if (valid) {
@@ -83,11 +82,10 @@ export default {
                     headers: {
                         Authorization: 'Bearer ' + this.accessToken
                     },
-                    data: {
-                        user
-                    }
+                    data: user
                 }).then(response => {
-                    this.user = this.changingUser;
+                    console.log(response)
+                    //this.user = this.changingUser;
                 })
             } else {
                 this.$message.error('Форма не прошла валидацию');

@@ -23,11 +23,11 @@
                     <el-input placeholder="Повторите пароль" type="password" v-model="ruleForm.passwordTwo" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item class='conf'>
-                    <el-checkbox v-model="checked" v-on:click='buttonUndisebled'>
+                    <el-checkbox v-model="notChecked" v-on:click='buttonUndisebled'>
                         <a href="../politikaconf.pdf" >Я согласен с политикой конфиденциальности</a>
                     </el-checkbox>
                 </el-form-item>
-                <input type='submit' value='Зарегистрироваться' class='one is-disabled' v-on:click="registration" :disabled="true">
+                <input type='submit' value='Зарегистрироваться' class='one' :class="{ disabled: !notChecked }" v-on:click="registration" :disabled="notChecked === false">
                 <router-link :to="{ name: 'login'}" class='button'>
                     <input type='button' value='Войти' class='two'> 
                 </router-link>
@@ -74,7 +74,7 @@ export default {
         };
         return {
             registrationPath: store.state.registrationPath,
-            checked: false,
+            notChecked: false,
             ruleForm: {
                 name: '',
                 surname: '',
@@ -125,18 +125,6 @@ export default {
         this.loading = false;
     },
     methods: {
-        buttonUndisebled() {
-            let button = $('.one');
-            console.log(button);
-            if (this.checked === true) {
-              button.prop('disabled', false);
-              button.parent().removeClass('is-disabled');
-            }
-            else if(this.checked === false) {
-                button.prop('disabled', true);
-                button.parent().addClass('is-disabled');
-            }
-        },
         registration() {
             this.loading = true;
             store.dispatch('REGISTRATION', {
@@ -255,7 +243,7 @@ export default {
         color: #EC7948;
     }
 
-    .is-disabled {
+    .disabled, .disabled:hover {
         background-color: #7089B2;
         border-color: #7089B2;
     }

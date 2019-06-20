@@ -4,9 +4,10 @@
             <el-upload
                 class="avatar-uploader"
                 action="https://jsonplaceholder.typicode.com/posts/"
+                :auto-upload="false"
+                :on-change="onFileChange"
                 :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
+                >
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
                 <img v-else src="./assets/images/camera.png" alt='camera' class="avatar-uploader-icon">
             </el-upload>
@@ -95,14 +96,14 @@
 
 <script>
 import store from '../store';
-
+import axios from 'axios';
 export default {
    data() {
       let checkValidate = (rule, value, callback, field, number) => {
         if (value === '' || value === undefined) {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.pageinf.field.length < number) {
+          if (value.length < number) {
             callback(new Error('Значение дожно быть больше '+ (number-1) +' символов'));
           }
           callback();
@@ -110,10 +111,10 @@ export default {
       };
       
       let checkMobile = (rule, value, callback) => {
-        if (value === '') {
+        if (value === '' || value === undefined) {
             callback(new Error('Заполните поле'));
         } else {
-          if (this.pageinf.mobile.length < 11 || this.pageinf.mobile.length > 12) {
+          if (value.length < 11 || value.length > 12) {
               callback(new Error('Значение должно быть равно 11 символам'));
           }
           callback();
@@ -123,7 +124,7 @@ export default {
         if (value === '') {
           callback(new Error('Введите пароль'));
         } else {
-          if (this.pageinf.passwordTwo !== '') {
+          if (value !== '') {
             this.$refs.pageinf.validateField('passwordTwo');
           }
           callback();
@@ -146,6 +147,7 @@ export default {
         countOfClicks: 0,
         changingUser: store.state.changingUser,
         pageinf: {
+          avatar: {},
           name: '',
           surname: '',
           login: '',
@@ -153,7 +155,7 @@ export default {
           email: '',
           passwordOne: '',
           passwordTwo: '',
-            text: '',
+          text: '',
         },
         rules: {
           name: [
@@ -166,7 +168,7 @@ export default {
             { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.login, 6), trigger: 'blur', required: true }
           ],
           mobile: [
-            { validator: checkMobile, trigger: 'blur', required: false }
+            { validator: checkMobile, trigger: 'blur', required: true }
           ],
           email: [
             { validator: (rule, value, callback) => checkValidate(rule, value, callback, this.email, 6), trigger: 'blur', required: true }
@@ -207,35 +209,20 @@ export default {
       this.changingUser = this.user;
     },
     methods: {
-      handleBackgroundSuccess(res, file) {
-        this.backgroundUrl = URL.createObjectURL(file.raw);
-      },
-      beforeBackgroundUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 2024 / 2024 < 4;
-
-        if (!isJPG) {
-          this.$message.error('Background picture must be JPG format!');
-        }
-        if (!isLt2M) {
-          this.$message.error('Avatar picture size can not exceed 4MB!');
-        }
-        return isJPG && isLt2M;
-      },
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 2024 / 2024 < 4;
-
-        if (!isJPG) {
-          this.$message.error('Avatar picture must be JPG format!');
-        }
-        if (!isLt2M) {
-          this.$message.error('Avatar picture size can not exceed 4MB!');
-        }
-        return isJPG && isLt2M;
+      onFileChange(file) {
+        const formData = new FormData();
+        formData.append("file", file.raw);
+        axios({
+              url: "https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/users/avatar",
+              method: "POST",
+              headers: {
+                Authorization: "Bearer " + store.state.accessToken
+              },
+              data: formData
+        }).then((response) => {
+          this.imageUrl = 'http://photobb.dev.webant.ru/uploads/' + response.data.path
+          store.dispatch('SET_USER_AVATAR', response.data);
+        })
       },
        available(event) {
           let element = $(event.target);

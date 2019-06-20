@@ -72,7 +72,7 @@ export default {
         callback(new Error("Заполните поле"));
       } else {
         if (number && value.length < number) {
-          callback(new Error("Введите больше " + (number - 1) + " символа"));
+          callback(new Error("Введите больше " + number - 1 + " символа"));
         }
         callback();
       }
@@ -81,7 +81,7 @@ export default {
       dialogImageUrl: "",
       dialogVisible: false,
       files: [],
-      filesId: [],
+      filesId: {},
       ruleForm: {
         value: {},
         date: Date,
@@ -159,7 +159,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.sendData();
+          this.sendImage();
         } else {
           return false;
         }
@@ -167,7 +167,6 @@ export default {
     },
     sendData() {
       let todayDate = Date();
-      this.sendImage().then(() => {
         axios({
           url: "https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/tours.json",
           method: "POST",
@@ -195,26 +194,22 @@ export default {
             images: this.filesId
           }
         });
-      });
     },
     sendImage() {
-      return new Promise((res, rej) => {
-        const formData = new FormData();
-        this.files.forEach(file => {
-          formData.append("file", file.raw);
-          axios({
-            url: "https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files",
-            method: "POST",
-            headers: {
-              Authorization: "Bearer " + this.token
-            },
-            data: formData
-          }).then(response => {
-            this.filesId = response.data;
-            res();
-          });
-        });
-      });
+            let files = new FormData()
+            for(let i=0;i < this.files.length; i++) {
+                files.append(`file${i}`, this.files[i].raw)
+            }
+            axios({
+              url: "https://cors-anywhere.herokuapp.com/http://photobb.dev.webant.ru/api/v1/files",
+              method: "POST",
+              headers: {
+                Authorization: "Bearer " + this.token
+              },
+              data: files
+            }).then(response => {
+                this.filesId = response.data
+            }).then(() => this.sendData())
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
